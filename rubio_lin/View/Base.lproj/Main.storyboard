@@ -51,7 +51,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CXa-Q8-e5n" secondAttribute="trailing" id="wGt-wT-x1a"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="首頁" image="house" catalog="system" id="y9e-vU-y3u"/>
+                    <tabBarItem key="tabBarItem" title="首頁" image="tabHome" id="y9e-vU-y3u"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -90,7 +90,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="輸入關鍵字或用戶帳號" translatesAutoresizingMaskIntoConstraints="NO" id="R41-vP-eru">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="搜尋" translatesAutoresizingMaskIntoConstraints="NO" id="R41-vP-eru">
                                 <rect key="frame" x="10" y="40" width="394" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
@@ -144,7 +144,7 @@
                             <constraint firstItem="Ocb-Jn-Vec" firstAttribute="top" secondItem="R41-vP-eru" secondAttribute="bottom" constant="15" id="uc0-cW-W5B"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="搜尋" image="magnifyingglass" catalog="system" id="LYS-J9-iO6"/>
+                    <tabBarItem key="tabBarItem" title="搜尋" image="tabSearch" id="LYS-J9-iO6"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -158,14 +158,13 @@
         <!--Account Page View Controller-->
         <scene sceneID="qsF-u9-nRn">
             <objects>
-                <viewController id="SUL-Eu-YkJ" customClass="AccountPageViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountPage" id="SUL-Eu-YkJ" customClass="AccountPageViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="63d-FR-agm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4RY-CM-Chv">
                                 <rect key="frame" x="103.5" y="157" width="207" height="207"/>
-                                <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4RY-CM-Chv" secondAttribute="height" multiplier="1:1" id="XMM-Sw-U1I"/>
                                 </constraints>
@@ -205,19 +204,11 @@
                                     <constraint firstAttribute="height" constant="44" id="B9D-nl-RPI"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" cornerStyle="capsule">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="登出">
-                                            <attributes>
-                                                <font key="NSFont" metaFont="system" size="18"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <buttonConfiguration key="configuration" style="filled" title="" cornerStyle="capsule">
                                     <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="clickOnSignOut:" destination="SUL-Eu-YkJ" eventType="touchUpInside" id="xB6-OJ-O1K"/>
-                                    <segue destination="Ozg-MB-Oft" kind="show" id="jaI-MC-xQN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -241,6 +232,7 @@
                     <connections>
                         <outlet property="accountHeadPhotoImageView" destination="4RY-CM-Chv" id="UGQ-q6-HB5"/>
                         <outlet property="nickNameLabel" destination="wR6-me-WnL" id="eb6-6s-yhm"/>
+                        <outlet property="signInOutButton" destination="Xqn-Qj-NOy" id="eix-xt-2hv"/>
                         <outlet property="userNameLabel" destination="aHC-za-ruh" id="J1T-nX-qN5"/>
                     </connections>
                 </viewController>
@@ -248,10 +240,10 @@
             </objects>
             <point key="canvasLocation" x="1205.7971014492755" y="915.40178571428567"/>
         </scene>
-        <!--Login Page View Controller-->
+        <!--Sign In Page View Controller-->
         <scene sceneID="V5T-r3-azl">
             <objects>
-                <viewController storyboardIdentifier="LoginPage" id="Ozg-MB-Oft" customClass="LoginPageViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInPage" id="Ozg-MB-Oft" customClass="SignInPageViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ew3-qs-SFc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -275,7 +267,7 @@
                                     <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="registerAccount:" destination="Ozg-MB-Oft" eventType="touchUpInside" id="4yj-k1-LPH"/>
+                                    <action selector="clickOnSignIn:" destination="Ozg-MB-Oft" eventType="touchUpInside" id="i38-cu-e2f"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="epY-po-NdD">
@@ -317,7 +309,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGE-v1-6tG">
                                                 <rect key="frame" x="0.0" y="0.0" width="45" height="31"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="checkmark.circle" catalog="system"/>
                                                 <connections>
                                                     <action selector="clickRememberMebutton:" destination="Ozg-MB-Oft" eventType="touchUpInside" id="39O-vi-kDH"/>
                                                 </connections>
@@ -339,7 +331,7 @@
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="5rZ-r0-YNh" kind="show" id="tcx-9v-F55"/>
+                                    <action selector="clinkOnSignUp:" destination="Ozg-MB-Oft" eventType="touchUpInside" id="gyX-DE-1yW"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -386,7 +378,7 @@
                                     <attributedString key="attributedTitle">
                                         <fragment content="註冊">
                                             <attributes>
-                                                <font key="NSFont" size="18" name=".PingFangTC-Regular"/>
+                                                <font key="NSFont" metaFont="system" size="18"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -454,13 +446,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xam-LO-Cn8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2025" y="1664"/>
+            <point key="canvasLocation" x="2797" y="915"/>
         </scene>
         <!--個人-->
         <scene sceneID="uLg-ZK-GHM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h3B-9d-gWt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="個人" image="person" catalog="system" id="HJa-3g-n76"/>
+                    <tabBarItem key="tabBarItem" title="個人" image="tabPersonal" id="HJa-3g-n76"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bWC-OC-sX5">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -477,13 +469,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="circle" catalog="system" width="128" height="121"/>
-        <image name="house" catalog="system" width="128" height="106"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="person" catalog="system" width="128" height="117"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="tabHome" width="27" height="27"/>
+        <image name="tabPersonal" width="27" height="27"/>
+        <image name="tabSearch" width="27" height="27"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

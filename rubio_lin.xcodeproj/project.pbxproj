@@ -28,7 +28,7 @@
 		4BF23FEB27F53D32002816EA /* AccountPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FEA27F53D32002816EA /* AccountPageViewController.swift */; };
 		4BF23FEE27F54AAE002816EA /* LiveRoomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */; };
 		4BF23FEF27F54AAE002816EA /* LiveRoomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */; };
-		4BF23FF927F571FD002816EA /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FF827F571FD002816EA /* LoginPageViewController.swift */; };
+		4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FF827F571FD002816EA /* SignInPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +71,7 @@
 		4BF23FEA27F53D32002816EA /* AccountPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageViewController.swift; sourceTree = "<group>"; };
 		4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRoomCollectionViewCell.swift; sourceTree = "<group>"; };
 		4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveRoomCollectionViewCell.xib; sourceTree = "<group>"; };
-		4BF23FF827F571FD002816EA /* LoginPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
+		4BF23FF827F571FD002816EA /* SignInPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +129,7 @@
 				4BF201A627F2B0C8007311AA /* HomePageViewController.swift */,
 				4BF23FE827F53D0F002816EA /* SearchPageViewController.swift */,
 				4BF23FEA27F53D32002816EA /* AccountPageViewController.swift */,
-				4BF23FF827F571FD002816EA /* LoginPageViewController.swift */,
+				4BF23FF827F571FD002816EA /* SignInPageViewController.swift */,
 				4BE1D4AF27FD223A006145B0 /* SignUpPageViewController.swift */,
 			);
 			path = Controller;
@@ -329,7 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BF23FF927F571FD002816EA /* LoginPageViewController.swift in Sources */,
+				4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */,
 				4BF23FE927F53D0F002816EA /* SearchPageViewController.swift in Sources */,
 				4BF23FEB27F53D32002816EA /* AccountPageViewController.swift in Sources */,
 				4BF201A727F2B0C8007311AA /* HomePageViewController.swift in Sources */,

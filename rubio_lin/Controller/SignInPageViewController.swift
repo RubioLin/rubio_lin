@@ -8,20 +8,19 @@
 import UIKit
 import FirebaseAuth
 
-class LoginPageViewController: UIViewController {
+class SignInPageViewController: UIViewController {
     
+    static let SignInPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInPage")
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rememberMeButton : UIButton!
-    var rememberMe: Bool = false
-    var isSingIn: Bool = false
-        
+    var rememberMe: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setAccountTextField()
         setPasswordTextField()
         self.navigationItem.setHidesBackButton(true, animated: true)
-        
     }
             
     func setAccountTextField() {
@@ -55,8 +54,25 @@ class LoginPageViewController: UIViewController {
     }
     
     @IBAction func clickOnSignIn(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        Auth.auth().signIn(withEmail: userNameTextField.text!, password: passwordTextField.text!) { result, error in
+            guard let user = result?.user, error == nil else {
+                let alert = UIAlertController(title: "Sign in failure", message: error?.localizedDescription, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(ok)
+                self.present(alert, animated: true, completion: nil)
+                print(error?.localizedDescription)
+                return
+            }
+            print(user.email,user.uid)
+            self.navigationController?.popToRootViewController(animated: true)
+//            self.navigationController?.popViewController(animated: true)
+//            self.dismiss(animated: true)
+        }
     }
+    
+    @IBAction func clinkOnSignUp(_ sender: UIButton) {            
+            self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
+        }
     
     
     /*

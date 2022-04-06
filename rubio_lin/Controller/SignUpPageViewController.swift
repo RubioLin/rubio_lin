@@ -9,6 +9,7 @@ import UIKit
 import FirebaseAuth
 
 class SignUpPageViewController: UIViewController {
+    static let SignUpPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpPage")
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
@@ -39,8 +40,19 @@ class SignUpPageViewController: UIViewController {
         passwordTextField.layer.cornerRadius = 22
     }
     @IBAction func clickOnSignUp(_ sender: Any) {
-        Auth.auth().createUser(withEmail: userNameTextField.text!, password: passwordTextField.text!)
-        self.navigationController?.popViewController(animated: true)
+        Auth.auth().createUser(withEmail: userNameTextField.text!, password: passwordTextField.text!) { result, error in
+            guard let user = result?.user,
+                  error == nil else {
+                let alert = UIAlertController(title: "Sign up failure", message: error?.localizedDescription, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(ok)
+                self.present(alert, animated: true, completion: nil)
+                print(error?.localizedDescription)
+                return
+            }
+            print(user.email, user.uid)
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     
 

@@ -7,10 +7,12 @@
 
 import UIKit
 import Foundation
+import FirebaseAuth
 
 class HomePageViewController: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var LiveRoomCollectionView: UICollectionView!
+    static var isSignIn: Bool?
     var result: Result?
     let lightyear_list: [LightyearList] = []
     let stream_list: [StreamList] = []
@@ -20,6 +22,7 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
         let nib = UINib(nibName: "LiveRoomCollectionViewCell", bundle: nil)
         self.LiveRoomCollectionView.register(nib, forCellWithReuseIdentifier: "LiveRoomCollectionViewCell")
         result = Network.shard.load("Result.json")
+        print(result?.lightyear_list[2]?.head_photo)
     }
 }
 
@@ -39,6 +42,13 @@ extension HomePageViewController: UICollectionViewDataSource {
         cell?.tagsLabel.text = "#" + String(result?.stream_list[indexPath.row]?.tags ?? "")
         
         if let url = URL(string: result?.stream_list[indexPath.row]?.head_photo ?? "") {
+//            if let data = try? Data(contentsOf: url) {
+//                if let image = UIImage(data: data) {
+//                    DispatchQueue.main.async {
+//                        cell?.head_photoImageView.image = image
+//                    }
+//                }
+//            }
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
                     DispatchQueue.main.async {
