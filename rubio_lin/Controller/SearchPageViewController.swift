@@ -48,6 +48,12 @@ extension SearchPageViewController: UICollectionViewDataSource {
         
         if let url = URL(string: result?.lightyear_list[indexPath.row]?.head_photo ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let httpResponse = response as? HTTPURLResponse,(200...201).contains(httpResponse.statusCode) else {
+                    DispatchQueue.main.async {
+                        cell?.head_photoImageView.image = UIImage(named: "paopao.png")
+                    }
+                    return
+                }
                 if let data = data {
                     DispatchQueue.main.async {
                         cell?.head_photoImageView.image = UIImage(data: data)

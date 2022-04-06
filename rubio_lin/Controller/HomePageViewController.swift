@@ -22,7 +22,6 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
         let nib = UINib(nibName: "LiveRoomCollectionViewCell", bundle: nil)
         self.LiveRoomCollectionView.register(nib, forCellWithReuseIdentifier: "LiveRoomCollectionViewCell")
         result = Network.shard.load("Result.json")
-        print(result?.lightyear_list[2]?.head_photo)
     }
 }
 
@@ -40,16 +39,15 @@ extension HomePageViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveRoomCollectionViewCell", for: indexPath) as? LiveRoomCollectionViewCell
         cell?.stream_titleLabel.text = result?.stream_list[indexPath.row]?.stream_title
         cell?.tagsLabel.text = "#" + String(result?.stream_list[indexPath.row]?.tags ?? "")
-        
+
         if let url = URL(string: result?.stream_list[indexPath.row]?.head_photo ?? "") {
-//            if let data = try? Data(contentsOf: url) {
-//                if let image = UIImage(data: data) {
-//                    DispatchQueue.main.async {
-//                        cell?.head_photoImageView.image = image
-//                    }
-//                }
-//            }
             URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let httpResponse = response as? HTTPURLResponse,(200...201).contains(httpResponse.statusCode) else {
+                    DispatchQueue.main.async {
+                        cell?.head_photoImageView.image = UIImage(named: "paopao.png")
+                    }
+                    return
+                }
                 if let data = data {
                     DispatchQueue.main.async {
                         cell?.head_photoImageView.image = UIImage(data: data)
