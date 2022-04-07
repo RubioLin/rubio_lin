@@ -17,7 +17,6 @@ class AccountPageViewController: UIViewController {
     @IBOutlet weak var signInOutButton: UIButton!
     var handle: AuthStateDidChangeListenerHandle?
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         handle = Auth.auth().addStateDidChangeListener { auth, user in
