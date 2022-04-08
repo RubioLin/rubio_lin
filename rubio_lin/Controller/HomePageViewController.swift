@@ -13,7 +13,7 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var LiveRoomCollectionView: UICollectionView!
     static var isSignIn: Bool?
-    var result: Result?
+    var result: Resultt?
     let lightyear_list: [LightyearList] = []
     let stream_list: [StreamList] = []
     
@@ -39,7 +39,7 @@ extension HomePageViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveRoomCollectionViewCell", for: indexPath) as? LiveRoomCollectionViewCell
         cell?.stream_titleLabel.text = result?.stream_list[indexPath.row]?.stream_title
         cell?.tagsLabel.text = "#" + String(result?.stream_list[indexPath.row]?.tags ?? "")
-
+        
         if let url = URL(string: result?.stream_list[indexPath.row]?.head_photo ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let httpResponse = response as? HTTPURLResponse,(200...201).contains(httpResponse.statusCode) else {
@@ -57,8 +57,8 @@ extension HomePageViewController: UICollectionViewDataSource {
         }
         return cell!
     }
-        
-    }
+    
+}
 
 // MARK: - 設定Colletion View
 extension HomePageViewController: UICollectionViewDelegateFlowLayout {

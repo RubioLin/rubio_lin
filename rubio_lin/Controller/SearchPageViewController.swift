@@ -9,7 +9,7 @@ import UIKit
 
 class SearchPageViewController: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var recommendCollectionView: UICollectionView!
-    var result: Result?
+    var result: Resultt?
     let lightyear_list: [LightyearList] = []
     let stream_list: [StreamList] = []
     

@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
+import FirebaseStorage
 
 class SignUpPageViewController: UIViewController {
     
@@ -16,7 +18,17 @@ class SignUpPageViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var userHeadPhotoImageView: UIImageView!
     var captureImage: UIImage?
-
+    var userUid: String?
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        nickNameTextField.text = ""
+        userNameTextField.text = ""
+        passwordTextField.text = ""
+        userHeadPhotoImageView.image = UIImage(named: "picPersonal")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUserNameTextField()
@@ -24,8 +36,23 @@ class SignUpPageViewController: UIViewController {
         setNickNameTextField()
         setNavigationBar()
         setHeadPhotoImageView()
-        print(captureImage)
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        uploadUserInfo()
+    }
+    
+    // upload userInfo to Firestore
+    func uploadUserInfo() {
+        let db = Firestore.firestore()
+        let user = UserInfo(id: "\(userUid!)", nickName: "\(nickNameTextField.text!)", email: "\(userNameTextField.text!)", passWord: "\(passwordTextField.text!)", Phoro: "")
+        do {
+            try db.collection("userInfo").document("\(userUid!)").setData(from: user)
+            print("成功")
+        } catch {
+            print(error)
+        }
     }
     
     func setNavigationBar() {
@@ -70,8 +97,8 @@ class SignUpPageViewController: UIViewController {
     }
     
     func setHeadPhotoImageView() {
-        let accountHeadPhotoCornerRadius: CGFloat = UIScreen.main.bounds.width / 4
-        userHeadPhotoImageView.layer.cornerRadius = accountHeadPhotoCornerRadius
+        let userHeadPhotoCornerRadius: CGFloat = UIScreen.main.bounds.width / 4
+        userHeadPhotoImageView.layer.cornerRadius = userHeadPhotoCornerRadius
     }
     
     @IBAction func selectPhotoBtn(_ sender: UIButton) {
@@ -101,27 +128,15 @@ class SignUpPageViewController: UIViewController {
                 print(error?.localizedDescription)
                 return
             }
-            print(user.email, user.uid)
+            userUid = user.uid
             self.navigationController?.popToRootViewController(animated: true)
         }
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 extension SignUpPageViewController: UIImagePickerControllerDelegate,  UINavigationControllerDelegate {
-    
+
     func selectPhoto(sourceType: UIImagePickerController.SourceType) {
         let ImagePickerController = UIImagePickerController()
         ImagePickerController.sourceType = sourceType

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Result: Codable {
+struct Resultt: Codable {
     let lightyear_list: [LightyearList?]
     let stream_list: [StreamList?]
 }

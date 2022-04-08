@@ -22,7 +22,13 @@ class SignInPageViewController: UIViewController {
         setPasswordTextField()
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
-            
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        userNameTextField.text = ""
+        passwordTextField.text = ""
+    }
+    
     func setAccountTextField() {
         let accountOverlayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
         accountOverlayLabel.text = "  帳號 "
@@ -63,16 +69,15 @@ class SignInPageViewController: UIViewController {
                 print(error?.localizedDescription)
                 return
             }
-            print(user.email,user.uid)
             self.navigationController?.popToRootViewController(animated: true)
-//            self.navigationController?.popViewController(animated: true)
-//            self.dismiss(animated: true)
+            //            self.navigationController?.popViewController(animated: true)
+            //            self.dismiss(animated: true)
         }
     }
     
     @IBAction func clinkOnSignUp(_ sender: UIButton) {            
-            self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
-        }
+        self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
+    }
     
     
     /*
@@ -85,5 +90,5 @@ class SignInPageViewController: UIViewController {
      }
      */
     
-
+    
 }

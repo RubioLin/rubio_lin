@@ -30,8 +30,8 @@ class AccountPageViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-      super.viewWillDisappear(animated)
-      Auth.auth().removeStateDidChangeListener(handle!)
+        super.viewWillDisappear(animated)
+        Auth.auth().removeStateDidChangeListener(handle!)
     }
     
     override func viewDidLoad() {

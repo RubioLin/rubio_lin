@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B602E8327FFC32000D621E6 /* testFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602E8227FFC32000D621E6 /* testFirebase.swift */; };
 		4BE1D49F27F83ED2006145B0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D49E27F83ED2006145B0 /* Network.swift */; };
 		4BE1D4A227F842D5006145B0 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A027F842D5006145B0 /* Object.swift */; };
 		4BE1D4A327F842D5006145B0 /* Result.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A127F842D5006145B0 /* Result.json */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B602E8227FFC32000D621E6 /* testFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testFirebase.swift; sourceTree = "<group>"; };
 		4BE1D49E27F83ED2006145B0 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4BE1D4A027F842D5006145B0 /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		4BE1D4A127F842D5006145B0 /* Result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Result.json; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				4BF201A627F2B0C8007311AA /* HomePageViewController.swift */,
 				4BF23FE827F53D0F002816EA /* SearchPageViewController.swift */,
 				4BF23FEA27F53D32002816EA /* AccountPageViewController.swift */,
+				4B602E8227FFC32000D621E6 /* testFirebase.swift */,
 				4BF23FF827F571FD002816EA /* SignInPageViewController.swift */,
 				4BE1D4AF27FD223A006145B0 /* SignUpPageViewController.swift */,
 			);
@@ -331,6 +334,7 @@
 			files = (
 				4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */,
 				4BF23FE927F53D0F002816EA /* SearchPageViewController.swift in Sources */,
+				4B602E8327FFC32000D621E6 /* testFirebase.swift in Sources */,
 				4BF23FEB27F53D32002816EA /* AccountPageViewController.swift in Sources */,
 				4BF201A727F2B0C8007311AA /* HomePageViewController.swift in Sources */,
 				4BE1D4B027FD223A006145B0 /* SignUpPageViewController.swift in Sources */,
