@@ -18,7 +18,6 @@ class SignUpPageViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var userHeadPhotoImageView: UIImageView!
     var captureImage: UIImage?
-    var userUid: String?
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,23 +35,6 @@ class SignUpPageViewController: UIViewController {
         setNickNameTextField()
         setNavigationBar()
         setHeadPhotoImageView()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        uploadUserInfo()
-    }
-    
-    // upload userInfo to Firestore
-    func uploadUserInfo() {
-        let db = Firestore.firestore()
-        let user = UserInfo(id: "\(userUid!)", nickName: "\(nickNameTextField.text!)", email: "\(userNameTextField.text!)", passWord: "\(passwordTextField.text!)", Phoro: "")
-        do {
-            try db.collection("userInfo").document("\(userUid!)").setData(from: user)
-            print("成功")
-        } catch {
-            print(error)
-        }
     }
     
     func setNavigationBar() {
@@ -118,7 +100,7 @@ class SignUpPageViewController: UIViewController {
     }
     
     @IBAction func clickOnSignUp(_ sender: Any) {
-        Auth.auth().createUser(withEmail: userNameTextField.text!, password: passwordTextField.text!) { [self] result, error in
+        Auth.auth().createUser(withEmail: userNameTextField.text!, password: passwordTextField.text!) {[self] result, error in
             guard let user = result?.user,
                   error == nil else {
                 let alert = UIAlertController(title: "Sign up failure", message: error?.localizedDescription, preferredStyle: .alert)
@@ -128,15 +110,14 @@ class SignUpPageViewController: UIViewController {
                 print(error?.localizedDescription)
                 return
             }
-            userUid = user.uid
             self.navigationController?.popToRootViewController(animated: true)
         }
     }
-
+    
 }
 
 extension SignUpPageViewController: UIImagePickerControllerDelegate,  UINavigationControllerDelegate {
-
+    
     func selectPhoto(sourceType: UIImagePickerController.SourceType) {
         let ImagePickerController = UIImagePickerController()
         ImagePickerController.sourceType = sourceType

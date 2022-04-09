@@ -25,8 +25,8 @@ class SignInPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        userNameTextField.text = ""
-        passwordTextField.text = ""
+        userNameTextField.text?.removeAll()
+        passwordTextField.text?.removeAll()
     }
     
     func setAccountTextField() {
@@ -70,25 +70,10 @@ class SignInPageViewController: UIViewController {
                 return
             }
             self.navigationController?.popToRootViewController(animated: true)
-            //            self.navigationController?.popViewController(animated: true)
-            //            self.dismiss(animated: true)
         }
     }
     
     @IBAction func clinkOnSignUp(_ sender: UIButton) {            
         self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    
 }

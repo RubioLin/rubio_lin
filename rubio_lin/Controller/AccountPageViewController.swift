@@ -7,6 +7,10 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseStorageSwift
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class AccountPageViewController: UIViewController {
     
@@ -37,20 +41,7 @@ class AccountPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeadPhotoImageView()
-        
-        // Do any additional setup after loading the view.
-        //檢查用
-        //        var timer = Timer()
-        //        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(a), userInfo: nil, repeats: true)
-    }
-    
-    //    @objc func a() {
-    //        if let user = Auth.auth().currentUser {
-    //            print("\(user.uid) login")
-    //        } else {
-    //            print("not login")
-    //        }
-    //    }
+        }
     
     func setHeadPhotoImageView() {
         let accountHeadPhotoCornerRadius: CGFloat = UIScreen.main.bounds.width / 4
@@ -64,15 +55,4 @@ class AccountPageViewController: UIViewController {
             print(error)
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

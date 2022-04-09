@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Resultt: Codable {
+struct JsonResult: Codable {
     let lightyear_list: [LightyearList?]
     let stream_list: [StreamList?]
 }

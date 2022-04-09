@@ -13,7 +13,7 @@
 // Photo: String
 
 // MARK: - 上傳時機
-// SignUpPageDidDisAppear時上傳
+// 按下註冊時上傳
 
 
 
@@ -24,11 +24,11 @@ import FirebaseStorage
 import FirebaseStorageSwift
 
 struct UserInfo: Codable, Identifiable {
-    var id: String
+    var id: String?
     let nickName: String
     let email: String
     let passWord: String
-    let Phoro: String?
+    let photo: String?
 }
 
 
@@ -52,14 +52,14 @@ class testFirebase: UIViewController {
         let db = Firestore.firestore()
         db.collection("userInfo").getDocuments { [self] snapshot, error in
             guard let snapshot = snapshot else {
-                error?.localizedDescription
+                print(error?.localizedDescription)
                 return
             }
             snapshot.documents.forEach { snapshot in
                 nicknameL.text = "\(snapshot.data()["nickName"]!)"
                 emailL.text = "\(snapshot.data()["email"]!)"
                 passwordL.text = "\(snapshot.data()["passWord"]!)"
-                let b = snapshot.data()["Phoro"] as! String
+                let b = snapshot.data()["photo"] as! String
                 print(b)
                 if let url = URL(string: b) {
                     URLSession.shared.dataTask(with: url) { data, response, error in
@@ -126,11 +126,10 @@ class testFirebase: UIViewController {
         }
     }
     
+    //upload user info to firestore
     @IBAction func a(_ sender: Any) {
         let db = Firestore.firestore()
-        
-        let user1 = UserInfo(id: "user.uid", nickName: "\(nickname.text!)", email: "\(email.text!)", passWord: "\(password.text!)", Phoro: "https://i.epochtimes.com/assets/uploads/2021/08/id13156667-shutterstock_376153318-450x322.jpg" ?? "")
-        
+        let user1 = UserInfo(id: "user.uid", nickName: "\(nickname.text!)", email: "\(email.text!)", passWord: "\(password.text!)", photo: "https://i.epochtimes.com/assets/uploads/2021/08/id13156667-shutterstock_376153318-450x322.jpg")
         do {
             try db.collection("userInfo").document("\(user1.nickName)").setData(from: user1)
             print("成功")

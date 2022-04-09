@@ -11,9 +11,10 @@ import FirebaseAuth
 
 class HomePageViewController: UIViewController, UICollectionViewDelegate {
     
+    static let HomePage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomePage")
     @IBOutlet weak var LiveRoomCollectionView: UICollectionView!
     static var isSignIn: Bool?
-    var result: Resultt?
+    var result: JsonResult?
     let lightyear_list: [LightyearList] = []
     let stream_list: [StreamList] = []
     

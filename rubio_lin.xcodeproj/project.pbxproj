@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4B602E8327FFC32000D621E6 /* testFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602E8227FFC32000D621E6 /* testFirebase.swift */; };
 		4BE1D49F27F83ED2006145B0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D49E27F83ED2006145B0 /* Network.swift */; };
-		4BE1D4A227F842D5006145B0 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A027F842D5006145B0 /* Object.swift */; };
+		4BE1D4A227F842D5006145B0 /* JsonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A027F842D5006145B0 /* JsonResult.swift */; };
 		4BE1D4A327F842D5006145B0 /* Result.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A127F842D5006145B0 /* Result.json */; };
 		4BE1D4A727FB0C44006145B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A627FB0C44006145B0 /* GoogleService-Info.plist */; };
 		4BE1D4AA27FC4E5E006145B0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4BE1D4A927FC4E5E006145B0 /* FirebaseAuth */; };
@@ -52,7 +52,7 @@
 /* Begin PBXFileReference section */
 		4B602E8227FFC32000D621E6 /* testFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testFirebase.swift; sourceTree = "<group>"; };
 		4BE1D49E27F83ED2006145B0 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		4BE1D4A027F842D5006145B0 /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		4BE1D4A027F842D5006145B0 /* JsonResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonResult.swift; sourceTree = "<group>"; };
 		4BE1D4A127F842D5006145B0 /* Result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Result.json; sourceTree = "<group>"; };
 		4BE1D4A627FB0C44006145B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4BE1D4AF27FD223A006145B0 /* SignUpPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpPageViewController.swift; path = rubio_lin/Controller/SignUpPageViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -107,7 +107,7 @@
 		4BA2207427F60A7F00CDFC59 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4BE1D4A027F842D5006145B0 /* Object.swift */,
+				4BE1D4A027F842D5006145B0 /* JsonResult.swift */,
 				4BE1D4A127F842D5006145B0 /* Result.json */,
 			);
 			path = Model;
@@ -338,7 +338,7 @@
 				4BF23FEB27F53D32002816EA /* AccountPageViewController.swift in Sources */,
 				4BF201A727F2B0C8007311AA /* HomePageViewController.swift in Sources */,
 				4BE1D4B027FD223A006145B0 /* SignUpPageViewController.swift in Sources */,
-				4BE1D4A227F842D5006145B0 /* Object.swift in Sources */,
+				4BE1D4A227F842D5006145B0 /* JsonResult.swift in Sources */,
 				4BE1D49F27F83ED2006145B0 /* Network.swift in Sources */,
 				4BF201A327F2B0C8007311AA /* AppDelegate.swift in Sources */,
 				4BF23FEE27F54AAE002816EA /* LiveRoomCollectionViewCell.swift in Sources */,
