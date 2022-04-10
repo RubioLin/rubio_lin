@@ -18,17 +18,17 @@
 
 
 import UIKit
+import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
 import FirebaseStorageSwift
 
-struct UserInfo: Codable, Identifiable {
-    var id: String?
+struct UserInfo: Codable {
     let nickName: String
     let email: String
     let passWord: String
-    let photo: String?
+    let photo: URL
 }
 
 
@@ -60,13 +60,14 @@ class testFirebase: UIViewController {
                 emailL.text = "\(snapshot.data()["email"]!)"
                 passwordL.text = "\(snapshot.data()["passWord"]!)"
                 let b = snapshot.data()["photo"] as! String
-                print(b)
-                if let url = URL(string: b) {
-                    URLSession.shared.dataTask(with: url) { data, response, error in
+                let u = Auth.auth().currentUser?.photoURL
+                print(u)
+                if u != nil {
+                    URLSession.shared.dataTask(with: u!) { data, response, error in
                         if let data = data {
                             DispatchQueue.main.async {
                                 self.userhaedphoto.image = UIImage(data: data)
-                        }
+                            }
                         }
                     }.resume()
                 }
@@ -98,6 +99,20 @@ class testFirebase: UIViewController {
             }
         }
     }
+    
+    func setUserPhoto(url: URL) {
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.photoURL = url
+        print(Auth.auth().currentUser?.photoURL)
+        changeRequest?.commitChanges(completion: { error in
+            guard error == nil else {
+                print(error?.localizedDescription)
+                return
+            }
+        })
+    }
+    
+    
     @IBAction func b(_ sender: Any) {
         let alertController = UIAlertController(title: "Select Photo", message: nil, preferredStyle: .actionSheet)
         let sources:[(name:String, type:UIImagePickerController.SourceType)] = [
@@ -114,31 +129,28 @@ class testFirebase: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func c(_ sender: Any) {
-        let uiImage = selectedImage.image
-        uploadPhoto(image: uiImage!) { result in
-            switch result {
-            case .success(let url):
-                print(url)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     //upload user info to firestore
     @IBAction func a(_ sender: Any) {
-        let db = Firestore.firestore()
-        let user1 = UserInfo(id: "user.uid", nickName: "\(nickname.text!)", email: "\(email.text!)", passWord: "\(password.text!)", photo: "https://i.epochtimes.com/assets/uploads/2021/08/id13156667-shutterstock_376153318-450x322.jpg")
-        do {
-            try db.collection("userInfo").document("\(user1.nickName)").setData(from: user1)
-            print("成功")
-        } catch {
-            print(error)
-        }
+//        Auth.auth().createUser(withEmail: email.text!, password: password.text!)
+//        uploadPhoto(image: selectedImage.image!) { result in
+//            switch result {
+//            case .success(let url):
+//                self.setUserPhoto(url: url)
+//                print(url)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//        
+//        let db = Firestore.firestore()
+//        let user1 = UserInfo(id: "user.uid", nickName: "\(nickname.text!)", email: "\(email.text!)", passWord: "\(password.text!)", photo: "")
+//        do {
+//            try db.collection("userInfo").document("\(user1.nickName)").setData(from: user1)
+//            print("成功")
+//        } catch {
+//            print(error)
+//        }
     }
-    
-    
 }
 
 extension testFirebase: UIImagePickerControllerDelegate,  UINavigationControllerDelegate {

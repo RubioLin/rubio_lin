@@ -20,12 +20,13 @@ class AccountPageViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var signInOutButton: UIButton!
     var handle: AuthStateDidChangeListenerHandle?
+    let db = Firestore.firestore()
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(true)
         handle = Auth.auth().addStateDidChangeListener { auth, user in
             if let user = user {
-                print("\(user.uid) login")
+                print("\(user.email!) login")
             } else {
                 self.navigationController?.pushViewController(SignInPageViewController.SignInPage, animated: true)
                 print("not login")
@@ -34,14 +35,14 @@ class AccountPageViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        super.viewWillDisappear(true)
         Auth.auth().removeStateDidChangeListener(handle!)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeadPhotoImageView()
-        }
+    }
     
     func setHeadPhotoImageView() {
         let accountHeadPhotoCornerRadius: CGFloat = UIScreen.main.bounds.width / 4
