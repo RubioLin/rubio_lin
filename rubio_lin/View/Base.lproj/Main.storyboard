@@ -264,7 +264,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picPersonal" translatesAutoresizingMaskIntoConstraints="NO" id="4RY-CM-Chv">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picPersonal" translatesAutoresizingMaskIntoConstraints="NO" id="4RY-CM-Chv">
                                 <rect key="frame" x="103.5" y="157" width="207" height="207"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4RY-CM-Chv" secondAttribute="height" multiplier="1:1" id="XMM-Sw-U1I"/>
@@ -338,10 +338,10 @@
                     <navigationItem key="navigationItem" id="bzy-q6-YW9"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="accountHeadPhotoImageView" destination="4RY-CM-Chv" id="UGQ-q6-HB5"/>
+                        <outlet property="emailLabel" destination="aHC-za-ruh" id="J1T-nX-qN5"/>
                         <outlet property="nickNameLabel" destination="wR6-me-WnL" id="eb6-6s-yhm"/>
                         <outlet property="signInOutButton" destination="Xqn-Qj-NOy" id="eix-xt-2hv"/>
-                        <outlet property="userNameLabel" destination="aHC-za-ruh" id="J1T-nX-qN5"/>
+                        <outlet property="userHeadPhotoImageView" destination="4RY-CM-Chv" id="UGQ-q6-HB5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esb-dk-66H" sceneMemberID="firstResponder"/>

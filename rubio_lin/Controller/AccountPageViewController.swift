@@ -15,18 +15,32 @@ import FirebaseFirestoreSwift
 class AccountPageViewController: UIViewController {
     
     static let AccountPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountPage")
-    @IBOutlet weak var accountHeadPhotoImageView: UIImageView!
+    @IBOutlet weak var userHeadPhotoImageView: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
-    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var signInOutButton: UIButton!
     var handle: AuthStateDidChangeListenerHandle?
     let db = Firestore.firestore()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
+        handle = Auth.auth().addStateDidChangeListener{ auth, user in
             if let user = user {
-                print("\(user.email!) login")
+                if let currentUserEmail = Auth.auth().currentUser?.email {
+                    self.db.collection("userInfo").document(currentUserEmail).getDocument { document, error in
+                        guard let document = document, document.exists,
+                              let user = try? document.data(as: UserInfo.self) else { return }
+                        print(user)
+                        URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
+                            DispatchQueue.main.async {
+                                self.userHeadPhotoImageView.image = UIImage(data: data!)
+                                self.nickNameLabel.text = user.nickName
+                                self.emailLabel.text = user.email
+                            }
+                        }.resume()
+                    }
+                }
+                print("\(user.email) login")
             } else {
                 self.navigationController?.pushViewController(SignInPageViewController.SignInPage, animated: true)
                 print("not login")
@@ -46,7 +60,7 @@ class AccountPageViewController: UIViewController {
     
     func setHeadPhotoImageView() {
         let accountHeadPhotoCornerRadius: CGFloat = UIScreen.main.bounds.width / 4
-        accountHeadPhotoImageView.layer.cornerRadius = accountHeadPhotoCornerRadius
+        userHeadPhotoImageView.layer.cornerRadius = accountHeadPhotoCornerRadius
     }
     
     @IBAction func clickOnSignOut(_ sender: Any) {

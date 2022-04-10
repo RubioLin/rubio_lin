@@ -133,7 +133,7 @@ class SignUpPageViewController: UIViewController {
     }
     
     func uploadUserInfo(url: URL) {
-        let user = UserInfo(nickName: nickNameTextField.text!, email: emailTextField.text!, passWord: passwordTextField.text!, photo: url)
+        let user = UserInfo(nickName: nickNameTextField.text!, email: emailTextField.text!, passWord: passwordTextField.text!, userPhotoUrl: url)
         do {
             try db.collection("userInfo").document(emailTextField.text!).setData(from: user)
         } catch {

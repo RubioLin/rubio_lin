@@ -28,7 +28,7 @@ struct UserInfo: Codable {
     let nickName: String
     let email: String
     let passWord: String
-    let photo: URL
+    let userPhotoUrl: URL
 }
 
 
