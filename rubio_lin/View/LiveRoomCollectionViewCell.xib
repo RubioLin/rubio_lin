@@ -20,27 +20,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvT-2V-prS">
-                        <rect key="frame" x="10" y="228" width="280" height="36"/>
+                        <rect key="frame" x="10" y="248" width="42.5" height="26"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="36" id="rlf-ao-zg6"/>
+                            <constraint firstAttribute="height" constant="26" id="rlf-ao-zg6"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDQ-YH-QDc">
-                        <rect key="frame" x="10" y="264" width="280" height="36"/>
+                        <rect key="frame" x="10" y="274" width="42.5" height="26"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="36" id="74L-Hg-jpW"/>
+                            <constraint firstAttribute="height" constant="26" id="74L-Hg-jpW"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXl-pi-wyM">
+                        <rect key="frame" x="10" y="10" width="63.5" height="26"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7eI-Sh-FGq">
+                                <rect key="frame" x="21" y="0.0" width="42.5" height="26"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconPersonal" translatesAutoresizingMaskIntoConstraints="NO" id="SS3-ka-lql">
+                                <rect key="frame" x="5" y="5" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="9og-8p-ZPV"/>
+                                    <constraint firstAttribute="width" secondItem="SS3-ka-lql" secondAttribute="height" multiplier="1:1" id="KRO-dY-oPp"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="7eI-Sh-FGq" secondAttribute="bottom" id="3Eg-pv-NJg"/>
+                            <constraint firstItem="SS3-ka-lql" firstAttribute="centerY" secondItem="rXl-pi-wyM" secondAttribute="centerY" id="N48-35-qDP"/>
+                            <constraint firstItem="7eI-Sh-FGq" firstAttribute="top" secondItem="rXl-pi-wyM" secondAttribute="top" id="fBA-ud-Nig"/>
+                            <constraint firstAttribute="trailing" secondItem="7eI-Sh-FGq" secondAttribute="trailing" id="iLm-Ps-MbS"/>
+                            <constraint firstItem="SS3-ka-lql" firstAttribute="leading" secondItem="rXl-pi-wyM" secondAttribute="leading" constant="5" id="kO7-8X-jUf"/>
+                            <constraint firstAttribute="height" constant="26" id="uwT-k7-Tc4"/>
+                            <constraint firstItem="7eI-Sh-FGq" firstAttribute="leading" secondItem="SS3-ka-lql" secondAttribute="trailing" id="weD-3f-S8U"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="VKe-nH-3F0"/>
             <constraints>
+                <constraint firstItem="rXl-pi-wyM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="59o-Ky-jyx"/>
+                <constraint firstItem="rXl-pi-wyM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="6Bs-IE-tzX"/>
                 <constraint firstAttribute="trailing" secondItem="HUx-sS-qaJ" secondAttribute="trailing" id="SDF-lr-nd9"/>
                 <constraint firstItem="SDQ-YH-QDc" firstAttribute="top" secondItem="YvT-2V-prS" secondAttribute="bottom" id="V6A-Pi-8FG"/>
                 <constraint firstAttribute="bottom" secondItem="HUx-sS-qaJ" secondAttribute="bottom" id="Xkt-NO-pYu"/>
@@ -48,8 +79,6 @@
                 <constraint firstAttribute="bottom" secondItem="SDQ-YH-QDc" secondAttribute="bottom" id="ZgL-pc-lr0"/>
                 <constraint firstItem="HUx-sS-qaJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cqI-Xl-Jmt"/>
                 <constraint firstItem="HUx-sS-qaJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="fxu-0x-hOZ"/>
-                <constraint firstAttribute="trailing" secondItem="SDQ-YH-QDc" secondAttribute="trailing" constant="10" id="pLG-Vd-2ya"/>
-                <constraint firstAttribute="trailing" secondItem="YvT-2V-prS" secondAttribute="trailing" constant="10" id="rCZ-Iq-DhD"/>
                 <constraint firstItem="SDQ-YH-QDc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="vAg-XM-IeN"/>
             </constraints>
             <size key="customSize" width="181" height="188"/>
@@ -60,10 +89,15 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="head_photoImageView" destination="HUx-sS-qaJ" id="l2M-Mj-BHQ"/>
+                <outlet property="online_numLabel" destination="7eI-Sh-FGq" id="mcL-dH-DXc"/>
+                <outlet property="online_numvView" destination="rXl-pi-wyM" id="5Bw-lj-maD"/>
                 <outlet property="stream_titleLabel" destination="SDQ-YH-QDc" id="z6D-k6-AbK"/>
                 <outlet property="tagsLabel" destination="YvT-2V-prS" id="pl1-HG-R5h"/>
             </connections>
-            <point key="canvasLocation" x="226.81159420289856" y="160.04464285714286"/>
+            <point key="canvasLocation" x="226.08695652173915" y="160.04464285714286"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="iconPersonal" width="8" height="10"/>
+    </resources>
 </document>

@@ -40,6 +40,14 @@ class AccountPageViewController: UIViewController {
                         }.resume()
                     }
                 }
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user {
                 print("\(user.email) login")
             } else {
                 self.navigationController?.pushViewController(SignInPageViewController.SignInPage, animated: true)
