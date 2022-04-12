@@ -28,6 +28,3 @@ struct StreamList: Codable {
     let online_num: Int?
 }
 
-class Light_yearList {
-    static var shareData: [LightyearList] = []
-}

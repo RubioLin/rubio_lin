@@ -10,6 +10,7 @@ import AVFoundation
 
 class LiveStreamRoomViewController: UIViewController {
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var chatRoomUIView: UIView!
     static let LiveStreamRoom = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom")
     var player = AVPlayer()
     var playerLayer = AVPlayerLayer()
@@ -45,12 +46,20 @@ class LiveStreamRoomViewController: UIViewController {
         playerLayer.frame = view.bounds
         self.view.layer.insertSublayer(playerLayer, at: 0)
         player.play()
+        //重複播放
+        let resetPlayer = {
+            self.player.seek(to: CMTime.zero)
+            self.player.play()
+        }
+        let playerObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { notification in
+            resetPlayer()
+        }
     }
     
     func setLogOutButton() {
         logoutButton.layer.cornerRadius = 22
         logoutButton.backgroundColor = .black
-        logoutButton.alpha = 0.8
+        logoutButton.alpha = 0.7
     }
     
     func setAlert() {
@@ -58,10 +67,16 @@ class LiveStreamRoomViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "立馬走", style: .default, handler: { UIAlertAction in
             self.dismiss(animated: true)
         }))
-        alert.addAction(UIAlertAction(title: "先不要", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "先不要", style: .cancel, handler: { UIAlertAction in
+            self.chatRoomUIView.isHidden = false
+        }))
         present(alert, animated: true)
     }
     @IBAction func clickLogoutButton(_ sender: Any) {
         setAlert()
+        if chatRoomUIView.isHidden == false {
+            chatRoomUIView.isHidden = true
+        }
+        
     }
 }

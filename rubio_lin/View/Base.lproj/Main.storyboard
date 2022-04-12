@@ -104,6 +104,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="rFD-2m-TCP"/>
                     <connections>
+                        <outlet property="chatRoomUIView" destination="Xh0-QH-IJP" id="wJY-GG-gxX"/>
                         <outlet property="logoutButton" destination="0Q3-1H-Irb" id="F6w-eJ-gdQ"/>
                     </connections>
                 </viewController>
@@ -601,16 +602,29 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rjg-5s-ARJ">
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="370"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Udu-1Q-LcZ" id="Qam-9A-yTt"/>
+                                    <outlet property="delegate" destination="Udu-1Q-LcZ" id="zeH-xE-z7u"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1no-eV-1Un"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="leading" secondItem="1no-eV-1Un" secondAttribute="leading" id="5bF-LQ-7sd"/>
                             <constraint firstItem="itB-3g-Wem" firstAttribute="leading" secondItem="1FM-rO-DMW" secondAttribute="leading" id="9A1-ac-dLW"/>
                             <constraint firstAttribute="trailing" secondItem="itB-3g-Wem" secondAttribute="trailing" id="Cz5-EI-HWZ"/>
                             <constraint firstAttribute="bottom" secondItem="itB-3g-Wem" secondAttribute="bottom" constant="10" id="GVc-ni-JoH"/>
+                            <constraint firstItem="itB-3g-Wem" firstAttribute="top" secondItem="rjg-5s-ARJ" secondAttribute="bottom" id="HJe-YB-1A8"/>
+                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="top" secondItem="1FM-rO-DMW" secondAttribute="top" id="TZh-N8-2aw"/>
+                            <constraint firstItem="1no-eV-1Un" firstAttribute="trailing" secondItem="rjg-5s-ARJ" secondAttribute="trailing" id="lL5-jN-63F"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="chatRoomTableView" destination="rjg-5s-ARJ" id="3nD-7f-RLe"/>
                         <outlet property="chatTextField" destination="wx5-bo-YQC" id="Xbr-aA-gxB"/>
                         <outlet property="sendButton" destination="yeq-CG-Xfm" id="BnS-rs-WcW"/>
                     </connections>

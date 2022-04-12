@@ -11,6 +11,8 @@
 		4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */; };
 		4B602EF42803401800D621E6 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EF32803401800D621E6 /* ChatRoomViewController.swift */; };
 		4BA3FB0C2805158100ABE771 /* hime3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0B2805158100ABE771 /* hime3.mp4 */; };
+		4BA3FB0F28051B7E00ABE771 /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */; };
+		4BA3FB1028051B7E00ABE771 /* ChatRoomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */; };
 		4BE1D49F27F83ED2006145B0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D49E27F83ED2006145B0 /* Network.swift */; };
 		4BE1D4A227F842D5006145B0 /* JsonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A027F842D5006145B0 /* JsonResult.swift */; };
 		4BE1D4A327F842D5006145B0 /* Result.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A127F842D5006145B0 /* Result.json */; };
@@ -57,6 +59,8 @@
 		4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamRoomViewController.swift; sourceTree = "<group>"; };
 		4B602EF32803401800D621E6 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatRoomViewController.swift; path = rubio_lin/Controller/ChatRoomViewController.swift; sourceTree = SOURCE_ROOT; };
 		4BA3FB0B2805158100ABE771 /* hime3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = hime3.mp4; sourceTree = "<group>"; };
+		4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
+		4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatRoomTableViewCell.xib; sourceTree = "<group>"; };
 		4BE1D49E27F83ED2006145B0 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4BE1D4A027F842D5006145B0 /* JsonResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonResult.swift; sourceTree = "<group>"; };
 		4BE1D4A127F842D5006145B0 /* Result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Result.json; sourceTree = "<group>"; };
@@ -123,9 +127,9 @@
 		4BA2207527F60A9000CDFC59 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */,
 				4BF201AD27F2B0C9007311AA /* LaunchScreen.storyboard */,
 				4BF201A827F2B0C8007311AA /* Main.storyboard */,
-				4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */,
 				4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */,
 			);
 			path = View;
@@ -142,6 +146,8 @@
 				4BF23FEA27F53D32002816EA /* AccountPageViewController.swift */,
 				4BF23FF827F571FD002816EA /* SignInPageViewController.swift */,
 				4BE1D4AF27FD223A006145B0 /* SignUpPageViewController.swift */,
+				4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */,
+				4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -313,6 +319,7 @@
 			files = (
 				4BE1D4A327F842D5006145B0 /* Result.json in Resources */,
 				4BF201AF27F2B0C9007311AA /* LaunchScreen.storyboard in Resources */,
+				4BA3FB1028051B7E00ABE771 /* ChatRoomTableViewCell.xib in Resources */,
 				4BA3FB0C2805158100ABE771 /* hime3.mp4 in Resources */,
 				4BF201AC27F2B0C9007311AA /* Assets.xcassets in Resources */,
 				4BF201AA27F2B0C8007311AA /* Main.storyboard in Resources */,
@@ -342,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BA3FB0F28051B7E00ABE771 /* ChatRoomTableViewCell.swift in Sources */,
 				4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */,
 				4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */,
 				4BF23FE927F53D0F002816EA /* SearchPageViewController.swift in Sources */,

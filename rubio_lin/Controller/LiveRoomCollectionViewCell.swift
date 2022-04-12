@@ -18,6 +18,7 @@ class LiveRoomCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         setTagsLabel()
         setOnlineNumView()
+        sethead_photoImageView()
     }
     //由於reuse機制，避免照片重複顯示，所以要先將ImageView
     override func prepareForReuse() {
@@ -35,5 +36,9 @@ class LiveRoomCollectionViewCell: UICollectionViewCell {
     func setOnlineNumView() {
         online_numvView.layer.masksToBounds = true
         online_numvView.layer.cornerRadius = 10
+    }
+    func sethead_photoImageView() {
+        head_photoImageView.layer.cornerRadius = 10
+        
     }
 }
