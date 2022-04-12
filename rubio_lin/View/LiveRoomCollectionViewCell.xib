@@ -82,11 +82,6 @@
                 <constraint firstItem="SDQ-YH-QDc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="vAg-XM-IeN"/>
             </constraints>
             <size key="customSize" width="181" height="188"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                    <integer key="value" value="10"/>
-                </userDefinedRuntimeAttribute>
-            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="head_photoImageView" destination="HUx-sS-qaJ" id="l2M-Mj-BHQ"/>
                 <outlet property="online_numLabel" destination="7eI-Sh-FGq" id="mcL-dH-DXc"/>

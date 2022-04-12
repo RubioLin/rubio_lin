@@ -19,7 +19,8 @@ class ChatRoomViewController: UIViewController {
     
     func setSendButton() {
         sendButton.layer.cornerRadius = 22
-        sendButton.backgroundColor = UIColor.systemGray
+        sendButton.backgroundColor = .black
+        sendButton.alpha = 0.8
     }
     func setChatTextField() {
         let chatOverlayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
@@ -27,7 +28,8 @@ class ChatRoomViewController: UIViewController {
         chatTextField.leftView = chatOverlayLabel
         chatTextField.leftViewMode = .always
         chatTextField.layer.cornerRadius = 22
-        chatTextField.backgroundColor = UIColor.systemGray
+        chatTextField.backgroundColor = .black
+        chatTextField.alpha = 0.8
         chatTextField.attributedPlaceholder = NSAttributedString(
             string: " 一起聊個天吧...",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]

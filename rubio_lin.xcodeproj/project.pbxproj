@@ -10,6 +10,7 @@
 		4B602EF0280324B200D621E6 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EEF280324B200D621E6 /* Firebase.swift */; };
 		4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */; };
 		4B602EF42803401800D621E6 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EF32803401800D621E6 /* ChatRoomViewController.swift */; };
+		4BA3FB0C2805158100ABE771 /* hime3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0B2805158100ABE771 /* hime3.mp4 */; };
 		4BE1D49F27F83ED2006145B0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D49E27F83ED2006145B0 /* Network.swift */; };
 		4BE1D4A227F842D5006145B0 /* JsonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A027F842D5006145B0 /* JsonResult.swift */; };
 		4BE1D4A327F842D5006145B0 /* Result.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A127F842D5006145B0 /* Result.json */; };
@@ -55,6 +56,7 @@
 		4B602EEF280324B200D621E6 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamRoomViewController.swift; sourceTree = "<group>"; };
 		4B602EF32803401800D621E6 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatRoomViewController.swift; path = rubio_lin/Controller/ChatRoomViewController.swift; sourceTree = SOURCE_ROOT; };
+		4BA3FB0B2805158100ABE771 /* hime3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = hime3.mp4; sourceTree = "<group>"; };
 		4BE1D49E27F83ED2006145B0 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4BE1D4A027F842D5006145B0 /* JsonResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonResult.swift; sourceTree = "<group>"; };
 		4BE1D4A127F842D5006145B0 /* Result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Result.json; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				4BA2207427F60A7F00CDFC59 /* Model */,
 				4BF201AB27F2B0C9007311AA /* Assets.xcassets */,
 				4BF201B027F2B0C9007311AA /* Info.plist */,
+				4BA3FB0B2805158100ABE771 /* hime3.mp4 */,
 			);
 			path = rubio_lin;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			files = (
 				4BE1D4A327F842D5006145B0 /* Result.json in Resources */,
 				4BF201AF27F2B0C9007311AA /* LaunchScreen.storyboard in Resources */,
+				4BA3FB0C2805158100ABE771 /* hime3.mp4 in Resources */,
 				4BF201AC27F2B0C9007311AA /* Assets.xcassets in Resources */,
 				4BF201AA27F2B0C8007311AA /* Main.storyboard in Resources */,
 				4BF23FEF27F54AAE002816EA /* LiveRoomCollectionViewCell.xib in Resources */,

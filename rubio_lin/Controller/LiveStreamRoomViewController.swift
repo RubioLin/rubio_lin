@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import AVFoundation
 
 class LiveStreamRoomViewController: UIViewController {
     @IBOutlet weak var logoutButton: UIButton!
     static let LiveStreamRoom = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom")
+    var player = AVPlayer()
+    var playerLayer = AVPlayerLayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setLogOutButton()
+        playVedio()
     }
 
 // MARK: - alert待優化
@@ -33,9 +37,20 @@ class LiveStreamRoomViewController: UIViewController {
 //        alert.addSubview(alertImage)
 //    }
     
+    func playVedio() {
+        let vedioUrl = Bundle.main.url(forResource: "hime3", withExtension: "mp4")
+        player = AVPlayer(url: vedioUrl!)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.frame = view.bounds
+        self.view.layer.insertSublayer(playerLayer, at: 0)
+        player.play()
+    }
+    
     func setLogOutButton() {
         logoutButton.layer.cornerRadius = 22
-        logoutButton.backgroundColor = UIColor.systemGray
+        logoutButton.backgroundColor = .black
+        logoutButton.alpha = 0.8
     }
     
     func setAlert() {

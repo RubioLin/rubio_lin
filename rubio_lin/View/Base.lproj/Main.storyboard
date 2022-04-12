@@ -73,6 +73,7 @@
                             <containerView opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xh0-QH-IJP">
                                 <rect key="frame" x="20" y="438" width="374" height="424"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="Udu-1Q-LcZ" kind="embed" id="mde-79-jI9"/>
                                 </connections>
@@ -585,6 +586,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Igl-k8-Xms"/>
                                         </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -601,7 +603,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1no-eV-1Un"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="itB-3g-Wem" firstAttribute="leading" secondItem="1FM-rO-DMW" secondAttribute="leading" id="9A1-ac-dLW"/>
                             <constraint firstAttribute="trailing" secondItem="itB-3g-Wem" secondAttribute="trailing" id="Cz5-EI-HWZ"/>
@@ -615,7 +617,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0j7-Te-DUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3125" y="-554"/>
+            <point key="canvasLocation" x="2826" y="-554"/>
         </scene>
         <!--首頁-->
         <scene sceneID="c6Y-e6-gNp">
