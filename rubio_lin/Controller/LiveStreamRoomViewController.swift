@@ -14,11 +14,18 @@ class LiveStreamRoomViewController: UIViewController {
     static let LiveStreamRoom = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom")
     var player = AVPlayer()
     var playerLayer = AVPlayerLayer()
+    var receiveInfo: receiveInfo?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        chatRoomUIView.isHidden = false
+        playVedio()
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setLogOutButton()
-        playVedio()
     }
 
 // MARK: - alert待優化
@@ -65,6 +72,8 @@ class LiveStreamRoomViewController: UIViewController {
     func setAlert() {
         let alert = UIAlertController(title: "", message: "確定離開此聊天室？", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "立馬走", style: .default, handler: { UIAlertAction in
+            SwiftWebSocketClient.shared.disconnect()
+            self.playerLayer.removeFromSuperlayer()
             self.dismiss(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "先不要", style: .cancel, handler: { UIAlertAction in
@@ -77,6 +86,5 @@ class LiveStreamRoomViewController: UIViewController {
         if chatRoomUIView.isHidden == false {
             chatRoomUIView.isHidden = true
         }
-        
     }
 }

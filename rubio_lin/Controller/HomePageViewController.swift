@@ -15,15 +15,12 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var LiveRoomCollectionView: UICollectionView!
     static var isSignIn: Bool?
     var result: JsonResult?
-    let stream_list: [StreamList] = []
-    var idArray = [String]()
-    let searchBar = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "LiveRoomCollectionViewCell", bundle: nil)
         self.LiveRoomCollectionView.register(nib, forCellWithReuseIdentifier: "LiveRoomCollectionViewCell")
-        result = Network.shard.load("Result.json")
+        result = Network.shared.load("Result.json")
     }
 }
 
@@ -52,7 +49,10 @@ extension HomePageViewController: UICollectionViewDataSource {
         
         if let url = URL(string: result?.stream_list[indexPath.row]?.head_photo ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
-                guard let httpResponse = response as? HTTPURLResponse,(200...201).contains(httpResponse.statusCode) else {
+                guard let httpResponse = response as?
+                    // MARK: -
+                    // 查詢為什麼要有，
+                        HTTPURLResponse,(200...201).contains(httpResponse.statusCode) else {
                     DispatchQueue.main.async {
                         cell?.head_photoImageView.image = UIImage(named: "paopao.png")
                     }

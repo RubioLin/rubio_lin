@@ -19,7 +19,7 @@ class SearchPageViewController: UIViewController {
         super.viewDidLoad()
         let nib = UINib(nibName: "LiveRoomCollectionViewCell", bundle: nil)
         self.recommendCollectionView.register(nib, forCellWithReuseIdentifier: "LiveRoomCollectionViewCell")
-        result = Network.shard.load("Result.json")
+        result = Network.shared.load("Result.json")
         self.searchBar.delegate = self
         searchBar.setImage(UIImage(named: "titlebarSearch"), for: .search, state: .normal)
     }

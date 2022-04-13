@@ -13,6 +13,7 @@
 		4BA3FB0C2805158100ABE771 /* hime3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0B2805158100ABE771 /* hime3.mp4 */; };
 		4BA3FB0F28051B7E00ABE771 /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */; };
 		4BA3FB1028051B7E00ABE771 /* ChatRoomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */; };
+		4BA3FB142805695B00ABE771 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA3FB132805695B00ABE771 /* WebSocket.swift */; };
 		4BE1D49F27F83ED2006145B0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D49E27F83ED2006145B0 /* Network.swift */; };
 		4BE1D4A227F842D5006145B0 /* JsonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A027F842D5006145B0 /* JsonResult.swift */; };
 		4BE1D4A327F842D5006145B0 /* Result.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A127F842D5006145B0 /* Result.json */; };
@@ -61,6 +62,7 @@
 		4BA3FB0B2805158100ABE771 /* hime3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = hime3.mp4; sourceTree = "<group>"; };
 		4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
 		4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatRoomTableViewCell.xib; sourceTree = "<group>"; };
+		4BA3FB132805695B00ABE771 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		4BE1D49E27F83ED2006145B0 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4BE1D4A027F842D5006145B0 /* JsonResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonResult.swift; sourceTree = "<group>"; };
 		4BE1D4A127F842D5006145B0 /* Result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Result.json; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				4B602EF32803401800D621E6 /* ChatRoomViewController.swift */,
 				4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */,
 				4BE1D49E27F83ED2006145B0 /* Network.swift */,
+				4BA3FB132805695B00ABE771 /* WebSocket.swift */,
 				4BF201A627F2B0C8007311AA /* HomePageViewController.swift */,
 				4BF23FE827F53D0F002816EA /* SearchPageViewController.swift */,
 				4BF23FEA27F53D32002816EA /* AccountPageViewController.swift */,
@@ -353,6 +356,7 @@
 				4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */,
 				4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */,
 				4BF23FE927F53D0F002816EA /* SearchPageViewController.swift in Sources */,
+				4BA3FB142805695B00ABE771 /* WebSocket.swift in Sources */,
 				4BF23FEB27F53D32002816EA /* AccountPageViewController.swift in Sources */,
 				4BF201A727F2B0C8007311AA /* HomePageViewController.swift in Sources */,
 				4B602EF42803401800D621E6 /* ChatRoomViewController.swift in Sources */,

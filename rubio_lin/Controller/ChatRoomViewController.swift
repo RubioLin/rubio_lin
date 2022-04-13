@@ -12,13 +12,17 @@ class ChatRoomViewController: UIViewController {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var chatRoomTableView: UITableView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        SwiftWebSocketClient.shared.establishConnection()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "ChatRoomTableViewCell", bundle: nil)
         self.chatRoomTableView.register(nib, forCellReuseIdentifier: "ChatRoomTableViewCell")
         setSendButton()
         setChatTextField()
-        
     }
     
     func setSendButton() {
@@ -41,16 +45,25 @@ class ChatRoomViewController: UIViewController {
         )
     }
     
+    @IBAction func clickSendMessage(_ sender: Any) {
+        SwiftWebSocketClient.shared.send(message: chatTextField.text!)
+        chatTextField.text = nil
+    }
+    
 }
 
 extension ChatRoomViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRoomTableViewCell", for: indexPath) as! ChatRoomTableViewCell
-        cell.chatTextView.text = "  " + "嗨！你今天過得好嗎？"
+//        if receiveInfo.event.contains("sys_updateRoomStatus") {
+//        } else if receiveInfo.event.contains("admin_all_broadcast") {
+//        } else if receiveInfo.event.contains("default_message") {
+//        } else if receiveInfo.event.contains("sys_member_notice") {
+//        }
         return cell
     }
     

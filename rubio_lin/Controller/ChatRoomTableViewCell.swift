@@ -13,7 +13,6 @@ class ChatRoomTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setChatTextView()
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -21,8 +20,8 @@ class ChatRoomTableViewCell: UITableViewCell {
     }
     
     func setChatTextView() {
-        chatTextView.alpha = 0.8
         chatTextView.layer.masksToBounds = true
+        chatTextView.alpha = 0.7
         chatTextView.layer.cornerRadius = (self.frame.height - 6) / 2
         
     }

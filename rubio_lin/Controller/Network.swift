@@ -9,7 +9,7 @@ import Foundation
     
 class Network {
     
-    static let shard = Network()
+    static let shared = Network()
     
     func load<T>(_ filename: String) -> T where T : Decodable {
         let data: Data
@@ -30,3 +30,4 @@ class Network {
     }
     
 }
+

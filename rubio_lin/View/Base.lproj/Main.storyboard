@@ -71,7 +71,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xh0-QH-IJP">
-                                <rect key="frame" x="20" y="438" width="374" height="424"/>
+                                <rect key="frame" x="20" y="576" width="374" height="286"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -87,9 +87,6 @@
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="logout"/>
-                                <buttonConfiguration key="configuration" style="plain" image="logout">
-                                    <fontDescription key="titleFontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
-                                </buttonConfiguration>
                                 <connections>
                                     <action selector="clickLogoutButton:" destination="hdd-z4-MWk" eventType="touchUpInside" id="z16-aR-Ksp"/>
                                 </connections>
@@ -576,11 +573,11 @@
             <objects>
                 <viewController id="Udu-1Q-LcZ" userLabel="Chat Room" customClass="ChatRoomViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1FM-rO-DMW">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="424"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="286"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="itB-3g-Wem">
-                                <rect key="frame" x="0.0" y="370" width="374" height="44"/>
+                                <rect key="frame" x="0.0" y="232" width="374" height="44"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="    一起聊個天吧..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wx5-bo-YQC">
                                         <rect key="frame" x="0.0" y="0.0" width="322" height="44"/>
@@ -597,13 +594,16 @@
                                             <constraint firstAttribute="height" constant="44" id="1KN-72-Pl6"/>
                                             <constraint firstAttribute="width" secondItem="yeq-CG-Xfm" secondAttribute="height" multiplier="1:1" id="h6D-9U-zgy"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="send"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="send"/>
+                                        <connections>
+                                            <action selector="clickSendMessage:" destination="Udu-1Q-LcZ" eventType="touchUpInside" id="cEY-vJ-nC9"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rjg-5s-ARJ">
-                                <rect key="frame" x="0.0" y="0.0" width="374" height="370"/>
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="232"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Udu-1Q-LcZ" id="Qam-9A-yTt"/>
@@ -631,7 +631,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0j7-Te-DUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2826" y="-554"/>
+            <point key="canvasLocation" x="2857" y="-872"/>
         </scene>
         <!--首頁-->
         <scene sceneID="c6Y-e6-gNp">
