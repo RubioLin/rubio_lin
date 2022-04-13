@@ -119,6 +119,7 @@
 		4BA2207427F60A7F00CDFC59 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4BA3FB132805695B00ABE771 /* WebSocket.swift */,
 				4BE1D4A027F842D5006145B0 /* JsonResult.swift */,
 				4B602EEF280324B200D621E6 /* Firebase.swift */,
 				4BE1D4A127F842D5006145B0 /* Result.json */,
@@ -140,10 +141,9 @@
 		4BA2207627F60A9700CDFC59 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4BE1D49E27F83ED2006145B0 /* Network.swift */,
 				4B602EF32803401800D621E6 /* ChatRoomViewController.swift */,
 				4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */,
-				4BE1D49E27F83ED2006145B0 /* Network.swift */,
-				4BA3FB132805695B00ABE771 /* WebSocket.swift */,
 				4BF201A627F2B0C8007311AA /* HomePageViewController.swift */,
 				4BF23FE827F53D0F002816EA /* SearchPageViewController.swift */,
 				4BF23FEA27F53D32002816EA /* AccountPageViewController.swift */,

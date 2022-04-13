@@ -23,6 +23,5 @@ class ChatRoomTableViewCell: UITableViewCell {
         chatTextView.layer.masksToBounds = true
         chatTextView.alpha = 0.7
         chatTextView.layer.cornerRadius = (self.frame.height - 6) / 2
-        
     }
 }
