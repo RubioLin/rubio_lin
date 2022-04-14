@@ -14,11 +14,14 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ZEq-cd-p8A">
-                        <rect key="frame" x="0.0" y="3" width="320" height="38"/>
+                        <rect key="frame" x="0.0" y="3" width="10" height="38"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" id="Epl-JV-xZD"/>
+                        </constraints>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -26,7 +29,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="ZEq-cd-p8A" secondAttribute="trailing" id="JTA-zV-yi2"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZEq-cd-p8A" secondAttribute="trailing" id="0yk-bT-5Rt"/>
                     <constraint firstItem="ZEq-cd-p8A" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="LSU-Pw-GUv"/>
                     <constraint firstItem="ZEq-cd-p8A" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XeX-Wz-vzy"/>
                     <constraint firstAttribute="bottom" secondItem="ZEq-cd-p8A" secondAttribute="bottom" constant="3" id="gty-gF-66w"/>

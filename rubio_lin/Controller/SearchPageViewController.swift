@@ -15,6 +15,10 @@ class SearchPageViewController: UIViewController {
     var lightyear_list: [LightyearList] = []
     var isSearch: Bool = false
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "LiveRoomCollectionViewCell", bundle: nil)
@@ -138,4 +142,3 @@ extension SearchPageViewController: UISearchBarDelegate {
         recommendCollectionView.reloadData()
     }
 }
-

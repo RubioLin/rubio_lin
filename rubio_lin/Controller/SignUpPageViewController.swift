@@ -15,28 +15,35 @@ import FirebaseStorageSwift
 class SignUpPageViewController: UIViewController {
     
     static let SignUpPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpPage")
-    @IBOutlet weak var nickNameTextField: UITextField!
+    @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var userHeadPhotoImageView: UIImageView!
+    @IBOutlet weak var signUpBtn: UIButton!
     let db = Firestore.firestore()
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        nickNameTextField.text = ""
+        nicknameTextField.text = ""
         emailTextField.text = ""
         passwordTextField.text = ""
-        userHeadPhotoImageView.image = UIImage(named: "picPersonal")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setEmailTextField()
         setPasswordTextField()
-        setNickNameTextField()
+        setNicknameTextField()
         setNavigationBar()
         setHeadPhotoImageView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        userHeadPhotoImageView.image = UIImage(named: "picPersonal")
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func setNavigationBar() {
@@ -50,14 +57,14 @@ class SignUpPageViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func setNickNameTextField() {
+    func setNicknameTextField() {
         let accountOverlayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
         accountOverlayLabel.text = "  暱稱 "
-        nickNameTextField.leftView = accountOverlayLabel
-        nickNameTextField.leftViewMode = .always
-        nickNameTextField.layer.borderWidth = 1
-        nickNameTextField.layer.borderColor = UIColor.black.cgColor
-        nickNameTextField.layer.cornerRadius = 22
+        nicknameTextField.leftView = accountOverlayLabel
+        nicknameTextField.leftViewMode = .always
+        nicknameTextField.layer.borderWidth = 1
+        nicknameTextField.layer.borderColor = UIColor.black.cgColor
+        nicknameTextField.layer.cornerRadius = 22
     }
     
     func setEmailTextField() {
@@ -71,19 +78,47 @@ class SignUpPageViewController: UIViewController {
     }
     
     func setPasswordTextField() {
-        let passwordOverlayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        passwordOverlayLabel.text = "  密碼 "
-        passwordTextField.leftView = passwordOverlayLabel
+        let psLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
+        psLeftView.text = "  密碼 "
+        passwordTextField.leftView = psLeftView
         passwordTextField.leftViewMode = .always
         passwordTextField.layer.borderWidth = 1
         passwordTextField.layer.borderColor = UIColor.black.cgColor
         passwordTextField.layer.cornerRadius = 22
+        let psRightView = UIButton(frame: CGRect(x: 6, y: 11, width: 30, height: 22))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+        isVisiblePassword(psRightView)
+        psRightView.addTarget(self, action: #selector(isVisiblePassword), for: .touchUpInside)
+        view.addSubview(psRightView)
+        view.backgroundColor = .clear
+        passwordTextField.rightViewMode = .always
+        passwordTextField.rightView = view
+    }
+    
+    @objc func isVisiblePassword(_ button: UIButton) {
+        button.tintColor = .black
+        if button.isSelected {
+            button.isSelected = false
+            self.passwordTextField.isSecureTextEntry = false
+        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        } else {
+            button.isSelected = true
+            self.passwordTextField.isSecureTextEntry = true
+        button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+        }
     }
     
     func setHeadPhotoImageView() {
         let userHeadPhotoCornerRadius: CGFloat = UIScreen.main.bounds.width / 4
         userHeadPhotoImageView.layer.cornerRadius = userHeadPhotoCornerRadius
     }
+    
+    @IBAction func a(_ sender: Any) {
+        nicknameTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
     
         
     @IBAction func selectPhotoBtn(_ sender: UIButton) {
@@ -133,7 +168,7 @@ class SignUpPageViewController: UIViewController {
     }
     
     func uploadUserInfo(url: URL) {
-        let user = UserInfo(nickName: nickNameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!, userPhotoUrl: url)
+        let user = UserInfo(nickName: nicknameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!, userPhotoUrl: url)
         do {
             try db.collection("userInfo").document(emailTextField.text!).setData(from: user)
         } catch {
@@ -143,7 +178,7 @@ class SignUpPageViewController: UIViewController {
     
     func uploadPhoto(image: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
         let fileReference = Storage.storage().reference().child("\(emailTextField.text!).jpg")
-        if let data = image.jpegData(compressionQuality: 1) {
+        if let data = image.jpegData(compressionQuality: 0.6            ) {
             fileReference.putData(data, metadata: nil) { result in
                 switch result {
                 case .success(_):

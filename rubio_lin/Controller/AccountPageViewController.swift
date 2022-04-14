@@ -33,9 +33,9 @@ class AccountPageViewController: UIViewController {
                         print(user)
                         URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
                             DispatchQueue.main.async {
-                                self.userHeadPhotoImageView.image = UIImage(data: data!)
-                                self.nickNameLabel.text = user.nickName
-                                self.emailLabel.text = user.email
+                                self.userHeadPhotoImageView.image = UIImage(data: data ?? Data())
+                                self.nickNameLabel.text = "暱稱：\(user.nickName)"
+                                self.emailLabel.text = "帳號：\(user.email)"
                             }
                         }.resume()
                     }
@@ -50,6 +50,12 @@ class AccountPageViewController: UIViewController {
             if let user = user {
                 print("\(user.email) login")
             } else {
+//                let alert = UIAlertController(title: "並未登入", message: "為您跳轉至登入頁面", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+//                self.present(alert, animated: true)
+                self.nickNameLabel.text? = "暱稱：未登入"
+                self.emailLabel.text? = "帳號：未登入"
+                self.userHeadPhotoImageView.image = UIImage(named: "picPersonal")
                 self.navigationController?.pushViewController(SignInPageViewController.SignInPage, animated: true)
                 print("not login")
             }

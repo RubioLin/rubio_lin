@@ -11,56 +11,102 @@ import FirebaseAuth
 class SignInPageViewController: UIViewController {
     
     static let SignInPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInPage")
-    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var rememberMeButton : UIButton!
+    @IBOutlet weak var rememberMeButton: UIButton!
     var rememberMe: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setAccountTextField()
+        setEmailTextField()
         setPasswordTextField()
+        rememberMeButton.isSelected = true
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        userNameTextField.text?.removeAll()
-        passwordTextField.text?.removeAll()
+        addKeyboardObserver()
+        
+        if rememberMeButton.isSelected {
+            let userDefaults = UserDefaults.standard
+            if let email = userDefaults.string(forKey: "email"), let password = userDefaults.string(forKey: "password") {
+                emailTextField.text = email
+                passwordTextField.text = password
+            }
+        } else {
+            emailTextField.text?.removeAll()
+            passwordTextField.text?.removeAll()
+        }
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func setAccountTextField() {
-        let accountOverlayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        accountOverlayLabel.text = "  帳號 "
-        userNameTextField.leftView = accountOverlayLabel
-        userNameTextField.leftViewMode = .always
-        userNameTextField.layer.borderWidth = 1
-        userNameTextField.layer.borderColor = UIColor.black.cgColor
-        userNameTextField.layer.cornerRadius = 22
+    func setEmailTextField() {
+        let emailLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
+        emailLeftView.text = "  帳號 "
+        emailTextField.leftView = emailLeftView
+        emailTextField.leftViewMode = .always
+        emailTextField.layer.borderWidth = 1
+        emailTextField.layer.borderColor = UIColor.black.cgColor
+        emailTextField.layer.cornerRadius = 22
     }
     
     func setPasswordTextField() {
-        let passwordOverlayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        passwordOverlayLabel.text = "  密碼 "
-        passwordTextField.leftView = passwordOverlayLabel
+        let psLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
+        psLeftView.text = "  密碼 "
+        passwordTextField.leftView = psLeftView
         passwordTextField.leftViewMode = .always
         passwordTextField.layer.borderWidth = 1
         passwordTextField.layer.borderColor = UIColor.black.cgColor
         passwordTextField.layer.cornerRadius = 22
+        let psRightView = UIButton(frame: CGRect(x: 6, y: 11, width: 30, height: 22))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+        isVisiblePassword(psRightView)
+        psRightView.addTarget(self, action: #selector(isVisiblePassword), for: .touchUpInside)
+        view.addSubview(psRightView)
+        view.backgroundColor = .clear
+        passwordTextField.rightViewMode = .always
+        passwordTextField.rightView = view
     }
     
-    @IBAction func clickRememberMebutton(_ sender: UIButton) {
-        if rememberMe == false {
-            rememberMe = true
-            rememberMeButton .setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+    @objc func isVisiblePassword(_ button: UIButton) {
+        button.tintColor = .black
+        if button.isSelected {
+            button.isSelected = false
+            self.passwordTextField.isSecureTextEntry = false
+        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
         } else {
-            rememberMe = false
-            rememberMeButton .setImage(UIImage(systemName: "circle"), for: .normal)
+            button.isSelected = true
+            self.passwordTextField.isSecureTextEntry = true
+        button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
         }
     }
     
+    @IBAction func emailEditDidEnd(_ sender: Any) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(emailTextField.text ?? "", forKey: "email")
+    }
+    @IBAction func passwordEditDidEnd(_ sender: Any) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(passwordTextField.text ?? "", forKey: "password")
+    }
+    
+    @IBAction func clickRememberMebutton(_ sender: UIButton) {
+        if rememberMeButton.isSelected {
+            rememberMeButton.isSelected = false
+            rememberMeButton.setImage(UIImage(systemName: "circle"), for: .normal)
+        } else {
+            rememberMeButton.isSelected = true
+            rememberMeButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        }
+  }
+    
     @IBAction func clickOnSignIn(_ sender: UIButton) {
-        Auth.auth().signIn(withEmail: userNameTextField.text!, password: passwordTextField.text!) { result, error in
+        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { result, error in
             guard let user = result?.user, error == nil else {
                 let alert = UIAlertController(title: "Sign in failure", message: error?.localizedDescription, preferredStyle: .alert)
                 let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -73,7 +119,27 @@ class SignInPageViewController: UIViewController {
         }
     }
     
-    @IBAction func clinkOnSignUp(_ sender: UIButton) {            
+    @IBAction func clinkOnSignUp(_ sender: UIButton) {
         self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
     }
+}
+
+extension SignInPageViewController {
+    func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRect.height / 2
+            view.bounds.origin.y = keyboardHeight
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+            view.bounds.origin.y = 0
+        }
+    
 }

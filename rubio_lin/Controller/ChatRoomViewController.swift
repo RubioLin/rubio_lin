@@ -18,6 +18,7 @@ class ChatRoomViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         establishConnection()
+        addKeyboardObserver()
     }
     
     override func viewDidLoad() {
@@ -26,6 +27,7 @@ class ChatRoomViewController: UIViewController {
         self.chatRoomTableView.register(nib, forCellReuseIdentifier: "ChatRoomTableViewCell")
         setSendButton()
         setChatTextField()
+        chatRoomTableView.allowsSelection = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -33,6 +35,9 @@ class ChatRoomViewController: UIViewController {
         webSocketReceive.removeAll()
         chatRoomTableView.reloadData()
         disconnect()
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+
     }
     
     func establishConnection() {
@@ -77,7 +82,7 @@ class ChatRoomViewController: UIViewController {
            }
             //缺少 監聽判斷我正在往上滾，就算有新訊息進來也不能回到最下面
             self?.chatRoomTableView.reloadData()
-            if self?.webSocketReceive.count ?? 0 > 0 {
+            if self?.webSocketReceive.count ?? 1 > 0 {
                 self?.chatRoomTableView.scrollToRow(at: IndexPath(row: self!.webSocketReceive.count - 1, section: 0), at: .bottom, animated: true)
             }
            self?.receive()
@@ -121,6 +126,10 @@ class ChatRoomViewController: UIViewController {
         send(message: self.chatTextField.text!)
         chatTextField.text = nil
     }
+   
+    @IBAction func didEndOnExit(_ sender: Any) {
+    }
+    
     
 }
 
@@ -167,5 +176,26 @@ extension ChatRoomViewController: URLSessionWebSocketDelegate {
             reasonString = ""
         }
         print("URLSessionWebSocketTask is closed: code=\(closeCode), reason=\(reasonString)")
+    }
+}
+
+extension ChatRoomViewController {
+    func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRect.height
+            view.frame.origin.y = -keyboardHeight
+        } else {
+            view.frame.origin.y = -view.frame.height / 3
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        view.frame.origin.y = 0
     }
 }

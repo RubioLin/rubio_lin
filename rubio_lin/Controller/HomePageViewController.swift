@@ -8,6 +8,10 @@
 import UIKit
 import Foundation
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseStorageSwift
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class HomePageViewController: UIViewController {
     
@@ -15,6 +19,13 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var LiveRoomCollectionView: UICollectionView!
     static var isSignIn: Bool?
     var result: JsonResult?
+    var handle: AuthStateDidChangeListenerHandle?
+    let db = Firestore.firestore()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        LiveRoomCollectionView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +33,7 @@ class HomePageViewController: UIViewController {
         self.LiveRoomCollectionView.register(nib, forCellWithReuseIdentifier: "LiveRoomCollectionViewCell")
         result = Network.shared.load("Result.json")
     }
+    
 }
 
 
@@ -30,8 +42,6 @@ class HomePageViewController: UIViewController {
 // MARK: - 設定Colletion View
 
 extension HomePageViewController: UICollectionViewDataSource {
-    
-
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return result?.stream_list.count ?? 0
