@@ -7,6 +7,7 @@
 
 import UIKit
 import Foundation
+import FirebaseAuth
 
 class ChatRoomViewController: UIViewController {
     @IBOutlet weak var chatTextField: UITextField!

@@ -24,42 +24,29 @@ class AccountPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        handle = Auth.auth().addStateDidChangeListener{ auth, user in
-            if let user = user {
-                if let currentUserEmail = Auth.auth().currentUser?.email {
-                    self.db.collection("userInfo").document(currentUserEmail).getDocument { document, error in
-                        guard let document = document, document.exists,
-                              let user = try? document.data(as: UserInfo.self) else { return }
-                        print(user)
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
+            if let currentUser = auth.currentUser {
+                if let email = currentUser.email {
+                    print("\(email) login")
+                    self.db.collection("userInfo").document(email).getDocument { document, error in
+                        guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
                         URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
                             DispatchQueue.main.async {
-                                self.userHeadPhotoImageView.image = UIImage(data: data ?? Data())
-                                self.nickNameLabel.text = "暱稱：\(user.nickName)"
+                                if let data = data {
+                                    self.userHeadPhotoImageView.image = UIImage(data: data)
+                                }
+                                self.nickNameLabel.text = "暱稱：\(user.nickname)"
                                 self.emailLabel.text = "帳號：\(user.email)"
                             }
                         }.resume()
                     }
                 }
-            }
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
-            if let user = user {
-                print("\(user.email) login")
             } else {
-//                let alert = UIAlertController(title: "並未登入", message: "為您跳轉至登入頁面", preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-//                self.present(alert, animated: true)
-                self.nickNameLabel.text? = "暱稱：未登入"
-                self.emailLabel.text? = "帳號：未登入"
-                self.userHeadPhotoImageView.image = UIImage(named: "picPersonal")
-                self.navigationController?.pushViewController(SignInPageViewController.SignInPage, animated: true)
                 print("not login")
+                self.navigationController?.pushViewController(SignInPageViewController.SignInPage, animated: true)
             }
         }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -70,6 +57,8 @@ class AccountPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeadPhotoImageView()
+        self.navigationItem.title = "會員資訊"
+
     }
     
     func setHeadPhotoImageView() {
@@ -80,6 +69,9 @@ class AccountPageViewController: UIViewController {
     @IBAction func clickOnSignOut(_ sender: Any) {
         do {
             try Auth.auth().signOut()
+            userHeadPhotoImageView.image = UIImage(named: "picPersonal")
+            nickNameLabel.text = nil
+            emailLabel.text = nil
         } catch {
             print(error)
         }

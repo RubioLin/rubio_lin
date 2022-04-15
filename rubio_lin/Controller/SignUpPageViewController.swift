@@ -12,6 +12,8 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 import FirebaseStorageSwift
 
+let userDefaults = UserDefaults.standard
+
 class SignUpPageViewController: UIViewController {
     
     static let SignUpPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpPage")
@@ -22,12 +24,8 @@ class SignUpPageViewController: UIViewController {
     @IBOutlet weak var signUpBtn: UIButton!
     let db = Firestore.firestore()
     
-    
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {        
         super.viewWillAppear(true)
-        nicknameTextField.text = ""
-        emailTextField.text = ""
-        passwordTextField.text = ""
     }
     
     override func viewDidLoad() {
@@ -41,13 +39,10 @@ class SignUpPageViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-        userHeadPhotoImageView.image = UIImage(named: "picPersonal")
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func setNavigationBar() {
-        let navigationBarLeftButton = UIBarButtonItem(image: UIImage(named: "titlebarBack"), style: .plain, target: self, action: Selector("backPreviousPage"))
+        let navigationBarLeftButton = UIBarButtonItem(image: UIImage(named: "titlebarBack"), style: .plain, target: self, action: #selector(backPreviousPage))
         navigationBarLeftButton.tintColor = UIColor.black
         self.navigationItem.title = "註冊會員"
         self.navigationItem.setLeftBarButton(navigationBarLeftButton, animated: true)
@@ -113,14 +108,12 @@ class SignUpPageViewController: UIViewController {
         userHeadPhotoImageView.layer.cornerRadius = userHeadPhotoCornerRadius
     }
     
-    @IBAction func a(_ sender: Any) {
+    @IBAction func touchDown(_ sender: Any) {
         nicknameTextField.resignFirstResponder()
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
     
-    
-        
     @IBAction func selectPhotoBtn(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Select Photo", message: nil, preferredStyle: .actionSheet)
         let sources:[(name:String, type:UIImagePickerController.SourceType)] = [
@@ -141,57 +134,74 @@ class SignUpPageViewController: UIViewController {
         //create a new user and upload to FirebaseAuth
         createUser()
         //upload userPhoto to Storage
-        uploadPhoto(image: userHeadPhotoImageView.image!) { result in
+        uploadPhoto(image: userHeadPhotoImageView.image ?? UIImage()) { result in
                 switch result {
                 case .success(let userPhotoUrl):
                     //upload UserInfo to Firestore
                     self.uploadUserInfo(url: userPhotoUrl)
-                    print(userPhotoUrl)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-            self.navigationController?.popToRootViewController(animated: true)
             }
+        nicknameTextField.text = ""
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        userHeadPhotoImageView.image = UIImage(named: "picPersonal")
     }
     
     func createUser() {
-        Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { [self] result, error in
-            guard let user = result?.user, error == nil else {
-                let alert = UIAlertController(title: "Sign up failure", message: error?.localizedDescription, preferredStyle: .alert)
-                let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(ok)
-                self.present(alert, animated: true, completion: nil)
-                print(error?.localizedDescription)
-                return
+        if let email = emailTextField.text, let password = passwordTextField.text {
+            Auth.auth().createUser(withEmail: email, password: password) { [self] result, error in
+                guard let user = result?.user, error == nil else {
+                    let alert = UIAlertController(title: "Sign up failure", message: error?.localizedDescription, preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(ok)
+                    self.present(alert, animated: true, completion: nil)
+                    print(error?.localizedDescription)
+                    return
+                }
             }
         }
     }
     
     func uploadUserInfo(url: URL) {
-        let user = UserInfo(nickName: nicknameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!, userPhotoUrl: url)
-        do {
-            try db.collection("userInfo").document(emailTextField.text!).setData(from: user)
-        } catch {
-            print(error.localizedDescription)
+        if let nickname = nicknameTextField.text, let email = emailTextField.text, let password = passwordTextField.text {
+            guard email != "" else {
+                print("email can't be nil")
+                return
+            }
+            let user = UserInfo(nickname: nickname, email: email, password: password, userPhotoUrl: url)
+            do {
+                try db.collection("userInfo").document("\(email)").setData(from: user)
+                self.navigationController?.popToRootViewController(animated: true)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     
     func uploadPhoto(image: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
-        let fileReference = Storage.storage().reference().child("\(emailTextField.text!).jpg")
-        if let data = image.jpegData(compressionQuality: 0.6            ) {
-            fileReference.putData(data, metadata: nil) { result in
-                switch result {
-                case .success(_):
-                    fileReference.downloadURL { result in
-                        switch result {
-                        case .success(let url):
-                            completion(.success(url))
-                        case .failure(let error):
-                            completion(.failure(error))
+        if let email = emailTextField.text {
+            guard email != "" else {
+                print("email can't be nil")
+                return
+            }
+            let fileReference = Storage.storage().reference().child("\(email).jpg")
+            if let data = image.jpegData(compressionQuality: 0.6) {
+                fileReference.putData(data, metadata: nil) { result in
+                    switch result {
+                    case .success(_):
+                        fileReference.downloadURL { result in
+                            switch result {
+                            case .success(let url):
+                                completion(.success(url))
+                            case .failure(let error):
+                                completion(.failure(error))
+                            }
                         }
+                    case .failure(let error):
+                        completion(.failure(error))
                     }
-                case .failure(let error):
-                    completion(.failure(error))
                 }
             }
         }
@@ -212,5 +222,4 @@ extension SignUpPageViewController: UIImagePickerControllerDelegate,  UINavigati
         userHeadPhotoImageView.image = info[.originalImage] as? UIImage
         dismiss(animated: true,completion: nil)
     }
-    
 }

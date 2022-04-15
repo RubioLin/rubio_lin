@@ -31,9 +31,9 @@ class HomePageViewController: UIViewController {
         super.viewDidLoad()
         let nib = UINib(nibName: "LiveRoomCollectionViewCell", bundle: nil)
         self.LiveRoomCollectionView.register(nib, forCellWithReuseIdentifier: "LiveRoomCollectionViewCell")
+        self.LiveRoomCollectionView.register(UINib(nibName: "HomePageHeaderReusableView", bundle: nil), forSupplementaryViewOfKind:  UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomePageHeaderReusableView")
         result = Network.shared.load("Result.json")
     }
-    
 }
 
 
@@ -43,6 +43,30 @@ class HomePageViewController: UIViewController {
 
 extension HomePageViewController: UICollectionViewDataSource {
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
+            header?.isHidden = false
+            if let currentUser = Auth.auth().currentUser {
+                if let email = currentUser.email {
+                    self.db.collection("userInfo").document(email).getDocument { document, error in
+                        guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
+                        URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
+                            DispatchQueue.main.async {
+                                header?.currentUserNicknameLabel.text = user.nickname
+                                header?.currentUserHeadPhotoImageView.image = UIImage(data: data!)
+                            }
+                        }.resume()
+                    }
+                }
+            } else {
+                header?.isHidden = true
+            }
+        }
+        return header!
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return result?.stream_list.count ?? 0
     }
@@ -50,11 +74,15 @@ extension HomePageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveRoomCollectionViewCell", for: indexPath) as? LiveRoomCollectionViewCell
         cell?.stream_titleLabel.text = result?.stream_list[indexPath.row]?.nickname
-        cell?.tagsLabel.text = "#" + String(result?.stream_list[indexPath.row]?.tags ?? "")
+        if result?.stream_list[indexPath.row]?.tags == "" {
+            cell?.tagsLabel.isHidden = true
+        } else {
+            cell?.tagsLabel.text = "#" + String(result?.stream_list[indexPath.row]?.tags ?? "")
+        }
         let formater = NumberFormatter()
         formater.numberStyle = .decimal
         if let a = result?.stream_list[indexPath.row]?.online_num {
-            cell?.online_numLabel.text = (formater.string(from: a as! NSNumber) ?? "") + "  "
+            cell?.online_numLabel.text = (formater.string(from: a as NSNumber) ?? "") + "  "
         }
         
         if let url = URL(string: result?.stream_list[indexPath.row]?.head_photo ?? "") {
@@ -84,7 +112,7 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
     
     //設定Collection View 和 Super View 的間距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
     }
     
     
@@ -95,7 +123,7 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 30
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

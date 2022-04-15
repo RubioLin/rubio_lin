@@ -68,6 +68,7 @@ class LiveStreamRoomViewController: UIViewController {
     }
     
     @IBAction func clickExitLiveStreamRoom(_ sender: Any) {
+        player.pause()
         playerLayer.removeFromSuperlayer()
         alertUIView.isHidden = true
         self.dismiss(animated: true)
@@ -76,5 +77,4 @@ class LiveStreamRoomViewController: UIViewController {
         chatRoomUIView.isHidden = false
         alertUIView.isHidden = true
     }
-    
 }
