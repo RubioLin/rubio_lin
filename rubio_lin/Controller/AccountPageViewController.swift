@@ -25,7 +25,7 @@ class AccountPageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         handle = Auth.auth().addStateDidChangeListener { auth, user in
-            if let currentUser = auth.currentUser {
+            if let currentUser = user {
                 if let email = currentUser.email {
                     print("\(email) login")
                     self.db.collection("userInfo").document(email).getDocument { document, error in
@@ -46,7 +46,6 @@ class AccountPageViewController: UIViewController {
                 self.navigationController?.pushViewController(SignInPageViewController.SignInPage, animated: true)
             }
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,7 +57,6 @@ class AccountPageViewController: UIViewController {
         super.viewDidLoad()
         setHeadPhotoImageView()
         self.navigationItem.title = "會員資訊"
-
     }
     
     func setHeadPhotoImageView() {

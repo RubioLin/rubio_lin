@@ -14,7 +14,6 @@ class HomePageHeaderReusableView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setCurrentUserHeadPhotoImageView()
-        
     }
     
     func setCurrentUserHeadPhotoImageView() {

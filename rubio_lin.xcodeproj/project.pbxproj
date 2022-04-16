@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B1748162809C5CD0067AD71 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1748152809C5CD0067AD71 /* extension.swift */; };
 		4B4355712808FFFA007B688A /* HomePageHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43556F2808FFFA007B688A /* HomePageHeaderReusableView.swift */; };
 		4B4355722808FFFA007B688A /* HomePageHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */; };
 		4B43557928091952007B688A /* SearchPageHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */; };
@@ -18,7 +19,7 @@
 		4BA3FB0F28051B7E00ABE771 /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */; };
 		4BA3FB1028051B7E00ABE771 /* ChatRoomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */; };
 		4BA3FB142805695B00ABE771 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA3FB132805695B00ABE771 /* WebSocket.swift */; };
-		4BE1D49F27F83ED2006145B0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D49E27F83ED2006145B0 /* Network.swift */; };
+		4BE1D49F27F83ED2006145B0 /* FetchJsonModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */; };
 		4BE1D4A227F842D5006145B0 /* JsonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A027F842D5006145B0 /* JsonResult.swift */; };
 		4BE1D4A327F842D5006145B0 /* Result.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A127F842D5006145B0 /* Result.json */; };
 		4BE1D4A727FB0C44006145B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A627FB0C44006145B0 /* GoogleService-Info.plist */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B1748152809C5CD0067AD71 /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		4B43556F2808FFFA007B688A /* HomePageHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomePageHeaderReusableView.swift; path = rubio_lin/Controller/HomePageHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
 		4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomePageHeaderReusableView.xib; path = rubio_lin/HomePageHeaderReusableView.xib; sourceTree = SOURCE_ROOT; };
 		4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchPageHeaderReusableView.swift; path = rubio_lin/Controller/SearchPageHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
@@ -71,7 +73,7 @@
 		4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
 		4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatRoomTableViewCell.xib; sourceTree = "<group>"; };
 		4BA3FB132805695B00ABE771 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
-		4BE1D49E27F83ED2006145B0 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchJsonModal.swift; sourceTree = "<group>"; };
 		4BE1D4A027F842D5006145B0 /* JsonResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonResult.swift; sourceTree = "<group>"; };
 		4BE1D4A127F842D5006145B0 /* Result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Result.json; sourceTree = "<group>"; };
 		4BE1D4A627FB0C44006145B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -138,8 +140,8 @@
 		4BA2207527F60A9000CDFC59 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */,
 				4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */,
+				4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */,
 				4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */,
 				4BF201AD27F2B0C9007311AA /* LaunchScreen.storyboard */,
 				4BF201A827F2B0C8007311AA /* Main.storyboard */,
@@ -151,7 +153,7 @@
 		4BA2207627F60A9700CDFC59 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4BE1D49E27F83ED2006145B0 /* Network.swift */,
+				4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */,
 				4B602EF32803401800D621E6 /* ChatRoomViewController.swift */,
 				4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */,
 				4BF201A627F2B0C8007311AA /* HomePageViewController.swift */,
@@ -193,6 +195,7 @@
 				4BF201A227F2B0C8007311AA /* AppDelegate.swift */,
 				4BF201A427F2B0C8007311AA /* SceneDelegate.swift */,
 				4BE1D4A627FB0C44006145B0 /* GoogleService-Info.plist */,
+				4B1748152809C5CD0067AD71 /* extension.swift */,
 				4BA2207627F60A9700CDFC59 /* Controller */,
 				4BA2207527F60A9000CDFC59 /* View */,
 				4BA2207427F60A7F00CDFC59 /* Model */,
@@ -369,6 +372,7 @@
 				4B4355712808FFFA007B688A /* HomePageHeaderReusableView.swift in Sources */,
 				4BA3FB0F28051B7E00ABE771 /* ChatRoomTableViewCell.swift in Sources */,
 				4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */,
+				4B1748162809C5CD0067AD71 /* extension.swift in Sources */,
 				4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */,
 				4BF23FE927F53D0F002816EA /* SearchPageViewController.swift in Sources */,
 				4BA3FB142805695B00ABE771 /* WebSocket.swift in Sources */,
@@ -378,7 +382,7 @@
 				4BE1D4B027FD223A006145B0 /* SignUpPageViewController.swift in Sources */,
 				4BE1D4A227F842D5006145B0 /* JsonResult.swift in Sources */,
 				4B43557928091952007B688A /* SearchPageHeaderReusableView.swift in Sources */,
-				4BE1D49F27F83ED2006145B0 /* Network.swift in Sources */,
+				4BE1D49F27F83ED2006145B0 /* FetchJsonModal.swift in Sources */,
 				4BF201A327F2B0C8007311AA /* AppDelegate.swift in Sources */,
 				4BF23FEE27F54AAE002816EA /* LiveRoomCollectionViewCell.swift in Sources */,
 				4BF201A527F2B0C8007311AA /* SceneDelegate.swift in Sources */,

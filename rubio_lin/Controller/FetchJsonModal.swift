@@ -7,9 +7,9 @@
 
 import Foundation
     
-class Network {
+class FetchJsonModal {
     
-    static let shared = Network()
+    static let shared = FetchJsonModal()
     
     func load<T>(_ filename: String) -> T where T : Decodable {
         let data: Data

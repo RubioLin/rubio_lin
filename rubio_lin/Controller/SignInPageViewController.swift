@@ -27,17 +27,16 @@ class SignInPageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         addKeyboardObserver()
-        
         if rememberMeButton.isSelected {
             let userDefaults = UserDefaults.standard
-            if let email = userDefaults.string(forKey: "email"), let password = userDefaults.string(forKey: "password") {
+            if let email = userDefaults.string(forKey: "email") {
                 emailTextField.text = email
-                passwordTextField.text = password
             }
         } else {
             emailTextField.text?.removeAll()
-            passwordTextField.text?.removeAll()
         }
+        passwordTextField.text?.removeAll()
+
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
@@ -46,23 +45,15 @@ class SignInPageViewController: UIViewController {
     }
     
     func setEmailTextField() {
-        let emailLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        emailLeftView.text = "  帳號 "
-        emailTextField.leftView = emailLeftView
-        emailTextField.leftViewMode = .always
-        emailTextField.layer.borderWidth = 1
-        emailTextField.layer.borderColor = UIColor.black.cgColor
-        emailTextField.layer.cornerRadius = 22
+        let overlay = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
+        emailTextField.setLeftView(overlay, emailTextField, "  帳號 ", .always)
+        emailTextField.setUITextField(emailTextField, 22, .white, 1.0, 1.0, UIColor.black.cgColor)
     }
     
     func setPasswordTextField() {
         let psLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        psLeftView.text = "  密碼 "
-        passwordTextField.leftView = psLeftView
-        passwordTextField.leftViewMode = .always
-        passwordTextField.layer.borderWidth = 1
-        passwordTextField.layer.borderColor = UIColor.black.cgColor
-        passwordTextField.layer.cornerRadius = 22
+        passwordTextField.setLeftView(psLeftView, passwordTextField, "  密碼 ", .always)
+        passwordTextField.setUITextField(passwordTextField, 22, .white, 1.0, 1.0, UIColor.black.cgColor)
         let psRightView = UIButton(frame: CGRect(x: 6, y: 11, width: 30, height: 22))
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         isVisiblePassword(psRightView)
@@ -106,16 +97,49 @@ class SignInPageViewController: UIViewController {
   }
     
     @IBAction func clickOnSignIn(_ sender: UIButton) {
-        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { result, error in
-            guard let user = result?.user, error == nil else {
-                let alert = UIAlertController(title: "Sign in failure", message: error?.localizedDescription, preferredStyle: .alert)
-                let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(ok)
-                self.present(alert, animated: true, completion: nil)
-                print(error?.localizedDescription)
-                return
+        var email = ""
+        var password = ""
+        var message = ""
+        do {
+            try judgeInput(emailTextField)
+            email = emailTextField.text!
+        } catch InputError.emailcount {
+             message += "帳號字數不正確 "
+            print("email Incorrect Word Count")
+        } catch InputError.isEmpty {
+            message += "請輸入帳號 "
+            print("email is Empty")
+        } catch {
+            print("email Other Error")
+        }
+        do {
+            try judgeInput(passwordTextField)
+            password = passwordTextField.text!
+        } catch InputError.passwordcount {
+            message += "密碼字數不正確 "
+            print("password Incorrect Word Count")
+        } catch InputError.isEmpty {
+            message += "請輸入密碼 "
+            print("password is Empty")
+        } catch {
+            print("password Other Error")
+        }
+        if message != "" {
+            let alert = UIAlertController(title: "請正確輸入", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true)
+        }
+        if email != "" && password != "" {
+            Auth.auth().signIn(withEmail: email, password: password) { result, error in
+                guard let user = result?.user, error == nil else {
+                    let alert = UIAlertController(title: "Sign in failure", message: error?.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                    self.present(alert, animated: true)
+                    print(error?.localizedDescription)
+                    return
+                }
+                self.navigationController?.popToRootViewController(animated: true)
             }
-            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     

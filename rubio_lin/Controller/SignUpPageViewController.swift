@@ -16,6 +16,7 @@ let userDefaults = UserDefaults.standard
 
 class SignUpPageViewController: UIViewController {
     
+    
     static let SignUpPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpPage")
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -40,7 +41,8 @@ class SignUpPageViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
     }
-    
+
+// MARK: - 設置畫面上的各類元件狀態
     func setNavigationBar() {
         let navigationBarLeftButton = UIBarButtonItem(image: UIImage(named: "titlebarBack"), style: .plain, target: self, action: #selector(backPreviousPage))
         navigationBarLeftButton.tintColor = UIColor.black
@@ -50,36 +52,28 @@ class SignUpPageViewController: UIViewController {
     
     @objc func backPreviousPage() {
         self.navigationController?.popViewController(animated: true)
+        self.nicknameTextField.text = ""
+        self.emailTextField.text = ""
+        self.passwordTextField.text = ""
+        self.userHeadPhotoImageView.image = UIImage(named: "picPersonal")
     }
     
     func setNicknameTextField() {
-        let accountOverlayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        accountOverlayLabel.text = "  暱稱 "
-        nicknameTextField.leftView = accountOverlayLabel
-        nicknameTextField.leftViewMode = .always
-        nicknameTextField.layer.borderWidth = 1
-        nicknameTextField.layer.borderColor = UIColor.black.cgColor
-        nicknameTextField.layer.cornerRadius = 22
+        let overlay = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
+        nicknameTextField.setLeftView(overlay, nicknameTextField, "  暱稱 ", .always)
+        nicknameTextField.setUITextField(nicknameTextField, 22, UIColor.white, 1, 1, UIColor.black.cgColor)
     }
     
     func setEmailTextField() {
-        let accountOverlayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        accountOverlayLabel.text = "  帳號 "
-        emailTextField.leftView = accountOverlayLabel
-        emailTextField.leftViewMode = .always
-        emailTextField.layer.borderWidth = 1
-        emailTextField.layer.borderColor = UIColor.black.cgColor
-        emailTextField.layer.cornerRadius = 22
+        let overlay = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
+        emailTextField.setLeftView(overlay, emailTextField, "  帳號 ", .always)
+        emailTextField.setUITextField(emailTextField, 22, UIColor.white, 1, 1, UIColor.black.cgColor)
     }
     
     func setPasswordTextField() {
         let psLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        psLeftView.text = "  密碼 "
-        passwordTextField.leftView = psLeftView
-        passwordTextField.leftViewMode = .always
-        passwordTextField.layer.borderWidth = 1
-        passwordTextField.layer.borderColor = UIColor.black.cgColor
-        passwordTextField.layer.cornerRadius = 22
+        passwordTextField.setLeftView(psLeftView, passwordTextField, "  密碼 ", .always)
+        passwordTextField.setUITextField(passwordTextField, 22, UIColor.white, 1, 1, UIColor.black.cgColor)
         let psRightView = UIButton(frame: CGRect(x: 6, y: 11, width: 30, height: 22))
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         isVisiblePassword(psRightView)
@@ -108,11 +102,13 @@ class SignUpPageViewController: UIViewController {
         userHeadPhotoImageView.layer.cornerRadius = userHeadPhotoCornerRadius
     }
     
+// MARK: - 點螢幕會自動收鍵盤
     @IBAction func touchDown(_ sender: Any) {
         nicknameTextField.resignFirstResponder()
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
+    
     
     @IBAction func selectPhotoBtn(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Select Photo", message: nil, preferredStyle: .actionSheet)
@@ -131,6 +127,46 @@ class SignUpPageViewController: UIViewController {
     }
     
     @IBAction func clickOnSignUp(_ sender: Any) {
+        var nickname = ""
+        var email = ""
+        var password = ""
+        var message = ""
+        if nicknameTextField.text?.trimmingCharacters(in: .whitespaces) != "" {
+            nickname = nicknameTextField.text!
+        }
+        
+        do {
+            try judgeInput(emailTextField)
+            email = emailTextField.text!
+        } catch InputError.emailcount {
+             message += "帳號字數不正確 "
+            print("email Incorrect Word Count")
+        } catch InputError.isEmpty {
+            message += "請輸入帳號 "
+            print("email is Empty")
+        } catch {
+            print("email Other Error")
+        }
+        do {
+            try judgeInput(passwordTextField)
+            password = passwordTextField.text!
+        } catch InputError.passwordcount {
+            message += "密碼字數不正確 "
+            print("password Incorrect Word Count")
+        } catch InputError.isEmpty {
+            message += "請輸入密碼 "
+            print("password is Empty")
+        } catch {
+            print("password Other Error")
+        }
+        
+        if message != "" {
+            let alert = UIAlertController(title: "請正確輸入", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true)
+        }
+        
+        if nickname != "" && email != "" && password != "" {
         //create a new user and upload to FirebaseAuth
         createUser()
         //upload userPhoto to Storage
@@ -139,14 +175,19 @@ class SignUpPageViewController: UIViewController {
                 case .success(let userPhotoUrl):
                     //upload UserInfo to Firestore
                     self.uploadUserInfo(url: userPhotoUrl)
+                    self.nicknameTextField.text = ""
+                    self.emailTextField.text = ""
+                    self.passwordTextField.text = ""
+                    self.userHeadPhotoImageView.image = UIImage(named: "picPersonal")
+                    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { Timer in
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                    self.tabBarController?.selectedIndex = 0
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
-        nicknameTextField.text = ""
-        emailTextField.text = ""
-        passwordTextField.text = ""
-        userHeadPhotoImageView.image = UIImage(named: "picPersonal")
+        }
     }
     
     func createUser() {
@@ -173,7 +214,6 @@ class SignUpPageViewController: UIViewController {
             let user = UserInfo(nickname: nickname, email: email, password: password, userPhotoUrl: url)
             do {
                 try db.collection("userInfo").document("\(email)").setData(from: user)
-                self.navigationController?.popToRootViewController(animated: true)
             } catch {
                 print(error.localizedDescription)
             }

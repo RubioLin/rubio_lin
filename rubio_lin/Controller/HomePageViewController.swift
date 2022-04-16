@@ -32,7 +32,7 @@ class HomePageViewController: UIViewController {
         let nib = UINib(nibName: "LiveRoomCollectionViewCell", bundle: nil)
         self.LiveRoomCollectionView.register(nib, forCellWithReuseIdentifier: "LiveRoomCollectionViewCell")
         self.LiveRoomCollectionView.register(UINib(nibName: "HomePageHeaderReusableView", bundle: nil), forSupplementaryViewOfKind:  UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomePageHeaderReusableView")
-        result = Network.shared.load("Result.json")
+        result = FetchJsonModal.shared.load("Result.json")
     }
 }
 

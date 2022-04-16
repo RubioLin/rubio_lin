@@ -21,7 +21,6 @@ class LiveRoomCollectionViewCell: UICollectionViewCell {
         contentView.layer.masksToBounds = true
         setTagsLabel()
         setOnlineNumView()
-        setCellGradient()
     }
     
     
@@ -44,10 +43,10 @@ class LiveRoomCollectionViewCell: UICollectionViewCell {
         online_numvView.layer.cornerRadius = 10
     }
     
-    func setCellGradient() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.gradientView.frame
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradientView.layer.addSublayer(gradientLayer)
-    }
+//    func setCellGradient() {
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.frame = self.gradientView.frame
+//        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+//        gradientView.layer.insertSublayer(gradientLayer, at: 0)
+//    }
 }

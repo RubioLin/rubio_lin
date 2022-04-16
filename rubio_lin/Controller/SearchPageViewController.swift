@@ -23,7 +23,7 @@ class SearchPageViewController: UIViewController {
         let nib = UINib(nibName: "LiveRoomCollectionViewCell", bundle: nil)
         self.recommendCollectionView.register(nib, forCellWithReuseIdentifier: "LiveRoomCollectionViewCell")
         self.recommendCollectionView.register(UINib(nibName: "SearchPageHeaderReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "SearchPageHeaderReusableView")
-        result = Network.shared.load("Result.json")
+        result = FetchJsonModal.shared.load("Result.json")
         self.searchBar.delegate = self
         searchBar.setImage(UIImage(named: "titlebarSearch"), for: .search, state: .normal)
     }
