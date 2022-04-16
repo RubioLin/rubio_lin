@@ -51,10 +51,14 @@ extension HomePageViewController: UICollectionViewDataSource {
                 if let email = currentUser.email {
                     self.db.collection("userInfo").document(email).getDocument { document, error in
                         guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
+                        self.showSpinner()
                         URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
                             DispatchQueue.main.async {
+                                if let data = data {
+                                    header?.currentUserHeadPhotoImageView.image = UIImage(data: data)
+                                }
                                 header?.currentUserNicknameLabel.text = user.nickname
-                                header?.currentUserHeadPhotoImageView.image = UIImage(data: data!)
+                                self.removeSpinner()
                             }
                         }.resume()
                     }

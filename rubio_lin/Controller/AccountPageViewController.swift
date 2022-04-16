@@ -30,6 +30,7 @@ class AccountPageViewController: UIViewController {
                     print("\(email) login")
                     self.db.collection("userInfo").document(email).getDocument { document, error in
                         guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
+                        self.showSpinner()
                         URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
                             DispatchQueue.main.async {
                                 if let data = data {
@@ -37,6 +38,7 @@ class AccountPageViewController: UIViewController {
                                 }
                                 self.nickNameLabel.text = "暱稱：\(user.nickname)"
                                 self.emailLabel.text = "帳號：\(user.email)"
+                                self.removeSpinner()
                             }
                         }.resume()
                     }
