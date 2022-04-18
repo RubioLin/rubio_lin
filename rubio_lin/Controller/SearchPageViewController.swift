@@ -12,21 +12,24 @@ class SearchPageViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     var result: JsonResult?
     var searching_list: [StreamList] = []
-    var isSearch: Bool = false
+    var isSearch: Bool = false // 判斷是否為搜尋中
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
     }
-    
+    // 要register Colletion View 的 Cell 和 Header
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "LiveRoomCollectionViewCell", bundle: nil)
         self.recommendCollectionView.register(nib, forCellWithReuseIdentifier: "LiveRoomCollectionViewCell")
         self.recommendCollectionView.register(UINib(nibName: "SearchPageHeaderReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "SearchPageHeaderReusableView")
-        result = FetchJsonModal.shared.load("Result.json")
+        result = FetchJsonModal.shared.load("Result.json") // 解析本地 json 資料
+        // 將 SearchBar 的 Delegate 設為此 Controller，並設置其圖片
         self.searchBar.delegate = self
         searchBar.setImage(UIImage(named: "titlebarSearch"), for: .search, state: .normal)
     }
+    // 按下search 鍵盤會收起來
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
@@ -178,6 +181,7 @@ extension SearchPageViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: (self.view.frame.size.width - 30) / 2 , height: (self.view.frame.size.width - 30) / 2)
     }
     
+    //設定Collection View 的 Cell 彼此的間距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
@@ -190,6 +194,7 @@ extension SearchPageViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - 設定Collection View Delegate
 extension SearchPageViewController: UICollectionViewDelegate {
+    // 點選Cell進入直播間
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         LiveStreamRoomViewController.LiveStreamRoom.modalPresentationStyle = .fullScreen
         self.present(LiveStreamRoomViewController.LiveStreamRoom, animated: true)

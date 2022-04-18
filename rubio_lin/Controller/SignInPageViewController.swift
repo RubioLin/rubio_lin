@@ -97,37 +97,37 @@ class SignInPageViewController: UIViewController {
   }
     
     @IBAction func clickOnSignIn(_ sender: UIButton) {
+        self.removeSpinner()
+        let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+="
         var email = ""
         var password = ""
         var message = ""
-        do {
-            try judgeInput(emailTextField)
-            email = emailTextField.text!
-        } catch InputError.emailcount {
-             message += "帳號字數不正確 "
-            print("email Incorrect Word Count")
-        } catch InputError.isEmpty {
+        if emailTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             message += "請輸入帳號 "
-            print("email is Empty")
-        } catch {
-            print("email Other Error")
+            print("Email is empty")
+        } else if emailTextField.text!.split(separator: "@")[0].count >= 20 || emailTextField.text!.split(separator: "@")[0].count <= 4 {
+            message += "帳號字數不正確 "
+            print("Email incorrect word count")
+        } else if punctuation.contains(emailTextField.text!.split(separator: "@")[0]) {
+            message += "帳號含有特殊符號 "
+            print("Email is badly formatted")
+        } else {
+            email = emailTextField.text!
         }
-        do {
-            try judgeInput(passwordTextField)
+        if passwordTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
+            message += "請輸入密碼"
+            print("Password is empty")
+        } else if passwordTextField.text!.count >= 12 || passwordTextField.text!.count <= 6 {
+            message += "密碼字數不正確"
+            print("Password incorrect word count")
+        } else if punctuation.contains(passwordTextField.text!) {
+            message += "密碼含有特殊符號"
+            print("Password is badly formatted")
+        } else {
             password = passwordTextField.text!
-        } catch InputError.passwordcount {
-            message += "密碼字數不正確 "
-            print("password Incorrect Word Count")
-        } catch InputError.isEmpty {
-            message += "請輸入密碼 "
-            print("password is Empty")
-        } catch {
-            print("password Other Error")
         }
         if message != "" {
-            let alert = UIAlertController(title: "請正確輸入", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(alert, animated: true)
+            showAlertInfo(message)
         }
         if email != "" && password != "" {
             Auth.auth().signIn(withEmail: email, password: password) { result, error in

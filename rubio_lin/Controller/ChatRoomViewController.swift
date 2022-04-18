@@ -13,8 +13,6 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 import FirebaseStorageSwift
 
-
-
 class ChatRoomViewController: UIViewController {
     @IBOutlet weak var chatTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
@@ -23,13 +21,19 @@ class ChatRoomViewController: UIViewController {
     var webSocketReceive: [receiveInfo] = []
     var handle: AuthStateDidChangeListenerHandle?
     let db = Firestore.firestore()
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         handle = Auth.auth().addStateDidChangeListener { auth, user in
         }
         establishConnection()
         addKeyboardObserver()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 3, delay: 2) {
+            self.view.alpha = 0.4
+        }
     }
     
     override func viewDidLoad() {
@@ -47,39 +51,39 @@ class ChatRoomViewController: UIViewController {
         webSocketReceive.removeAll()
         chatRoomTableView.reloadData()
         disconnect()
+        self.view.alpha = 1
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     
+    
+    
     func establishConnection() {
-        var nickname: String?
+        var nickname = ""
+        let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
         if let currentUser = Auth.auth().currentUser {
             if let currentEmail = currentUser.email {
-                self.db.collection("userInfo").document(currentEmail).getDocument { snapshots, error in
-                    guard let snapshot = snapshots, snapshots!.exists, let user = try? snapshots!.data(as: UserInfo.self) else { return }
+                self.db.collection("userInfo").document(currentEmail).getDocument { document, error in
+                    guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
                     nickname = user.nickname
-                    let urlStr = "wss://lott-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname!)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                    let urlStr = "wss://lott-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
                     guard let url = URL(string: urlStr!) else {
                         print("connection error")
                         return }
-                    let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
                     let request = URLRequest(url: url)
                     self.webSocketTask = urlSession.webSocketTask(with: request)
-                    self.webSocketTask?.resume()
                 }
             }
         } else {
             nickname = "訪客"
-            let urlStr = "wss://lott-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname!)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            let urlStr = "wss://lott-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             guard let url = URL(string: urlStr!) else {
                 print("connection error")
                 return }
-            let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
             let request = URLRequest(url: url)
             self.webSocketTask = urlSession.webSocketTask(with: request)
-            self.webSocketTask?.resume()
         }
+        self.webSocketTask?.resume()
         receive()
     }
     
@@ -156,14 +160,10 @@ class ChatRoomViewController: UIViewController {
    
     
     @IBAction func clickSendMessage(_ sender: Any) {
-        do {
-            try judgeInput(chatTextField)
-            send(message: self.chatTextField.text!)
-            print("Input is correct")
-        } catch InputError.isEmpty {
+        if chatTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             print("Input is empty")
-        } catch {
-            print("chat box Other error")
+        } else {
+            send(message: self.chatTextField.text!)
         }
         chatTextField.text?.removeAll() //送出後要重置輸入框
     }
@@ -172,6 +172,15 @@ class ChatRoomViewController: UIViewController {
     @IBAction func didEndOnExit(_ sender: Any) {
     }
     
+    @IBAction func editdidEnd(_ sender: Any) {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 3, delay: 2) {
+            self.view.alpha = 0.4
+        }
+    }
+    
+    @IBAction func touchdown(_ sender: Any) {
+        self.view.alpha = 1
+    }
 }
 
 // MARK: - 設定TableViewCell數量和內容

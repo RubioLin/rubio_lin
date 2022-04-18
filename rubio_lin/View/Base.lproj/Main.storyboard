@@ -76,8 +76,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xh0-QH-IJP">
-                                <rect key="frame" x="21" y="576" width="373" height="286"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="20" y="576" width="374" height="286"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="Udu-1Q-LcZ" kind="embed" id="mde-79-jI9"/>
@@ -568,7 +568,7 @@
                                             <constraint firstAttribute="height" constant="44" id="W84-jf-1LF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入6位以上字母或數字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ngQ-AT-ooK" userLabel="Password TextField">
                                         <rect key="frame" x="0.0" y="128" width="366" height="44"/>
@@ -665,15 +665,15 @@
         <scene sceneID="xB9-0G-65C">
             <objects>
                 <viewController id="Udu-1Q-LcZ" userLabel="Chat Room" customClass="ChatRoomViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1FM-rO-DMW">
-                        <rect key="frame" x="0.0" y="0.0" width="373" height="286"/>
+                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FM-rO-DMW">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="286"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="itB-3g-Wem">
-                                <rect key="frame" x="0.0" y="232" width="373" height="44"/>
+                                <rect key="frame" x="0.0" y="232" width="374" height="44"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="    一起聊個天吧..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wx5-bo-YQC">
-                                        <rect key="frame" x="0.0" y="0.0" width="321" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="322" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Igl-k8-Xms"/>
                                         </constraints>
@@ -682,10 +682,12 @@
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="didEndOnExit:" destination="Udu-1Q-LcZ" eventType="editingDidEndOnExit" id="Ckc-S7-3Jv"/>
+                                            <action selector="editdidEnd:" destination="Udu-1Q-LcZ" eventType="editingDidEnd" id="uAd-lW-Ah0"/>
+                                            <action selector="touchdown:" destination="Udu-1Q-LcZ" eventType="touchDown" id="1Gd-cf-14m"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeq-CG-Xfm">
-                                        <rect key="frame" x="329" y="0.0" width="44" height="44"/>
+                                        <rect key="frame" x="330" y="0.0" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="1KN-72-Pl6"/>
                                             <constraint firstAttribute="width" secondItem="yeq-CG-Xfm" secondAttribute="height" multiplier="1:1" id="h6D-9U-zgy"/>
@@ -698,9 +700,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="rjg-5s-ARJ">
-                                <rect key="frame" x="0.0" y="0.0" width="374" height="232"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" delaysContentTouches="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rjg-5s-ARJ">
+                                <rect key="frame" x="0.0" y="44" width="374" height="178"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Udu-1Q-LcZ" id="Qam-9A-yTt"/>
@@ -711,12 +712,13 @@
                         <viewLayoutGuide key="safeArea" id="1no-eV-1Un"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="leading" secondItem="1no-eV-1Un" secondAttribute="leading" id="5bF-LQ-7sd"/>
-                            <constraint firstItem="itB-3g-Wem" firstAttribute="leading" secondItem="1FM-rO-DMW" secondAttribute="leading" id="9A1-ac-dLW"/>
-                            <constraint firstAttribute="trailing" secondItem="itB-3g-Wem" secondAttribute="trailing" id="Cz5-EI-HWZ"/>
-                            <constraint firstAttribute="bottom" secondItem="itB-3g-Wem" secondAttribute="bottom" constant="10" id="GVc-ni-JoH"/>
-                            <constraint firstItem="itB-3g-Wem" firstAttribute="top" secondItem="rjg-5s-ARJ" secondAttribute="bottom" id="HJe-YB-1A8"/>
-                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="top" secondItem="1FM-rO-DMW" secondAttribute="top" id="TZh-N8-2aw"/>
+                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="trailing" secondItem="itB-3g-Wem" secondAttribute="trailing" id="CZ9-oR-DNf"/>
+                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="leading" secondItem="itB-3g-Wem" secondAttribute="leading" id="Iai-2w-Nlr"/>
+                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="top" secondItem="1no-eV-1Un" secondAttribute="top" id="Ojj-I6-0AJ"/>
+                            <constraint firstItem="1no-eV-1Un" firstAttribute="trailing" secondItem="itB-3g-Wem" secondAttribute="trailing" id="k9v-zt-T1T"/>
+                            <constraint firstItem="itB-3g-Wem" firstAttribute="leading" secondItem="1no-eV-1Un" secondAttribute="leading" id="obN-c0-IiI"/>
+                            <constraint firstItem="1no-eV-1Un" firstAttribute="bottom" secondItem="itB-3g-Wem" secondAttribute="bottom" constant="10" id="qci-kg-6uE"/>
+                            <constraint firstItem="itB-3g-Wem" firstAttribute="top" secondItem="rjg-5s-ARJ" secondAttribute="bottom" constant="10" id="yN7-X2-loM"/>
                         </constraints>
                     </view>
                     <connections>
@@ -727,7 +729,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0j7-Te-DUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2857" y="-872"/>
+            <point key="canvasLocation" x="2856.521739130435" y="-872.54464285714278"/>
         </scene>
         <!--首頁-->
         <scene sceneID="c6Y-e6-gNp">

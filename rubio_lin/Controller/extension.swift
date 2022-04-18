@@ -5,6 +5,23 @@ fileprivate var backgroundView: UIView?
 
 extension UIViewController {
     
+    func showAlertInfo(_ message: String?) {
+        backgroundView = UIView(frame: CGRect(x: 0, y: self.view.bounds.midY * 1.6, width: self.view.bounds.width * 0.855, height: 44))
+        backgroundView?.center.x = self.view.center.x
+        backgroundView!.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+        backgroundView?.layer.cornerRadius = 22
+        let alert = UILabel()
+        alert.frame = backgroundView!.bounds
+        alert.text = "\(message!)"
+        alert.textColor = .white
+        alert.textAlignment = .center
+        backgroundView?.addSubview(alert)
+        self.view.addSubview(backgroundView!)
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 4, delay: 0) {
+            backgroundView?.alpha = 0
+        }
+    }
+    
     func showSpinner() {
         backgroundView = UIView(frame: self.view.bounds)
         backgroundView!.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
@@ -19,30 +36,6 @@ extension UIViewController {
     
     func removeSpinner() {
         backgroundView?.removeFromSuperview()
-        print("有喔")
-    }
-    
-    
-    enum InputError: Error {
-        case emailcount
-        case passwordcount
-        case isEmpty
-    }
-    
-    func judgeInput(_ textField: UITextField) throws {
-        guard textField.text!.trimmingCharacters(in: .whitespaces) != "" else {
-            throw InputError.isEmpty
-        }
-        if textField.text!.contains("@") {
-            let newtext = textField.text!.split(separator: "@")
-            guard newtext[0].count <= 20 && newtext[0].count >= 4 else {
-                throw InputError.emailcount
-            }
-        } else {
-            guard textField.text!.count <= 12 && textField.text!.count >= 6 else {
-                throw InputError.passwordcount
-            }
-        }
     }
 }
 

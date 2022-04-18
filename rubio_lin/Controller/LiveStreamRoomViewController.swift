@@ -7,8 +7,9 @@
 
 import UIKit
 import AVFoundation
+import YouTubeiOSPlayerHelper
 
-class LiveStreamRoomViewController: UIViewController {
+class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var chatRoomUIView: UIView!
     @IBOutlet weak var alertUIView: UIView!
@@ -18,22 +19,46 @@ class LiveStreamRoomViewController: UIViewController {
     var player = AVPlayer()
     var playerLayer = AVPlayerLayer()
     var receiveInfo: receiveInfo?
+    let YTPlayer = YTPlayerView()
+    var playlist = ["I3440shDJYw", "xSbeUixi22o", "3OHT350Acj4", "_zvMspsjNgA", "tH4SMx_-5As"]
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         chatRoomUIView.isHidden = false
-        playVedio()
+        playerViewDidBecomeReady(YTPlayer)
+        playerView(YTPlayer, didChangeTo: .ended)
+        playVedio(playid: playlist.randomElement()!)
+//        playVedio()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLogoutButton()
         setupAlertView()
+        YTPlayer.delegate = self
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
     }
     
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        YTPlayer.playVideo()
+    }
+    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        YTPlayer.playVideo()
+    }
+    
+    //串流影片
+    func playVedio(playid: String) {
+        YTPlayer.frame = self.view.bounds
+        YTPlayer.load(withVideoId: playid, playerVars: ["controls": 0,"autohide": 1,"modestbranding":1])
+        YTPlayer.webView?.configuration.allowsInlineMediaPlayback = false
+        YTPlayer.isUserInteractionEnabled = false
+        view.insertSubview(YTPlayer, at: 0)
+    }
+    
+    //本地影片
     func playVedio() {
         let vedioUrl = Bundle.main.url(forResource: "hime3", withExtension: "mp4")
         player = AVPlayer(url: vedioUrl!)
@@ -68,8 +93,10 @@ class LiveStreamRoomViewController: UIViewController {
     }
     
     @IBAction func clickExitLiveStreamRoom(_ sender: Any) {
+        YTPlayer.pauseVideo()
         player.pause()
         playerLayer.removeFromSuperlayer()
+        YTPlayer.removeWebView()
         alertUIView.isHidden = true
         self.dismiss(animated: true)
     }

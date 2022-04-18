@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4B1748162809C5CD0067AD71 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1748152809C5CD0067AD71 /* extension.swift */; };
+		4B239EDB280C651400E862BF /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 4B239EDA280C651400E862BF /* YouTubeiOSPlayerHelper */; };
 		4B4355712808FFFA007B688A /* HomePageHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43556F2808FFFA007B688A /* HomePageHeaderReusableView.swift */; };
 		4B4355722808FFFA007B688A /* HomePageHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */; };
 		4B43557928091952007B688A /* SearchPageHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */; };
@@ -106,6 +107,7 @@
 				4BE1D4AA27FC4E5E006145B0 /* FirebaseAuth in Frameworks */,
 				4BE1D4AC27FC4E5E006145B0 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				4BE1D4AE27FC4E5E006145B0 /* FirebaseStorageSwift-Beta in Frameworks */,
+				4B239EDB280C651400E862BF /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,12 +142,12 @@
 		4BA2207527F60A9000CDFC59 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */,
-				4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */,
-				4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */,
 				4BF201AD27F2B0C9007311AA /* LaunchScreen.storyboard */,
 				4BF201A827F2B0C8007311AA /* Main.storyboard */,
+				4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */,
+				4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */,
 				4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */,
+				4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -153,18 +155,19 @@
 		4BA2207627F60A9700CDFC59 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */,
-				4B602EF32803401800D621E6 /* ChatRoomViewController.swift */,
-				4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */,
 				4BF201A627F2B0C8007311AA /* HomePageViewController.swift */,
 				4BF23FE827F53D0F002816EA /* SearchPageViewController.swift */,
 				4BF23FEA27F53D32002816EA /* AccountPageViewController.swift */,
 				4BF23FF827F571FD002816EA /* SignInPageViewController.swift */,
 				4BE1D4AF27FD223A006145B0 /* SignUpPageViewController.swift */,
-				4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */,
-				4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */,
+				4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */,
+				4B602EF32803401800D621E6 /* ChatRoomViewController.swift */,
 				4B43556F2808FFFA007B688A /* HomePageHeaderReusableView.swift */,
 				4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */,
+				4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */,
+				4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */,
+				4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */,
+				4B1748152809C5CD0067AD71 /* extension.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -195,7 +198,6 @@
 				4BF201A227F2B0C8007311AA /* AppDelegate.swift */,
 				4BF201A427F2B0C8007311AA /* SceneDelegate.swift */,
 				4BE1D4A627FB0C44006145B0 /* GoogleService-Info.plist */,
-				4B1748152809C5CD0067AD71 /* extension.swift */,
 				4BA2207627F60A9700CDFC59 /* Controller */,
 				4BA2207527F60A9000CDFC59 /* View */,
 				4BA2207427F60A7F00CDFC59 /* Model */,
@@ -243,6 +245,7 @@
 				4BE1D4A927FC4E5E006145B0 /* FirebaseAuth */,
 				4BE1D4AB27FC4E5E006145B0 /* FirebaseFirestoreSwift-Beta */,
 				4BE1D4AD27FC4E5E006145B0 /* FirebaseStorageSwift-Beta */,
+				4B239EDA280C651400E862BF /* YouTubeiOSPlayerHelper */,
 			);
 			productName = rubio_lin;
 			productReference = 4BF2019F27F2B0C8007311AA /* rubio_lin.app */;
@@ -318,6 +321,7 @@
 			mainGroup = 4BF2019627F2B0C7007311AA;
 			packageReferences = (
 				4BE1D4A827FC4E5E006145B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4B239ED9280C651400E862BF /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 4BF201A027F2B0C8007311AA /* Products */;
 			projectDirPath = "";
@@ -728,6 +732,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4B239ED9280C651400E862BF /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		4BE1D4A827FC4E5E006145B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -739,6 +751,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4B239EDA280C651400E862BF /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B239ED9280C651400E862BF /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
+		};
 		4BE1D4A927FC4E5E006145B0 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4BE1D4A827FC4E5E006145B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
