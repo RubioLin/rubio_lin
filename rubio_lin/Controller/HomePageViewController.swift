@@ -38,6 +38,9 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
         tabBarController?.delegate = self
         tabBarController?.tabBar.tintColor = .black
     }
+
+    
+    
 }
 
 // MARK: - 設定Colletion View DataSource
@@ -149,6 +152,11 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
 extension HomePageViewController: UICollectionViewDelegate {
     // 點選Cell進入直播間
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row % 2 == 0 {
+            LiveStreamRoomViewController.LiveStreamRoom.isStream = true
+        } else {
+            LiveStreamRoomViewController.LiveStreamRoom.isStream = false
+        }
         LiveStreamRoomViewController.LiveStreamRoom.modalPresentationStyle = .fullScreen
         self.present(LiveStreamRoomViewController.LiveStreamRoom, animated: true)
     }

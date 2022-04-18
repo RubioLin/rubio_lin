@@ -13,6 +13,7 @@
 		4B4355722808FFFA007B688A /* HomePageHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */; };
 		4B43557928091952007B688A /* SearchPageHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */; };
 		4B43557A28091952007B688A /* SearchPageHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */; };
+		4B4A72A2280D1AD700149C89 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4A72A1280D1AD700149C89 /* TableViewController.swift */; };
 		4B602EF0280324B200D621E6 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EEF280324B200D621E6 /* Firebase.swift */; };
 		4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */; };
 		4B602EF42803401800D621E6 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EF32803401800D621E6 /* ChatRoomViewController.swift */; };
@@ -67,6 +68,7 @@
 		4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomePageHeaderReusableView.xib; path = rubio_lin/HomePageHeaderReusableView.xib; sourceTree = SOURCE_ROOT; };
 		4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchPageHeaderReusableView.swift; path = rubio_lin/Controller/SearchPageHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
 		4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchPageHeaderReusableView.xib; path = rubio_linUITests/SearchPageHeaderReusableView.xib; sourceTree = SOURCE_ROOT; };
+		4B4A72A1280D1AD700149C89 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		4B602EEF280324B200D621E6 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamRoomViewController.swift; sourceTree = "<group>"; };
 		4B602EF32803401800D621E6 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatRoomViewController.swift; path = rubio_lin/Controller/ChatRoomViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -155,6 +157,7 @@
 		4BA2207627F60A9700CDFC59 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4B4A72A1280D1AD700149C89 /* TableViewController.swift */,
 				4BF201A627F2B0C8007311AA /* HomePageViewController.swift */,
 				4BF23FE827F53D0F002816EA /* SearchPageViewController.swift */,
 				4BF23FEA27F53D32002816EA /* AccountPageViewController.swift */,
@@ -386,6 +389,7 @@
 				4BE1D4B027FD223A006145B0 /* SignUpPageViewController.swift in Sources */,
 				4BE1D4A227F842D5006145B0 /* JsonResult.swift in Sources */,
 				4B43557928091952007B688A /* SearchPageHeaderReusableView.swift in Sources */,
+				4B4A72A2280D1AD700149C89 /* TableViewController.swift in Sources */,
 				4BE1D49F27F83ED2006145B0 /* FetchJsonModal.swift in Sources */,
 				4BF201A327F2B0C8007311AA /* AppDelegate.swift in Sources */,
 				4BF23FEE27F54AAE002816EA /* LiveRoomCollectionViewCell.swift in Sources */,

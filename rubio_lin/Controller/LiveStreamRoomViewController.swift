@@ -15,21 +15,24 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
     @IBOutlet weak var alertUIView: UIView!
     @IBOutlet weak var alertExitBtn: UIButton!
     @IBOutlet weak var alertStayBtn: UIButton!
-    static let LiveStreamRoom = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom")
+    static let LiveStreamRoom = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
     var player = AVPlayer()
     var playerLayer = AVPlayerLayer()
     var receiveInfo: receiveInfo?
     let YTPlayer = YTPlayerView()
     var playlist = ["I3440shDJYw", "xSbeUixi22o", "3OHT350Acj4", "_zvMspsjNgA", "tH4SMx_-5As"]
-
+    var isStream: Bool?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         chatRoomUIView.isHidden = false
-        playerViewDidBecomeReady(YTPlayer)
-        playerView(YTPlayer, didChangeTo: .ended)
-        playVedio(playid: playlist.randomElement()!)
-//        playVedio()
+        if isStream == true {
+            playerViewDidBecomeReady(YTPlayer)
+            playerView(YTPlayer, didChangeTo: .ended)
+            playVedio(playid: playlist.randomElement()!)
+        } else {
+            playVedio()
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()

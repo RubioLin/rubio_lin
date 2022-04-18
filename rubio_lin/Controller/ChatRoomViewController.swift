@@ -119,7 +119,7 @@ class ChatRoomViewController: UIViewController {
             //缺少 監聽判斷我正在往上滾，就算有新訊息進來也不能回到最下面
             self?.chatRoomTableView.reloadData()
             if self?.webSocketReceive.count ?? 1 > 0 {
-                self?.chatRoomTableView.scrollToRow(at: IndexPath(row: self!.webSocketReceive.count - 1, section: 0), at: .bottom, animated: true)
+                self?.chatRoomTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .none, animated: true)
             }
             self?.receive()
         }
@@ -188,21 +188,21 @@ extension ChatRoomViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return webSocketReceive.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRoomTableViewCell", for: indexPath) as! ChatRoomTableViewCell
-//        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
-//        cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-        if webSocketReceive[indexPath.row].event.contains("sys_updateRoomStatus") {
-            if webSocketReceive[indexPath.row].body.entry_notice?.action == "enter" {
-                cell.chatTextView.text = "\(webSocketReceive[indexPath.row].body.entry_notice!.username!)  進入聊天室"
+        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        let index = webSocketReceive.count - 1 - indexPath.row
+        if webSocketReceive[index].event.contains("sys_updateRoomStatus") {
+            if webSocketReceive[index].body.entry_notice?.action == "enter" {
+                cell.chatTextView.text = "\(webSocketReceive[index].body.entry_notice!.username!)  進入聊天室"
             } else {
-                cell.chatTextView.text = "\(webSocketReceive[indexPath.row].body.entry_notice!.username!)  離開聊天室"
+                cell.chatTextView.text = "\(webSocketReceive[index].body.entry_notice!.username!)  離開聊天室"
             }
-        } else if webSocketReceive[indexPath.row].event.contains("default_message") {
-            cell.chatTextView.text = "\(webSocketReceive[indexPath.row].body.nickname!): \(webSocketReceive[indexPath.row].body.text!)"
-        } else if webSocketReceive[indexPath.row].event.contains("admin_all_broadcast") {
-            cell.chatTextView.text = "\(webSocketReceive[indexPath.row].body.content!.tw!)"
+        } else if webSocketReceive[index].event.contains("default_message") {
+            cell.chatTextView.text = "\(webSocketReceive[index].body.nickname!): \(webSocketReceive[index].body.text!)"
+        } else if webSocketReceive[index].event.contains("admin_all_broadcast") {
+            cell.chatTextView.text = "\(webSocketReceive[index].body.content!.tw!)"
         }
         return cell
     }
