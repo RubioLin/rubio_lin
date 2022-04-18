@@ -43,9 +43,7 @@ class AccountPageViewController: UIViewController {
                 }
             } else {
                 print("not login")
-                SignInPageViewController.SignInPage.modalPresentationStyle = .currentContext
-                self.present(SignInPageViewController.SignInPage, animated: true)
-//                self.navigationController?.pushViewController(SignInPageViewController.SignInPage, animated: true)
+                self.navigationController?.pushViewController(SignInPageViewController.SignInPage, animated: true)
             }
         }
     }
@@ -75,5 +73,6 @@ class AccountPageViewController: UIViewController {
         } catch {
             print(error)
         }
+        self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
     }
 }

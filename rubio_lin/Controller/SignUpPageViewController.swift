@@ -183,9 +183,6 @@ class SignUpPageViewController: UIViewController {
                     self.emailTextField.text = ""
                     self.passwordTextField.text = ""
                     self.userHeadPhotoImageView.image = UIImage(named: "picPersonal")
-                    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { Timer in
-                        self.navigationController?.popToRootViewController(animated: true)
-                    }
                     self.tabBarController?.selectedIndex = 0
                 case .failure(let error):
                     print(error.localizedDescription)

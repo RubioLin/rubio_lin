@@ -146,8 +146,7 @@ class SignInPageViewController: UIViewController {
     
     @IBAction func clinkOnSignUp(_ sender: UIButton) {
         SignUpPageViewController.SignUpPage.modalPresentationStyle = .overCurrentContext
-        self.present(SignUpPageViewController.SignUpPage, animated: true)
-//        self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
+        self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
     }
 }
 
