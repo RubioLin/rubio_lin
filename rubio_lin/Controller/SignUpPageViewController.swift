@@ -40,6 +40,7 @@ class SignUpPageViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
+        
     }
 
 // MARK: - 設置畫面上的各類元件狀態

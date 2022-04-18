@@ -49,27 +49,25 @@ extension HomePageViewController: UICollectionViewDataSource {
     
     // 設置 Colletion View 的 Header
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
+        var header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
         handle = Auth.auth().addStateDidChangeListener { auth, user in
             header?.isHidden = false
             if let currentUser = Auth.auth().currentUser {
                 if let email = currentUser.email {
                     self.db.collection("userInfo").document(email).getDocument { document, error in
                         guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
-                        self.showSpinner()
                         URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
                             DispatchQueue.main.async {
                                 if let data = data {
                                     header?.currentUserHeadPhotoImageView.image = UIImage(data: data)
                                 }
                                 header?.currentUserNicknameLabel.text = user.nickname
-                                self.removeSpinner()
                             }
                         }.resume()
                     }
                 }
             } else {
-                header?.isHidden = true
+                
             }
         }
         return header!
@@ -84,10 +82,10 @@ extension HomePageViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveRoomCollectionViewCell", for: indexPath) as? LiveRoomCollectionViewCell
         
         // 設置cell的漸層
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.view.bounds
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        cell?.contentView.layer.insertSublayer(gradientLayer, at: 0)
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.frame = self.view.bounds
+//        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+//        cell?.contentView.layer.insertSublayer(gradientLayer, at: 0)
         // 設置cell的主播名稱和直播間名稱
         cell?.stream_titleLabel.text = String((result?.stream_list[indexPath.row]?.nickname)!) + "   " + String((result?.stream_list[indexPath.row]?.stream_title)!)
         // 設置cell的tags，並加以判斷，無內容不顯示

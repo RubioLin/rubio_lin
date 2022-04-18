@@ -76,6 +76,11 @@ extension SearchPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveRoomCollectionViewCell", for: indexPath) as? LiveRoomCollectionViewCell
+        // 設置cell的漸層
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        cell?.contentView.layer.insertSublayer(gradientLayer, at: 0)
         
         if isSearch == true {
             if indexPath.section == 0 {
@@ -161,8 +166,6 @@ extension SearchPageViewController: UICollectionViewDataSource {
                 }.resume()
             }
         }
-        
-        
         return cell!
     }
 }

@@ -21,6 +21,8 @@ class ChatRoomViewController: UIViewController {
     var webSocketReceive: [receiveInfo] = []
     var handle: AuthStateDidChangeListenerHandle?
     let db = Firestore.firestore()
+    var animator = UIViewPropertyAnimator()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         handle = Auth.auth().addStateDidChangeListener { auth, user in
@@ -65,13 +67,16 @@ class ChatRoomViewController: UIViewController {
             if let currentEmail = currentUser.email {
                 self.db.collection("userInfo").document(currentEmail).getDocument { document, error in
                     guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
-                    nickname = user.nickname
-                    let urlStr = "wss://lott-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-                    guard let url = URL(string: urlStr!) else {
+                    nickname = user.nickname.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                    let urlStr = "wss://lott-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)"
+                    guard let url = URL(string: urlStr) else {
                         print("connection error")
                         return }
                     let request = URLRequest(url: url)
+                    print(request)
                     self.webSocketTask = urlSession.webSocketTask(with: request)
+                    self.webSocketTask?.resume()
+                    self.receive()
                 }
             }
         } else {
@@ -82,9 +87,9 @@ class ChatRoomViewController: UIViewController {
                 return }
             let request = URLRequest(url: url)
             self.webSocketTask = urlSession.webSocketTask(with: request)
+            self.webSocketTask?.resume()
+            self.receive()
         }
-        self.webSocketTask?.resume()
-        receive()
     }
     
     private func receive() {
@@ -173,12 +178,14 @@ class ChatRoomViewController: UIViewController {
     }
     
     @IBAction func editdidEnd(_ sender: Any) {
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 3, delay: 2) {
+        animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 3, delay: 2, options: .allowUserInteraction, animations: {
             self.view.alpha = 0.4
-        }
+        }, completion: { UIViewAnimatingPosition in
+        })
     }
     
     @IBAction func touchdown(_ sender: Any) {
+        animator.stopAnimation(true)
         self.view.alpha = 1
     }
 }

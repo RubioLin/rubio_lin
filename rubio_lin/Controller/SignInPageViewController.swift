@@ -42,6 +42,7 @@ class SignInPageViewController: UIViewController {
         super.viewDidDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        self.dismiss(animated: true)
     }
     
     func setEmailTextField() {
@@ -105,7 +106,7 @@ class SignInPageViewController: UIViewController {
         if emailTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             message += "請輸入帳號 "
             print("Email is empty")
-        } else if emailTextField.text!.split(separator: "@")[0].count >= 20 || emailTextField.text!.split(separator: "@")[0].count <= 4 {
+        } else if emailTextField.text!.split(separator: "@")[0].count > 20 || emailTextField.text!.split(separator: "@")[0].count < 4 {
             message += "帳號字數不正確 "
             print("Email incorrect word count")
         } else if punctuation.contains(emailTextField.text!.split(separator: "@")[0]) {
@@ -117,7 +118,7 @@ class SignInPageViewController: UIViewController {
         if passwordTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             message += "請輸入密碼"
             print("Password is empty")
-        } else if passwordTextField.text!.count >= 12 || passwordTextField.text!.count <= 6 {
+        } else if passwordTextField.text!.count > 12 || passwordTextField.text!.count < 6 {
             message += "密碼字數不正確"
             print("Password incorrect word count")
         } else if punctuation.contains(passwordTextField.text!) {
@@ -144,7 +145,9 @@ class SignInPageViewController: UIViewController {
     }
     
     @IBAction func clinkOnSignUp(_ sender: UIButton) {
-        self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
+        SignUpPageViewController.SignUpPage.modalPresentationStyle = .overCurrentContext
+        self.present(SignUpPageViewController.SignUpPage, animated: true)
+//        self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
     }
 }
 
