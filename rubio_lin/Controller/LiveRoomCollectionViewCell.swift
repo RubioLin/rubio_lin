@@ -20,6 +20,7 @@ class LiveRoomCollectionViewCell: UICollectionViewCell {
         contentView.layer.masksToBounds = true
         setTagsLabel()
         setOnlineNumView()
+        setStream_titleLabel()
     }
     
     override func prepareForReuse() {
@@ -30,12 +31,21 @@ class LiveRoomCollectionViewCell: UICollectionViewCell {
         head_photoImageView.image = nil
     }
     
+    func setStream_titleLabel() {
+        tagsLabel.backgroundColor = .black
+        tagsLabel.alpha = 0.6
+        stream_titleLabel.layer.masksToBounds = true
+        stream_titleLabel.layer.cornerRadius = 10
+    }
+        
     func setTagsLabel() {
         tagsLabel.backgroundColor = .black
-        tagsLabel.alpha = 0.8
+        tagsLabel.alpha = 0.6
         tagsLabel.layer.masksToBounds = true
-        tagsLabel.layer.cornerRadius = 5
+        tagsLabel.layer.cornerRadius = 10
     }
+    
+    
     
     func setOnlineNumView() {
         online_numvView.layer.masksToBounds = true
@@ -43,7 +53,12 @@ class LiveRoomCollectionViewCell: UICollectionViewCell {
     }
     
     func setCellGradient() {
+        let gradientLayer = CAGradientLayer()
         
+        gradientLayer.frame = head_photoImageView.bounds
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: head_photoImageView.bounds.width, height: head_photoImageView.bounds.height)
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        self.contentView.layer.insertSublayer(gradientLayer, above: head_photoImageView.layer)
 //        let gradientLayer = CAGradientLayer()
 //        gradientLayer.frame = self.gradientView.frame
 //        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]

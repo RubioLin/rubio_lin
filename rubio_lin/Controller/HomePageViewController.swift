@@ -12,7 +12,8 @@ import FirebaseStorage
 import FirebaseStorageSwift
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import SwiftUI
+
+var handle: AuthStateDidChangeListenerHandle?
 
 class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarControllerDelegate {
     
@@ -20,8 +21,8 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
     @IBOutlet weak var LiveRoomCollectionView: UICollectionView!
     static var isSignIn: Bool?
     var result: JsonResult?
-    var handle: AuthStateDidChangeListenerHandle?
     let db = Firestore.firestore()
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -47,7 +48,16 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
 
 extension HomePageViewController: UICollectionViewDataSource {
     
-    // 設置 Colletion View 的 Header
+    // 設置 Collection View 的 Header在有登入時存在，未登入則高度為零
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if Auth.auth().currentUser == nil {
+            return CGSize(width: 0.0, height: 0.0)
+        } else {
+            return CGSize(width: self.view.bounds.width, height: 40)
+        }
+    }
+    
+    // 設置 Collection View 的 Header
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
         handle = Auth.auth().addStateDidChangeListener { auth, user in
@@ -71,7 +81,6 @@ extension HomePageViewController: UICollectionViewDataSource {
             }
         }
         return header!
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -81,11 +90,6 @@ extension HomePageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveRoomCollectionViewCell", for: indexPath) as? LiveRoomCollectionViewCell
         
-        // 設置cell的漸層
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = self.view.bounds
-//        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-//        cell?.contentView.layer.insertSublayer(gradientLayer, at: 0)
         // 設置cell的主播名稱和直播間名稱
         cell?.stream_titleLabel.text = String((result?.stream_list[indexPath.row]?.nickname)!) + "   " + String((result?.stream_list[indexPath.row]?.stream_title)!)
         // 設置cell的tags，並加以判斷，無內容不顯示

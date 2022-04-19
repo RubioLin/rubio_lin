@@ -68,7 +68,7 @@ class ChatRoomViewController: UIViewController {
                 self.db.collection("userInfo").document(currentEmail).getDocument { document, error in
                     guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
                     nickname = user.nickname.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-                    let urlStr = "wss://lott-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)"
+                    let urlStr = "wss://client-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)"
                     guard let url = URL(string: urlStr) else {
                         print("connection error")
                         return }
@@ -81,7 +81,7 @@ class ChatRoomViewController: UIViewController {
             }
         } else {
             nickname = "訪客"
-            let urlStr = "wss://lott-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            let urlStr = "wss://client-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             guard let url = URL(string: urlStr!) else {
                 print("connection error")
                 return }
@@ -186,7 +186,7 @@ class ChatRoomViewController: UIViewController {
     
     @IBAction func touchdown(_ sender: Any) {
         animator.stopAnimation(true)
-        self.view.alpha = 1
+        self.view.alpha = 0.8
     }
 }
 
@@ -200,6 +200,7 @@ extension ChatRoomViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
         let index = webSocketReceive.count - 1 - indexPath.row
+       
         if webSocketReceive[index].event.contains("sys_updateRoomStatus") {
             if webSocketReceive[index].body.entry_notice?.action == "enter" {
                 cell.chatTextView.text = "\(webSocketReceive[index].body.entry_notice!.username!)  進入聊天室"
@@ -211,6 +212,8 @@ extension ChatRoomViewController: UITableViewDelegate, UITableViewDataSource {
         } else if webSocketReceive[index].event.contains("admin_all_broadcast") {
             cell.chatTextView.text = "\(webSocketReceive[index].body.content!.tw!)"
         }
+        
+        
         return cell
     }
 }

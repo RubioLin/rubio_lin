@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class SignInPageViewController: UIViewController {
     
-    static let SignInPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInPage")
+    static let SignInPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInPage") as! SignInPageViewController
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rememberMeButton: UIButton!
@@ -42,16 +42,18 @@ class SignInPageViewController: UIViewController {
         super.viewDidDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        self.dismiss(animated: true)
+        self.dismiss(animated: false)
     }
     
     func setEmailTextField() {
+        emailTextField.keyboardType = .asciiCapable
         let overlay = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
         emailTextField.setLeftView(overlay, emailTextField, "  帳號 ", .always)
         emailTextField.setUITextField(emailTextField, 22, .white, 1.0, 1.0, UIColor.black.cgColor)
     }
     
     func setPasswordTextField() {
+        passwordTextField.keyboardType = .asciiCapable
         let psLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
         passwordTextField.setLeftView(psLeftView, passwordTextField, "  密碼 ", .always)
         passwordTextField.setUITextField(passwordTextField, 22, .white, 1.0, 1.0, UIColor.black.cgColor)
@@ -128,6 +130,7 @@ class SignInPageViewController: UIViewController {
             password = passwordTextField.text!
         }
         if message != "" {
+            
             showAlertInfo(message)
         }
         if email != "" && password != "" {
@@ -139,14 +142,13 @@ class SignInPageViewController: UIViewController {
                     print(error?.localizedDescription)
                     return
                 }
-                self.navigationController?.popToRootViewController(animated: true)
+                self.tabBarController?.selectedIndex = 0
+                self.navigationController?.viewDidLoad()
             }
         }
     }
     
     @IBAction func clinkOnSignUp(_ sender: UIButton) {
-        SignUpPageViewController.SignUpPage.modalPresentationStyle = .overCurrentContext
-        self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
     }
 }
 

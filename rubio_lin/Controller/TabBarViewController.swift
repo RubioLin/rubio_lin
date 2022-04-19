@@ -16,6 +16,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         let firstItemView = tabBar.subviews.first!
         self.firstTabbarItemImageView = firstItemView.subviews.first as? UIImageView
+        print(firstItemView.subviews)
         self.firstTabbarItemImageView.contentMode = .center
         self.firstTabbarItemImageView.clipsToBounds = true
         let secondItemView = self.tabBar.subviews[1]

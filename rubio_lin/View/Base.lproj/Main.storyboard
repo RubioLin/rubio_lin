@@ -75,12 +75,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xh0-QH-IJP">
-                                <rect key="frame" x="20" y="576" width="335" height="202"/>
+                            <containerView opaque="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Xh0-QH-IJP">
+                                <rect key="frame" x="20" y="521" width="335" height="257"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="286" id="HCl-wB-h3M"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="374" id="KZM-et-KF5"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="335" id="jbQ-tb-jrd"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="Udu-1Q-LcZ" kind="embed" id="mde-79-jI9"/>
@@ -179,15 +178,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0Q3-1H-Irb" firstAttribute="centerY" secondItem="v0p-dV-ipV" secondAttribute="centerY" multiplier="0.2" id="7R1-Us-TpT"/>
-                            <constraint firstItem="Xh0-QH-IJP" firstAttribute="centerX" secondItem="v0p-dV-ipV" secondAttribute="centerX" id="IR1-sY-6r4"/>
-                            <constraint firstItem="Xh0-QH-IJP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Knl-qE-hkN" secondAttribute="top" constant="532" id="JIj-Ma-i28"/>
-                            <constraint firstItem="Knl-qE-hkN" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xh0-QH-IJP" secondAttribute="trailing" constant="20" id="JhG-YX-rac"/>
+                            <constraint firstItem="Xh0-QH-IJP" firstAttribute="centerX" secondItem="v0p-dV-ipV" secondAttribute="centerX" id="8w4-rc-fer"/>
+                            <constraint firstItem="Xh0-QH-IJP" firstAttribute="bottom" secondItem="Knl-qE-hkN" secondAttribute="bottom" id="BYc-xA-mdR"/>
+                            <constraint firstItem="Xh0-QH-IJP" firstAttribute="leading" secondItem="Knl-qE-hkN" secondAttribute="leading" constant="20" id="Dqi-pW-1o3"/>
                             <constraint firstItem="lU1-gj-UrX" firstAttribute="centerY" secondItem="v0p-dV-ipV" secondAttribute="centerY" id="S6I-Vf-cLm"/>
                             <constraint firstItem="0Q3-1H-Irb" firstAttribute="centerX" secondItem="v0p-dV-ipV" secondAttribute="centerX" multiplier="1.8" id="UBy-rj-izy"/>
+                            <constraint firstItem="Xh0-QH-IJP" firstAttribute="height" secondItem="Knl-qE-hkN" secondAttribute="height" multiplier="0.35" id="hDN-1c-zHO"/>
                             <constraint firstItem="lU1-gj-UrX" firstAttribute="centerX" secondItem="v0p-dV-ipV" secondAttribute="centerX" id="ml2-mw-sey"/>
                             <constraint firstItem="lU1-gj-UrX" firstAttribute="width" secondItem="v0p-dV-ipV" secondAttribute="width" multiplier="0.8" id="s2e-Bi-ig4"/>
-                            <constraint firstItem="Xh0-QH-IJP" firstAttribute="leading" secondItem="Knl-qE-hkN" secondAttribute="leading" constant="20" id="sMl-Ml-9Yu"/>
-                            <constraint firstItem="Xh0-QH-IJP" firstAttribute="bottom" secondItem="Knl-qE-hkN" secondAttribute="bottom" id="z3N-xd-UMO"/>
+                            <constraint firstItem="Knl-qE-hkN" firstAttribute="trailing" secondItem="Xh0-QH-IJP" secondAttribute="trailing" constant="20" id="v57-40-Rxk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rFD-2m-TCP"/>
@@ -201,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ej9-24-B29" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2115.9420289855075" y="-713.16964285714278"/>
+            <point key="canvasLocation" x="2114.4000000000001" y="-713.79310344827593"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="lH7-q0-SEn">
@@ -377,7 +376,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esb-dk-66H" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1125" y="915"/>
+            <point key="canvasLocation" x="1130" y="1422"/>
         </scene>
         <!--SignInPage-->
         <scene sceneID="V5T-r3-azl">
@@ -415,7 +414,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lyH-MM-m6O">
                                         <rect key="frame" x="0.0" y="0.0" width="320.33333333333331" height="108"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入4-20位字母或數字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3vK-05-T8z">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入4-20位字母或數字的電子郵件" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3vK-05-T8z">
                                                 <rect key="frame" x="0.0" y="0.0" width="320.33333333333331" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="D3B-XF-L9o"/>
@@ -502,6 +501,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="clinkOnSignUp:" destination="Ozg-MB-Oft" eventType="touchUpInside" id="gyX-DE-1yW"/>
+                                    <segue destination="5rZ-r0-YNh" kind="show" id="Ofp-24-0wT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -528,7 +528,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWY-nk-ttl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1875" y="915"/>
+            <point key="canvasLocation" x="1129" y="733"/>
         </scene>
         <!--SignUpPage-->
         <scene sceneID="859-Za-4hs">
@@ -570,7 +570,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入電子郵件" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vaI-MK-vCN" userLabel="Email TextField">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入4-20位字母或數字的電子郵件" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vaI-MK-vCN" userLabel="Email TextField">
                                         <rect key="frame" x="0.0" y="64" width="331.66666666666669" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="W84-jf-1LF"/>
@@ -578,7 +578,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入6位以上字母或數字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ngQ-AT-ooK" userLabel="Password TextField">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入6-12位字母或數字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ngQ-AT-ooK" userLabel="Password TextField">
                                         <rect key="frame" x="0.0" y="128" width="331.66666666666669" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="C2G-VU-ZYQ"/>
@@ -648,12 +648,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xam-LO-Cn8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2619" y="915"/>
+            <point key="canvasLocation" x="1969" y="732"/>
         </scene>
         <!--個人-->
         <scene sceneID="uLg-ZK-GHM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h3B-9d-gWt" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Navigation" automaticallyAdjustsScrollViewInsets="NO" id="h3B-9d-gWt" customClass="NavigationViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="個人" image="tabPersonal" id="HJa-3g-n76"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bWC-OC-sX5">
@@ -662,7 +662,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="SUL-Eu-YkJ" kind="relationship" relationship="rootViewController" id="vOy-73-qEi"/>
+                        <segue destination="Ozg-MB-Oft" kind="relationship" relationship="rootViewController" id="KIU-jC-Dwx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hif-2g-6rZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -674,11 +674,11 @@
             <objects>
                 <viewController id="Udu-1Q-LcZ" userLabel="Chat Room" customClass="ChatRoomViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FM-rO-DMW">
-                        <rect key="frame" x="0.0" y="0.0" width="335" height="202"/>
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="257"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="itB-3g-Wem">
-                                <rect key="frame" x="0.0" y="148" width="335" height="44"/>
+                                <rect key="frame" x="0.0" y="203" width="335" height="44"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="    一起聊個天吧..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wx5-bo-YQC">
                                         <rect key="frame" x="0.0" y="0.0" width="283" height="44"/>
@@ -709,7 +709,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" delaysContentTouches="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rjg-5s-ARJ">
-                                <rect key="frame" x="0.0" y="44" width="335" height="94"/>
+                                <rect key="frame" x="0.0" y="44" width="335" height="149"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Udu-1Q-LcZ" id="Qam-9A-yTt"/>

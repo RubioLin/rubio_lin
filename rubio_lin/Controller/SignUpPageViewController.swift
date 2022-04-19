@@ -17,7 +17,7 @@ let userDefaults = UserDefaults.standard
 class SignUpPageViewController: UIViewController {
     
     
-    static let SignUpPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpPage")
+    static let SignUpPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpPage") as! SignUpPageViewController
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -31,16 +31,16 @@ class SignUpPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        setNavigationBar()
         setEmailTextField()
         setPasswordTextField()
         setNicknameTextField()
-        setNavigationBar()
         setHeadPhotoImageView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-        
     }
 
 // MARK: - 設置畫面上的各類元件狀態
@@ -66,12 +66,14 @@ class SignUpPageViewController: UIViewController {
     }
     
     func setEmailTextField() {
+        emailTextField.keyboardType = .asciiCapable
         let overlay = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
         emailTextField.setLeftView(overlay, emailTextField, "  帳號 ", .always)
         emailTextField.setUITextField(emailTextField, 22, UIColor.white, 1, 1, UIColor.black.cgColor)
     }
     
     func setPasswordTextField() {
+        passwordTextField.keyboardType = .asciiCapable
         let psLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
         passwordTextField.setLeftView(psLeftView, passwordTextField, "  密碼 ", .always)
         passwordTextField.setUITextField(passwordTextField, 22, UIColor.white, 1, 1, UIColor.black.cgColor)
@@ -143,7 +145,7 @@ class SignUpPageViewController: UIViewController {
         if emailTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             message += "請輸入帳號 "
             print("Email is empty")
-        } else if emailTextField.text!.split(separator: "@")[0].count >= 20 || emailTextField.text!.split(separator: "@")[0].count <= 4 {
+        } else if emailTextField.text!.split(separator: "@")[0].count > 20 || emailTextField.text!.split(separator: "@")[0].count < 4 {
             message += "帳號字數不正確 "
             print("Email incorrect word count")
         } else if punctuation.contains(emailTextField.text!.split(separator: "@")[0]) {
@@ -155,7 +157,7 @@ class SignUpPageViewController: UIViewController {
         if passwordTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             message += "請輸入密碼"
             print("Password is empty")
-        } else if passwordTextField.text!.count >= 12 || passwordTextField.text!.count <= 6 {
+        } else if passwordTextField.text!.count > 12 || passwordTextField.text!.count < 6 {
             message += "密碼字數不正確"
             print("Password incorrect word count")
         } else if punctuation.contains(passwordTextField.text!) {
@@ -184,6 +186,7 @@ class SignUpPageViewController: UIViewController {
                     self.passwordTextField.text = ""
                     self.userHeadPhotoImageView.image = UIImage(named: "picPersonal")
                     self.tabBarController?.selectedIndex = 0
+                    self.navigationController?.viewDidLoad()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

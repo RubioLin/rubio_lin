@@ -14,12 +14,11 @@ import FirebaseFirestoreSwift
 
 class AccountPageViewController: UIViewController {
     
-    static let AccountPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountPage")
+    static let AccountPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountPage") as! AccountPageViewController
     @IBOutlet weak var userHeadPhotoImageView: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var signInOutButton: UIButton!
-    var handle: AuthStateDidChangeListenerHandle?
     let db = Firestore.firestore()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +42,6 @@ class AccountPageViewController: UIViewController {
                 }
             } else {
                 print("not login")
-                self.navigationController?.pushViewController(SignInPageViewController.SignInPage, animated: true)
             }
         }
     }
@@ -51,6 +49,11 @@ class AccountPageViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         Auth.auth().removeStateDidChangeListener(handle!)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        self.dismiss(animated: false)
     }
     
     override func viewDidLoad() {
@@ -73,6 +76,7 @@ class AccountPageViewController: UIViewController {
         } catch {
             print(error)
         }
-        self.navigationController?.pushViewController(SignUpPageViewController.SignUpPage, animated: true)
+        self.navigationController?.viewDidLoad()
     }
 }
+

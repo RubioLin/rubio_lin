@@ -14,6 +14,7 @@
 		4B43557928091952007B688A /* SearchPageHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */; };
 		4B43557A28091952007B688A /* SearchPageHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */; };
 		4B4A72A4280D1B9A00149C89 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4A72A3280D1B9A00149C89 /* TabBarViewController.swift */; };
+		4B4A72A6280DAA2400149C89 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4A72A5280DAA2400149C89 /* NavigationViewController.swift */; };
 		4B602EF0280324B200D621E6 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EEF280324B200D621E6 /* Firebase.swift */; };
 		4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */; };
 		4B602EF42803401800D621E6 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EF32803401800D621E6 /* ChatRoomViewController.swift */; };
@@ -24,7 +25,6 @@
 		4BE1D49F27F83ED2006145B0 /* FetchJsonModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */; };
 		4BE1D4A227F842D5006145B0 /* JsonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A027F842D5006145B0 /* JsonResult.swift */; };
 		4BE1D4A327F842D5006145B0 /* Result.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A127F842D5006145B0 /* Result.json */; };
-		4BE1D4A727FB0C44006145B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BE1D4A627FB0C44006145B0 /* GoogleService-Info.plist */; };
 		4BE1D4AA27FC4E5E006145B0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4BE1D4A927FC4E5E006145B0 /* FirebaseAuth */; };
 		4BE1D4AC27FC4E5E006145B0 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 4BE1D4AB27FC4E5E006145B0 /* FirebaseFirestoreSwift-Beta */; };
 		4BE1D4AE27FC4E5E006145B0 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 4BE1D4AD27FC4E5E006145B0 /* FirebaseStorageSwift-Beta */; };
@@ -43,6 +43,7 @@
 		4BF23FEE27F54AAE002816EA /* LiveRoomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */; };
 		4BF23FEF27F54AAE002816EA /* LiveRoomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */; };
 		4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FF827F571FD002816EA /* SignInPageViewController.swift */; };
+		4BF354AB280E94A500F0EE0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BF354AA280E94A500F0EE0A /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchPageHeaderReusableView.swift; path = rubio_lin/Controller/SearchPageHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
 		4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchPageHeaderReusableView.xib; path = rubio_linUITests/SearchPageHeaderReusableView.xib; sourceTree = SOURCE_ROOT; };
 		4B4A72A3280D1B9A00149C89 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		4B4A72A5280DAA2400149C89 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		4B602EEF280324B200D621E6 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamRoomViewController.swift; sourceTree = "<group>"; };
 		4B602EF32803401800D621E6 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatRoomViewController.swift; path = rubio_lin/Controller/ChatRoomViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -79,7 +81,6 @@
 		4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchJsonModal.swift; sourceTree = "<group>"; };
 		4BE1D4A027F842D5006145B0 /* JsonResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonResult.swift; sourceTree = "<group>"; };
 		4BE1D4A127F842D5006145B0 /* Result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Result.json; sourceTree = "<group>"; };
-		4BE1D4A627FB0C44006145B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4BE1D4AF27FD223A006145B0 /* SignUpPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpPageViewController.swift; path = rubio_lin/Controller/SignUpPageViewController.swift; sourceTree = SOURCE_ROOT; };
 		4BF2019F27F2B0C8007311AA /* rubio_lin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rubio_lin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF201A227F2B0C8007311AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRoomCollectionViewCell.swift; sourceTree = "<group>"; };
 		4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveRoomCollectionViewCell.xib; sourceTree = "<group>"; };
 		4BF23FF827F571FD002816EA /* SignInPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPageViewController.swift; sourceTree = "<group>"; };
+		4BF354AA280E94A500F0EE0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 		4BA2207627F60A9700CDFC59 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4B4A72A5280DAA2400149C89 /* NavigationViewController.swift */,
 				4B4A72A3280D1B9A00149C89 /* TabBarViewController.swift */,
 				4BF201A627F2B0C8007311AA /* HomePageViewController.swift */,
 				4BF23FE827F53D0F002816EA /* SearchPageViewController.swift */,
@@ -165,10 +168,6 @@
 				4BE1D4AF27FD223A006145B0 /* SignUpPageViewController.swift */,
 				4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */,
 				4B602EF32803401800D621E6 /* ChatRoomViewController.swift */,
-				4B43556F2808FFFA007B688A /* HomePageHeaderReusableView.swift */,
-				4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */,
-				4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */,
-				4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */,
 				4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */,
 				4B1748152809C5CD0067AD71 /* extension.swift */,
 			);
@@ -198,10 +197,11 @@
 		4BF201A127F2B0C8007311AA /* rubio_lin */ = {
 			isa = PBXGroup;
 			children = (
+				4BF354AA280E94A500F0EE0A /* GoogleService-Info.plist */,
 				4BF201A227F2B0C8007311AA /* AppDelegate.swift */,
 				4BF201A427F2B0C8007311AA /* SceneDelegate.swift */,
-				4BE1D4A627FB0C44006145B0 /* GoogleService-Info.plist */,
 				4BA2207627F60A9700CDFC59 /* Controller */,
+				4BF354A7280E92B000F0EE0A /* Cell Controller */,
 				4BA2207527F60A9000CDFC59 /* View */,
 				4BA2207427F60A7F00CDFC59 /* Model */,
 				4BF201AB27F2B0C9007311AA /* Assets.xcassets */,
@@ -226,6 +226,18 @@
 				4BF201C527F2B0CA007311AA /* rubio_linUITestsLaunchTests.swift */,
 			);
 			path = rubio_linUITests;
+			sourceTree = "<group>";
+		};
+		4BF354A7280E92B000F0EE0A /* Cell Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4B43556F2808FFFA007B688A /* HomePageHeaderReusableView.swift */,
+				4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */,
+				4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */,
+				4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */,
+			);
+			name = "Cell Controller";
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,9 +361,9 @@
 				4BA3FB0C2805158100ABE771 /* hime3.mp4 in Resources */,
 				4B4355722808FFFA007B688A /* HomePageHeaderReusableView.xib in Resources */,
 				4BF201AC27F2B0C9007311AA /* Assets.xcassets in Resources */,
+				4BF354AB280E94A500F0EE0A /* GoogleService-Info.plist in Resources */,
 				4BF201AA27F2B0C8007311AA /* Main.storyboard in Resources */,
 				4BF23FEF27F54AAE002816EA /* LiveRoomCollectionViewCell.xib in Resources */,
-				4BE1D4A727FB0C44006145B0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +396,7 @@
 				4BF23FE927F53D0F002816EA /* SearchPageViewController.swift in Sources */,
 				4BA3FB142805695B00ABE771 /* WebSocket.swift in Sources */,
 				4BF23FEB27F53D32002816EA /* AccountPageViewController.swift in Sources */,
+				4B4A72A6280DAA2400149C89 /* NavigationViewController.swift in Sources */,
 				4BF201A727F2B0C8007311AA /* HomePageViewController.swift in Sources */,
 				4B602EF42803401800D621E6 /* ChatRoomViewController.swift in Sources */,
 				4BE1D4B027FD223A006145B0 /* SignUpPageViewController.swift in Sources */,
@@ -576,9 +589,12 @@
 				DEVELOPMENT_TEAM = B9VFL264JH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rubio_lin/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "APP想取用相機權限";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP想取用相簿權限";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -604,9 +620,12 @@
 				DEVELOPMENT_TEAM = B9VFL264JH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rubio_lin/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "APP想取用相機權限";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP想取用相簿權限";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

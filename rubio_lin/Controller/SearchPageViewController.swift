@@ -76,20 +76,15 @@ extension SearchPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveRoomCollectionViewCell", for: indexPath) as? LiveRoomCollectionViewCell
-        // 設置cell的漸層
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.view.bounds
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        cell?.contentView.layer.insertSublayer(gradientLayer, at: 0)
         
         if isSearch == true {
             if indexPath.section == 0 {
                 let formater = NumberFormatter()
                 formater.numberStyle = .decimal
                 if let a = searching_list[indexPath.row].online_num {
-                    cell?.online_numLabel.text = (formater.string(from: a as! NSNumber) ?? "") + "  "
+                    cell?.online_numLabel.text = (formater.string(from: a as NSNumber) ?? "")
                 }
-                cell?.stream_titleLabel.text = searching_list[indexPath.row].nickname
+                cell?.stream_titleLabel.text = searching_list[indexPath.row].nickname! + "   " + searching_list[indexPath.row].stream_title!
                 if searching_list[indexPath.row].tags == "" {
                     cell?.tagsLabel.isHidden = true
                 } else {
@@ -114,9 +109,9 @@ extension SearchPageViewController: UICollectionViewDataSource {
                 let formater = NumberFormatter()
                 formater.numberStyle = .decimal
                 if let a = result?.lightyear_list[indexPath.row]?.online_num {
-                    cell?.online_numLabel.text = (formater.string(from: a as! NSNumber) ?? "") + "  "
+                    cell?.online_numLabel.text = (formater.string(from: a as NSNumber) ?? "")
                 }
-                cell?.stream_titleLabel.text = result?.lightyear_list[indexPath.row]?.nickname
+                cell?.stream_titleLabel.text = (result?.lightyear_list[indexPath.row]?.nickname!)! + "   " + (result?.lightyear_list[indexPath.row]?.stream_title!)!
                 if result?.lightyear_list[indexPath.row]?.tags == "" {
                     cell?.tagsLabel.isHidden = true
                 } else {
@@ -142,9 +137,9 @@ extension SearchPageViewController: UICollectionViewDataSource {
             let formater = NumberFormatter()
             formater.numberStyle = .decimal
             if let a = result?.lightyear_list[indexPath.row]?.online_num {
-                cell?.online_numLabel.text = (formater.string(from: a as! NSNumber) ?? "") + "  "
+                cell?.online_numLabel.text = (formater.string(from: a as NSNumber) ?? "")
             }
-            cell?.stream_titleLabel.text = result?.lightyear_list[indexPath.row]?.nickname
+            cell?.stream_titleLabel.text = (result?.lightyear_list[indexPath.row]?.nickname)! + "   " + (result?.lightyear_list[indexPath.row]?.stream_title!)!
             if result?.lightyear_list[indexPath.row]?.tags == "" {
                 cell?.tagsLabel.isHidden = true
             } else {
