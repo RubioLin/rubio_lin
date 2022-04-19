@@ -1,14 +1,6 @@
-//
-//  Network.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/4/2.
-//
-
 import Foundation
     
 class FetchJsonModal {
-    
     static let shared = FetchJsonModal()
     
     func load<T>(_ filename: String) -> T where T : Decodable {

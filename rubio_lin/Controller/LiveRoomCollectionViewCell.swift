@@ -35,33 +35,26 @@ class LiveRoomCollectionViewCell: UICollectionViewCell {
         tagsLabel.backgroundColor = .black
         tagsLabel.alpha = 0.6
         stream_titleLabel.layer.masksToBounds = true
-        stream_titleLabel.layer.cornerRadius = 10
+        stream_titleLabel.layer.cornerRadius = 5
     }
         
     func setTagsLabel() {
         tagsLabel.backgroundColor = .black
         tagsLabel.alpha = 0.6
         tagsLabel.layer.masksToBounds = true
-        tagsLabel.layer.cornerRadius = 10
+        tagsLabel.layer.cornerRadius = 5
     }
-    
-    
     
     func setOnlineNumView() {
         online_numvView.layer.masksToBounds = true
-        online_numvView.layer.cornerRadius = 10
+        online_numvView.layer.cornerRadius = 5
     }
     
-    func setCellGradient() {
-        let gradientLayer = CAGradientLayer()
-        
-        gradientLayer.frame = head_photoImageView.bounds
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: head_photoImageView.bounds.width, height: head_photoImageView.bounds.height)
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        self.contentView.layer.insertSublayer(gradientLayer, above: head_photoImageView.layer)
+//    func setCellGradient() {
 //        let gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = self.gradientView.frame
+//        gradientLayer.frame = head_photoImageView.bounds
+//        gradientLayer.frame = CGRect(x: 0, y: 0, width: head_photoImageView.bounds.width, height: head_photoImageView.bounds.height)
 //        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-//        gradientView.layer.insertSublayer(gradientLayer, at: 0)
-    }
+//        self.contentView.layer.insertSublayer(gradientLayer, above: head_photoImageView.layer)
+//    }
 }

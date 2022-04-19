@@ -1,12 +1,4 @@
-//
-//  Firebaser.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/4/10.
-//
-
 import Foundation
-import UIKit
 
 struct UserInfo: Codable {
     let nickname: String

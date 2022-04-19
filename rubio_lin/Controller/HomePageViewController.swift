@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/3/29.
-//
-
 import UIKit
 import Foundation
 import FirebaseAuth
@@ -14,6 +7,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 var handle: AuthStateDidChangeListenerHandle?
+let userDefaults = UserDefaults.standard
 
 class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarControllerDelegate {
     
@@ -23,11 +17,9 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
     var result: JsonResult?
     let db = Firestore.firestore()
 
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         LiveRoomCollectionView.reloadData()
-
     }
     
     // 要register Colletion View 的 Cell 和 Header
@@ -40,18 +32,9 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
         tabBarController?.delegate = self
         tabBarController?.tabBar.tintColor = .black
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        Auth.auth().removeStateDidChangeListener(handle!)
-    }
-
-    
-    
 }
 
 // MARK: - 設定Colletion View DataSource
-
 extension HomePageViewController: UICollectionViewDataSource {
     
     // 設置 Collection View 的 Header在有登入時存在，未登入則高度為零
@@ -63,11 +46,12 @@ extension HomePageViewController: UICollectionViewDataSource {
         }
     }
     
-    // 設置 Collection View 的 Header
+    // 設置 Collection View 的 Header，判斷有無使用者決定 Header 的內容
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
-//        handle = Auth.auth().addStateDidChangeListener { auth, user in
             if let currentUser = Auth.auth().currentUser {
+                header?.currentUserHeadPhotoImageView.isHidden = false
+                header?.currentUserNicknameLabel.isHidden = false
                 if let email = currentUser.email {
                     self.db.collection("userInfo").document(email).getDocument { document, error in
                         guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
@@ -82,17 +66,20 @@ extension HomePageViewController: UICollectionViewDataSource {
                     }
                 }
             } else {
+                header?.currentUserHeadPhotoImageView.isHidden = true
+                header?.currentUserNicknameLabel.isHidden = true
                 header?.currentUserHeadPhotoImageView.image = nil
                 header?.currentUserNicknameLabel.text?.removeAll()
             }
-//        }
         return header!
     }
     
+    // 設置 Collection View 的 Cell 數量
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return result?.stream_list.count ?? 0
     }
     
+    // 設置 Collection View 的 Cell 內容
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveRoomCollectionViewCell", for: indexPath) as? LiveRoomCollectionViewCell
         
@@ -114,8 +101,7 @@ extension HomePageViewController: UICollectionViewDataSource {
         if let url = URL(string: result?.stream_list[indexPath.row]?.head_photo ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let httpResponse = response as?
-                    // MARK: -
-                    // 查詢為什麼要有，
+                        //判斷 Server 回傳的 Response 的 statusCode 可知是否有圖片，沒有圖片就用預設的圖
                         HTTPURLResponse,(200...201).contains(httpResponse.statusCode) else {
                     DispatchQueue.main.async {
                         cell?.head_photoImageView.image = UIImage(named: "paopao.png")
@@ -131,7 +117,6 @@ extension HomePageViewController: UICollectionViewDataSource {
         }
         return cell!
     }
-    
 }
 
 extension HomePageViewController: UICollectionViewDelegateFlowLayout {
@@ -158,7 +143,7 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - 設定Collection View Delegate
 extension HomePageViewController: UICollectionViewDelegate {
-    // 點選Cell進入直播間
+    // 點選 Cell 進入直播間，點 index 偶數間進入 Youtube 串流影片，基數間進入本地影片
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row % 2 == 0 {
             LiveStreamRoomViewController.LiveStreamRoom.isStream = true

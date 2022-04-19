@@ -1,10 +1,3 @@
-//
-//  SignUpViewController.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/4/6.
-//
-
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
@@ -12,11 +5,8 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 import FirebaseStorageSwift
 
-let userDefaults = UserDefaults.standard
-
 class SignUpPageViewController: UIViewController {
-    
-    
+        
     static let SignUpPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpPage") as! SignUpPageViewController
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -24,10 +14,6 @@ class SignUpPageViewController: UIViewController {
     @IBOutlet weak var userHeadPhotoImageView: UIImageView!
     @IBOutlet weak var signUpBtn: UIButton!
     let db = Firestore.firestore()
-    
-    override func viewWillAppear(_ animated: Bool) {        
-        super.viewWillAppear(true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +28,7 @@ class SignUpPageViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
     }
-
-// MARK: - 設置畫面上的各類元件狀態
+    
     func setNavigationBar() {
         let navigationBarLeftButton = UIBarButtonItem(image: UIImage(named: "titlebarBack"), style: .plain, target: self, action: #selector(backPreviousPage))
         navigationBarLeftButton.tintColor = UIColor.black
@@ -92,11 +77,11 @@ class SignUpPageViewController: UIViewController {
         if button.isSelected {
             button.isSelected = false
             self.passwordTextField.isSecureTextEntry = false
-        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+            button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
         } else {
             button.isSelected = true
             self.passwordTextField.isSecureTextEntry = true
-        button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+            button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
         }
     }
     
@@ -105,13 +90,12 @@ class SignUpPageViewController: UIViewController {
         userHeadPhotoImageView.layer.cornerRadius = userHeadPhotoCornerRadius
     }
     
-// MARK: - 點螢幕會自動收鍵盤
+    // 點螢幕會自動收鍵盤
     @IBAction func touchDown(_ sender: Any) {
         nicknameTextField.resignFirstResponder()
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
-    
     
     @IBAction func selectPhotoBtn(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Select Photo", message: nil, preferredStyle: .actionSheet)
@@ -132,7 +116,7 @@ class SignUpPageViewController: UIViewController {
     @IBAction func clickOnSignUp(_ sender: Any) {
         var message = ""
         let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+="
-
+        
         if nicknameTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
             message += "請輸入暱稱 "
         }
@@ -161,47 +145,33 @@ class SignUpPageViewController: UIViewController {
             }
         }
         
-        if message != "" {
-            showAlertInfo(message)
-        } else {
-            self.showSpinner()
-        //create a new user and upload to FirebaseAuth
-        createUser()
-        //upload userPhoto to Storage
-        uploadPhoto(image: userHeadPhotoImageView.image ?? UIImage()) { result in
-                switch result {
-                case .success(let userPhotoUrl):
-                    //upload UserInfo to Firestore
-                    self.uploadUserInfo(url: userPhotoUrl)
-                    self.nicknameTextField.text = ""
-                    self.emailTextField.text = ""
-                    self.passwordTextField.text = ""
-                    self.userHeadPhotoImageView.image = UIImage(named: "picPersonal")
-                    self.removeSpinner()
-                    self.tabBarController?.selectedIndex = 0
-                    self.navigationController?.viewDidLoad()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
+        guard message == "" else {
+            showAlertInfo(message, y: self.view.bounds.midY * 1.6)
+            return
         }
-        
-//        if nickname != "" && email != "" && password != "" {
-//
-//        }
-        
-    }
-    
-    func createUser() {
+        self.showSpinner()
+        //create a new user and upload to FirebaseAuth
         if let email = emailTextField.text, let password = passwordTextField.text {
-            Auth.auth().createUser(withEmail: email, password: password) { [self] result, error in
-                guard let user = result?.user, error == nil else {
+            Auth.auth().createUser(withEmail: email, password: password) { auth, error in
+                if error != nil {
                     let alert = UIAlertController(title: "Sign up failure", message: error?.localizedDescription, preferredStyle: .alert)
                     let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alert.addAction(ok)
                     self.present(alert, animated: true, completion: nil)
-                    print(error?.localizedDescription)
-                    return
+                } else {
+                    //upload userPhoto to Storage
+                    self.uploadPhoto(image: self.userHeadPhotoImageView.image ?? UIImage()) { result in
+                        switch result {
+                        case .success(let userPhotoUrl):
+                            //upload UserInfo to Firestore
+                            self.uploadUserInfo(url: userPhotoUrl)
+                            self.tabBarController?.selectedIndex = 0
+                            self.navigationController?.viewDidLoad()
+                            self.removeSpinner()
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
                 }
             }
         }
@@ -248,7 +218,6 @@ class SignUpPageViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension SignUpPageViewController: UIImagePickerControllerDelegate,  UINavigationControllerDelegate {

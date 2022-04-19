@@ -4,9 +4,8 @@ import UIKit
 fileprivate var backgroundView: UIView?
 
 extension UIViewController {
-    
-    func showAlertInfo(_ message: String?) {
-        backgroundView = UIView(frame: CGRect(x: 0, y: self.view.bounds.midY * 0.48, width: self.view.bounds.width * 0.855, height: 44))
+    func showAlertInfo(_ message: String?, y: CGFloat) {
+        backgroundView = UIView(frame: CGRect(x: 0, y: y, width: self.view.bounds.width * 0.855, height: 44))
         backgroundView?.center.x = self.view.center.x
         backgroundView!.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
         backgroundView?.layer.cornerRadius = 22

@@ -1,10 +1,3 @@
-//
-//  SearchViewController.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/3/31.
-//
-
 import UIKit
 
 class SearchPageViewController: UIViewController {
@@ -29,7 +22,7 @@ class SearchPageViewController: UIViewController {
         self.searchBar.delegate = self
         searchBar.setImage(UIImage(named: "titlebarSearch"), for: .search, state: .normal)
     }
-    // 按下search 鍵盤會收起來
+    // 按下 search 鍵盤會收起來
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
@@ -57,8 +50,6 @@ extension SearchPageViewController: UICollectionViewDataSource {
         } else {
             header?.recommendAndSearchLabel.text = "熱門推薦"
         }
-        
-        
         return header!
     }
     
@@ -192,6 +183,7 @@ extension SearchPageViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - 設定Collection View Delegate
 extension SearchPageViewController: UICollectionViewDelegate {
+    
     // 點選Cell進入直播間
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row % 2 == 0 {
@@ -206,15 +198,15 @@ extension SearchPageViewController: UICollectionViewDelegate {
 
 // MARK: - 設定SearchBar
 extension SearchPageViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             isSearch = false
         } else {
             isSearch = true
+            // 不管大小寫都會進行 filter 裝進新陣列 $0指得是result?.stream_list的各項
             searching_list = result?.stream_list.filter { ($0?.tags!.localizedCaseInsensitiveContains(searchText))! || ($0?.nickname!.localizedCaseInsensitiveContains(searchText))! || ($0?.stream_title!.localizedCaseInsensitiveContains(searchText))! } as! [StreamList]
         }
         recommendCollectionView.reloadData()
     }
-    
-
 }

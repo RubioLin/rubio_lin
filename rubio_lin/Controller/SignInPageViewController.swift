@@ -1,10 +1,3 @@
-//
-//  LoginViewController.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/3/31.
-//
-
 import UIKit
 import FirebaseAuth
 
@@ -15,14 +8,6 @@ class SignInPageViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rememberMeButton: UIButton!
     var rememberMe: Bool = true
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setEmailTextField()
-        setPasswordTextField()
-        rememberMeButton.isSelected = true
-        self.navigationItem.setHidesBackButton(true, animated: true)
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -36,13 +21,20 @@ class SignInPageViewController: UIViewController {
             emailTextField.text?.removeAll()
         }
         passwordTextField.text?.removeAll()
-        
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setEmailTextField()
+        setPasswordTextField()
+        rememberMeButton.isSelected = true
+        self.navigationItem.setHidesBackButton(true, animated: true)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        dismiss(animated: false)
     }
     
     func setEmailTextField() {
@@ -111,34 +103,34 @@ class SignInPageViewController: UIViewController {
         }
         
         if passwordTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
-            message += "請輸入密碼"
+            message += "請輸入密碼 "
             print("Password is empty")
         } else if passwordTextField.text!.count > 12 || passwordTextField.text!.count < 6 {
-            message += "密碼字數不正確"
+            message += "密碼字數不正確 "
             print("Password incorrect word count")
         }
         
         for i in punctuation {
             if passwordTextField.text?.contains(i) == true {
-                message += "密碼含有特殊符號"
+                message += "密碼含有特殊符號 "
                 print("Password is badly formatted")
                 break
             }
         }
         
         if message != "" {
-            showAlertInfo(message)
+            showAlertInfo(message, y: self.view.bounds.midY * 0.65)
         } else {
             Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { result, error in
-                guard let user = result?.user, error == nil else {
+                if error == nil {
+                    self.tabBarController?.selectedIndex = 0
+                    self.navigationController?.viewDidLoad()
+                } else {
                     let alert = UIAlertController(title: "Sign in failure", message: error?.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel))
                     self.present(alert, animated: true)
                     print(error?.localizedDescription)
-                    return
                 }
-                self.tabBarController?.selectedIndex = 0
-                self.navigationController?.viewDidLoad()
             }
         }
     }
@@ -147,6 +139,7 @@ class SignInPageViewController: UIViewController {
     }
 }
 
+// MARK: - 設置鍵盤監聽
 extension SignInPageViewController {
     func addKeyboardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)

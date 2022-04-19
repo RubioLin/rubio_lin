@@ -1,10 +1,3 @@
-//
-//  WebSocket.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/4/12.
-//
-
 import Foundation
 
 struct receiveInfo: Codable {

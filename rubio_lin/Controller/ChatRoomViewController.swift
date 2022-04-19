@@ -143,7 +143,6 @@ class ChatRoomViewController: UIViewController {
         sendButton.layer.cornerRadius = 22
         sendButton.backgroundColor = .black
         sendButton.alpha = 0.7
-        
     }
     
     func setChatTextField() {
@@ -156,10 +155,8 @@ class ChatRoomViewController: UIViewController {
             string: " 一起聊個天吧...",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
         )
-        
     }
    
-    
     @IBAction func clickSendMessage(_ sender: Any) {
         if chatTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             print("Input is empty")
@@ -173,16 +170,16 @@ class ChatRoomViewController: UIViewController {
     @IBAction func didEndOnExit(_ sender: Any) {
     }
     
+    // 聊天室淡出，點擊聊天框變回來
     @IBAction func editdidEnd(_ sender: Any) {
         animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 3, delay: 2, options: .allowUserInteraction, animations: {
             self.view.alpha = 0.4
         }, completion: { UIViewAnimatingPosition in
         })
     }
-    
     @IBAction func touchdown(_ sender: Any) {
         animator.stopAnimation(true)
-        self.view.alpha = 0.8
+        self.view.alpha = 0.7
     }
 }
 
@@ -208,8 +205,6 @@ extension ChatRoomViewController: UITableViewDelegate, UITableViewDataSource {
         } else if webSocketReceive[index].event.contains("admin_all_broadcast") {
             cell.chatTextView.text = "\(webSocketReceive[index].body.content!.tw!)"
         }
-        
-        
         return cell
     }
 }
@@ -222,7 +217,6 @@ extension ChatRoomViewController: URLSessionWebSocketDelegate {
                            didOpenWithProtocol protocol: String?) {
         print("URLSessionWebSocketTask is connected")
     }
-    
     public func urlSession(_ session: URLSession,
                            webSocketTask: URLSessionWebSocketTask,
                            didCloseWith closeCode: URLSessionWebSocketTask.CloseCode,
@@ -257,5 +251,4 @@ extension ChatRoomViewController {
     @objc func keyboardWillHide(notification: Notification) {
         view.frame.origin.y = 0
     }
-   
 }

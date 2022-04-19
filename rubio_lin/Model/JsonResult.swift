@@ -1,10 +1,3 @@
-//
-//  stream_list.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/4/1.
-//
-
 import Foundation
 
 struct JsonResult: Codable {

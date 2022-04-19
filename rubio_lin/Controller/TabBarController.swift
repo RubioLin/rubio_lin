@@ -1,17 +1,11 @@
-//
-//  TabBarViewController.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/4/18.
-//
-
 import UIKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
+    
     var firstTabbarItemImageView: UIImageView!
     var secondTabbarItemImageView: UIImageView!
     var thirdTabbarItemImageView: UIImageView!
-    
+    // 設置 Tabbar 的點擊動畫
     override func viewDidLoad() {
         super.viewDidLoad()
         let firstItemView = tabBar.subviews.first!

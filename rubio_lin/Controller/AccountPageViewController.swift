@@ -1,10 +1,3 @@
-//
-//  AccountViewController.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/3/31.
-//
-
 import UIKit
 import FirebaseAuth
 import FirebaseStorage
@@ -23,9 +16,8 @@ class AccountPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
-            if let currentUser = user {
-                if let email = currentUser.email {
+            if Auth.auth().currentUser != nil {
+                if let email = Auth.auth().currentUser?.email {
                     print("\(email) login")
                     self.db.collection("userInfo").document(email).getDocument { document, error in
                         guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
@@ -45,17 +37,6 @@ class AccountPageViewController: UIViewController {
             } else {
                 print("not login")
             }
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        Auth.auth().removeStateDidChangeListener(handle!)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        self.dismiss(animated: false)
     }
     
     override func viewDidLoad() {

@@ -1,24 +1,18 @@
-//
-//  LiveStramRoomViewController.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/4/10.
-//
-
 import UIKit
 import AVFoundation
 import YouTubeiOSPlayerHelper
 
 class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
+    
+    
+    static let LiveStreamRoom = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var chatRoomUIView: UIView!
     @IBOutlet weak var alertUIView: UIView!
     @IBOutlet weak var alertExitBtn: UIButton!
     @IBOutlet weak var alertStayBtn: UIButton!
-    static let LiveStreamRoom = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
     var player = AVPlayer()
     var playerLayer = AVPlayerLayer()
-    var receiveInfo: receiveInfo?
     let YTPlayer = YTPlayerView()
     var playlist = ["I3440shDJYw", "xSbeUixi22o", "3OHT350Acj4", "_zvMspsjNgA", "tH4SMx_-5As"]
     var isStream: Bool?
@@ -27,22 +21,19 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
         super.viewWillAppear(true)
         chatRoomUIView.isHidden = false
         if isStream == true {
-            playerViewDidBecomeReady(YTPlayer)
-            playerView(YTPlayer, didChangeTo: .ended)
-            playVedio(playid: playlist.randomElement()!)
+            playerViewDidBecomeReady(YTPlayer) // 進入畫面 loading 完會自動播放
+            playerView(YTPlayer, didChangeTo: .ended) // 播完會自動重播
+            playVedio(playid: playlist.randomElement()!) // 隨機播放playlist裡的音樂
         } else {
             playVedio()
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLogoutButton()
         setupAlertView()
         YTPlayer.delegate = self
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
     }
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
@@ -55,9 +46,10 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
     //串流影片
     func playVedio(playid: String) {
         YTPlayer.frame = self.view.bounds
-        YTPlayer.load(withVideoId: playid, playerVars: ["controls": 0,"autohide": 1,"modestbranding":1])
-        YTPlayer.webView?.configuration.allowsInlineMediaPlayback = false
-        YTPlayer.isUserInteractionEnabled = false
+        // 設定 control 0：無控制條，1：有控制條
+        YTPlayer.load(withVideoId: playid, playerVars: ["controls": 0])
+//        YTPlayer.webView?.configuration.allowsInlineMediaPlayback = true
+        YTPlayer.isUserInteractionEnabled = false // 讓畫面不可點擊就不能暫停了
         view.insertSubview(YTPlayer, at: 0)
     }
     
