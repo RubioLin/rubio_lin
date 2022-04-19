@@ -19,14 +19,11 @@ class ChatRoomViewController: UIViewController {
     @IBOutlet weak var chatRoomTableView: UITableView!
     var webSocketTask: URLSessionWebSocketTask?
     var webSocketReceive: [receiveInfo] = []
-    var handle: AuthStateDidChangeListenerHandle?
     let db = Firestore.firestore()
     var animator = UIViewPropertyAnimator()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
-        }
         establishConnection()
         addKeyboardObserver()
     }
@@ -49,7 +46,6 @@ class ChatRoomViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-        Auth.auth().removeStateDidChangeListener(handle!)
         webSocketReceive.removeAll()
         chatRoomTableView.reloadData()
         disconnect()

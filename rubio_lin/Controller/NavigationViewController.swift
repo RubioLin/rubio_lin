@@ -12,12 +12,15 @@ class NavigationViewController: UINavigationController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if Auth.auth().currentUser != nil {
-            let accountPage = self.storyboard?.instantiateViewController(withIdentifier:"AccountPage")
-            self.viewControllers = [accountPage!]
-        } else {
-            let signInPage = self.storyboard?.instantiateViewController(withIdentifier:"SignInPage")
-            self.viewControllers = [signInPage!]
+        handle = Auth.auth().addStateDidChangeListener{ auth, user in
+            if auth.currentUser != nil {
+                let accountPage = self.storyboard?.instantiateViewController(withIdentifier:"AccountPage")
+                self.viewControllers = [accountPage!]
+            } else {
+                let signInPage = self.storyboard?.instantiateViewController(withIdentifier:"SignInPage")
+                self.viewControllers = [signInPage!]
+            }
         }
+
     }
 }

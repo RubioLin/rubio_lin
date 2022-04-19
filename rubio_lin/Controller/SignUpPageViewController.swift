@@ -130,15 +130,10 @@ class SignUpPageViewController: UIViewController {
     }
     
     @IBAction func clickOnSignUp(_ sender: Any) {
-        var nickname = ""
-        var email = ""
-        var password = ""
         var message = ""
         let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+="
 
-        if nicknameTextField.text?.trimmingCharacters(in: .whitespaces) != "" {
-            nickname = nicknameTextField.text!
-        } else {
+        if nicknameTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
             message += "請輸入暱稱 "
         }
         
@@ -148,30 +143,27 @@ class SignUpPageViewController: UIViewController {
         } else if emailTextField.text!.split(separator: "@")[0].count > 20 || emailTextField.text!.split(separator: "@")[0].count < 4 {
             message += "帳號字數不正確 "
             print("Email incorrect word count")
-        } else if punctuation.contains(emailTextField.text!.split(separator: "@")[0]) {
-            message += "帳號含有特殊符號 "
-            print("Email is badly formatted")
-        } else {
-            email = emailTextField.text!
         }
+        
         if passwordTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             message += "請輸入密碼"
             print("Password is empty")
         } else if passwordTextField.text!.count > 12 || passwordTextField.text!.count < 6 {
             message += "密碼字數不正確"
             print("Password incorrect word count")
-        } else if punctuation.contains(passwordTextField.text!) {
-            message += "密碼含有特殊符號"
-            print("Password is badly formatted")
-        } else {
-            password = passwordTextField.text!
+        }
+        
+        for i in punctuation {
+            if passwordTextField.text?.contains(i) == true {
+                message += "密碼含有特殊符號"
+                print("Password is badly formatted")
+                break
+            }
         }
         
         if message != "" {
             showAlertInfo(message)
-        }
-        
-        if nickname != "" && email != "" && password != "" {
+        } else {
             self.showSpinner()
         //create a new user and upload to FirebaseAuth
         createUser()
@@ -185,14 +177,19 @@ class SignUpPageViewController: UIViewController {
                     self.emailTextField.text = ""
                     self.passwordTextField.text = ""
                     self.userHeadPhotoImageView.image = UIImage(named: "picPersonal")
+                    self.removeSpinner()
                     self.tabBarController?.selectedIndex = 0
                     self.navigationController?.viewDidLoad()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
-            self.removeSpinner()
         }
+        
+//        if nickname != "" && email != "" && password != "" {
+//
+//        }
+        
     }
     
     func createUser() {

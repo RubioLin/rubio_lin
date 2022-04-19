@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4B1748162809C5CD0067AD71 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1748152809C5CD0067AD71 /* extension.swift */; };
-		4B239EDB280C651400E862BF /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 4B239EDA280C651400E862BF /* YouTubeiOSPlayerHelper */; };
 		4B4355712808FFFA007B688A /* HomePageHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43556F2808FFFA007B688A /* HomePageHeaderReusableView.swift */; };
 		4B4355722808FFFA007B688A /* HomePageHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */; };
 		4B43557928091952007B688A /* SearchPageHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */; };
@@ -43,7 +42,8 @@
 		4BF23FEE27F54AAE002816EA /* LiveRoomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */; };
 		4BF23FEF27F54AAE002816EA /* LiveRoomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */; };
 		4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FF827F571FD002816EA /* SignInPageViewController.swift */; };
-		4BF354AB280E94A500F0EE0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BF354AA280E94A500F0EE0A /* GoogleService-Info.plist */; };
+		4BFC12A4280E982400E77D7C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BFC12A3280E982400E77D7C /* GoogleService-Info.plist */; };
+		4BFC12A7280E98BB00E77D7C /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 4BFC12A6280E98BB00E77D7C /* YouTubeiOSPlayerHelper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +100,7 @@
 		4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRoomCollectionViewCell.swift; sourceTree = "<group>"; };
 		4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveRoomCollectionViewCell.xib; sourceTree = "<group>"; };
 		4BF23FF827F571FD002816EA /* SignInPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPageViewController.swift; sourceTree = "<group>"; };
-		4BF354AA280E94A500F0EE0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4BFC12A3280E982400E77D7C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +111,7 @@
 				4BE1D4AA27FC4E5E006145B0 /* FirebaseAuth in Frameworks */,
 				4BE1D4AC27FC4E5E006145B0 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				4BE1D4AE27FC4E5E006145B0 /* FirebaseStorageSwift-Beta in Frameworks */,
-				4B239EDB280C651400E862BF /* YouTubeiOSPlayerHelper in Frameworks */,
+				4BFC12A7280E98BB00E77D7C /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +197,7 @@
 		4BF201A127F2B0C8007311AA /* rubio_lin */ = {
 			isa = PBXGroup;
 			children = (
-				4BF354AA280E94A500F0EE0A /* GoogleService-Info.plist */,
+				4BFC12A3280E982400E77D7C /* GoogleService-Info.plist */,
 				4BF201A227F2B0C8007311AA /* AppDelegate.swift */,
 				4BF201A427F2B0C8007311AA /* SceneDelegate.swift */,
 				4BA2207627F60A9700CDFC59 /* Controller */,
@@ -260,7 +260,7 @@
 				4BE1D4A927FC4E5E006145B0 /* FirebaseAuth */,
 				4BE1D4AB27FC4E5E006145B0 /* FirebaseFirestoreSwift-Beta */,
 				4BE1D4AD27FC4E5E006145B0 /* FirebaseStorageSwift-Beta */,
-				4B239EDA280C651400E862BF /* YouTubeiOSPlayerHelper */,
+				4BFC12A6280E98BB00E77D7C /* YouTubeiOSPlayerHelper */,
 			);
 			productName = rubio_lin;
 			productReference = 4BF2019F27F2B0C8007311AA /* rubio_lin.app */;
@@ -336,7 +336,7 @@
 			mainGroup = 4BF2019627F2B0C7007311AA;
 			packageReferences = (
 				4BE1D4A827FC4E5E006145B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				4B239ED9280C651400E862BF /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
+				4BFC12A5280E98BB00E77D7C /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 4BF201A027F2B0C8007311AA /* Products */;
 			projectDirPath = "";
@@ -361,7 +361,7 @@
 				4BA3FB0C2805158100ABE771 /* hime3.mp4 in Resources */,
 				4B4355722808FFFA007B688A /* HomePageHeaderReusableView.xib in Resources */,
 				4BF201AC27F2B0C9007311AA /* Assets.xcassets in Resources */,
-				4BF354AB280E94A500F0EE0A /* GoogleService-Info.plist in Resources */,
+				4BFC12A4280E982400E77D7C /* GoogleService-Info.plist in Resources */,
 				4BF201AA27F2B0C8007311AA /* Main.storyboard in Resources */,
 				4BF23FEF27F54AAE002816EA /* LiveRoomCollectionViewCell.xib in Resources */,
 			);
@@ -759,14 +759,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4B239ED9280C651400E862BF /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		4BE1D4A827FC4E5E006145B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -775,14 +767,17 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		4BFC12A5280E98BB00E77D7C /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4B239EDA280C651400E862BF /* YouTubeiOSPlayerHelper */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4B239ED9280C651400E862BF /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
-			productName = YouTubeiOSPlayerHelper;
-		};
 		4BE1D4A927FC4E5E006145B0 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4BE1D4A827FC4E5E006145B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -797,6 +792,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4BE1D4A827FC4E5E006145B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageSwift-Beta";
+		};
+		4BFC12A6280E98BB00E77D7C /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4BFC12A5280E98BB00E77D7C /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

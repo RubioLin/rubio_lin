@@ -36,13 +36,12 @@ class SignInPageViewController: UIViewController {
             emailTextField.text?.removeAll()
         }
         passwordTextField.text?.removeAll()
-
+        
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        self.dismiss(animated: false)
     }
     
     func setEmailTextField() {
@@ -72,11 +71,11 @@ class SignInPageViewController: UIViewController {
         if button.isSelected {
             button.isSelected = false
             self.passwordTextField.isSecureTextEntry = false
-        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+            button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
         } else {
             button.isSelected = true
             self.passwordTextField.isSecureTextEntry = true
-        button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+            button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
         }
     }
     
@@ -97,10 +96,9 @@ class SignInPageViewController: UIViewController {
             rememberMeButton.isSelected = true
             rememberMeButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         }
-  }
+    }
     
     @IBAction func clickOnSignIn(_ sender: UIButton) {
-        self.removeSpinner()
         let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+="
         var email = ""
         var password = ""
@@ -111,9 +109,6 @@ class SignInPageViewController: UIViewController {
         } else if emailTextField.text!.split(separator: "@")[0].count > 20 || emailTextField.text!.split(separator: "@")[0].count < 4 {
             message += "帳號字數不正確 "
             print("Email incorrect word count")
-        } else if punctuation.contains(emailTextField.text!.split(separator: "@")[0]) {
-            message += "帳號含有特殊符號 "
-            print("Email is badly formatted")
         } else {
             email = emailTextField.text!
         }
@@ -123,27 +118,32 @@ class SignInPageViewController: UIViewController {
         } else if passwordTextField.text!.count > 12 || passwordTextField.text!.count < 6 {
             message += "密碼字數不正確"
             print("Password incorrect word count")
-        } else if punctuation.contains(passwordTextField.text!) {
-            message += "密碼含有特殊符號"
-            print("Password is badly formatted")
         } else {
             password = passwordTextField.text!
         }
-        if message != "" {
-            
-            showAlertInfo(message)
+        for i in punctuation {
+            if passwordTextField.text?.contains(i) == true {
+                message += "密碼含有特殊符號"
+                print("Password is badly formatted")
+                break
+            }
         }
-        if email != "" && password != "" {
-            Auth.auth().signIn(withEmail: email, password: password) { result, error in
-                guard let user = result?.user, error == nil else {
-                    let alert = UIAlertController(title: "Sign in failure", message: error?.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-                    self.present(alert, animated: true)
-                    print(error?.localizedDescription)
-                    return
+        
+        if message != "" {
+            showAlertInfo(message)
+        } else {
+            if email != "" && password != "" {
+                Auth.auth().signIn(withEmail: email, password: password) { result, error in
+                    guard let user = result?.user, error == nil else {
+                        let alert = UIAlertController(title: "Sign in failure", message: error?.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                        self.present(alert, animated: true)
+                        print(error?.localizedDescription)
+                        return
+                    }
                 }
-                self.tabBarController?.selectedIndex = 0
                 self.navigationController?.viewDidLoad()
+                self.tabBarController?.selectedIndex = 0
             }
         }
     }
@@ -167,7 +167,7 @@ extension SignInPageViewController {
     }
     
     @objc func keyboardWillHide(notification: Notification) {
-            view.bounds.origin.y = 0
-        }
+        view.bounds.origin.y = 0
+    }
     
 }

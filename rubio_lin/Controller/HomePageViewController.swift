@@ -27,6 +27,7 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         LiveRoomCollectionView.reloadData()
+
     }
     
     // 要register Colletion View 的 Cell 和 Header
@@ -38,6 +39,11 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
         result = FetchJsonModal.shared.load("Result.json") // 解析本地 json 資料
         tabBarController?.delegate = self
         tabBarController?.tabBar.tintColor = .black
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        Auth.auth().removeStateDidChangeListener(handle!)
     }
 
     
@@ -59,9 +65,8 @@ extension HomePageViewController: UICollectionViewDataSource {
     
     // 設置 Collection View 的 Header
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        var header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
-            header?.isHidden = false
+        let header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
+//        handle = Auth.auth().addStateDidChangeListener { auth, user in
             if let currentUser = Auth.auth().currentUser {
                 if let email = currentUser.email {
                     self.db.collection("userInfo").document(email).getDocument { document, error in
@@ -77,9 +82,10 @@ extension HomePageViewController: UICollectionViewDataSource {
                     }
                 }
             } else {
-                
+                header?.currentUserHeadPhotoImageView.image = nil
+                header?.currentUserNicknameLabel.text?.removeAll()
             }
-        }
+//        }
         return header!
     }
     
