@@ -42,6 +42,7 @@ class SignInPageViewController: UIViewController {
         super.viewDidDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        dismiss(animated: false)
     }
     
     func setEmailTextField() {
@@ -100,8 +101,6 @@ class SignInPageViewController: UIViewController {
     
     @IBAction func clickOnSignIn(_ sender: UIButton) {
         let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+="
-        var email = ""
-        var password = ""
         var message = ""
         if emailTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             message += "請輸入帳號 "
@@ -109,18 +108,16 @@ class SignInPageViewController: UIViewController {
         } else if emailTextField.text!.split(separator: "@")[0].count > 20 || emailTextField.text!.split(separator: "@")[0].count < 4 {
             message += "帳號字數不正確 "
             print("Email incorrect word count")
-        } else {
-            email = emailTextField.text!
         }
+        
         if passwordTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             message += "請輸入密碼"
             print("Password is empty")
         } else if passwordTextField.text!.count > 12 || passwordTextField.text!.count < 6 {
             message += "密碼字數不正確"
             print("Password incorrect word count")
-        } else {
-            password = passwordTextField.text!
         }
+        
         for i in punctuation {
             if passwordTextField.text?.contains(i) == true {
                 message += "密碼含有特殊符號"
@@ -132,18 +129,16 @@ class SignInPageViewController: UIViewController {
         if message != "" {
             showAlertInfo(message)
         } else {
-            if email != "" && password != "" {
-                Auth.auth().signIn(withEmail: email, password: password) { result, error in
-                    guard let user = result?.user, error == nil else {
-                        let alert = UIAlertController(title: "Sign in failure", message: error?.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-                        self.present(alert, animated: true)
-                        print(error?.localizedDescription)
-                        return
-                    }
+            Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { result, error in
+                guard let user = result?.user, error == nil else {
+                    let alert = UIAlertController(title: "Sign in failure", message: error?.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                    self.present(alert, animated: true)
+                    print(error?.localizedDescription)
+                    return
                 }
-                self.navigationController?.viewDidLoad()
                 self.tabBarController?.selectedIndex = 0
+                self.navigationController?.viewDidLoad()
             }
         }
     }

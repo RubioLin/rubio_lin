@@ -43,7 +43,7 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        Auth.auth().removeStateDidChangeListener(handle!)
+        Auth.auth().removeStateDidChangeListener(handle!)
     }
 
     

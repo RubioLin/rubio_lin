@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var firstTabbarItemImageView: UIImageView!
     var secondTabbarItemImageView: UIImageView!
     var thirdTabbarItemImageView: UIImageView!
