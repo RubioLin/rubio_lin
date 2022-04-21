@@ -157,9 +157,6 @@ class ChatRoomViewController: UIViewController {
         if chatTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
             self.showAlertInfo("請輸入內容", y: self.view.bounds.midY)
             print("Input is empty")
-        } else if chatTextField.text!.trimmingCharacters(in: .whitespaces).description.count > 160 {
-            self.showAlertInfo("字數過多", y: self.view.bounds.midY)
-            print("Too much input")
         } else {
             send()
         }
