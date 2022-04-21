@@ -81,6 +81,11 @@ class SignInPageViewController: UIViewController {
         userDefaults.set(passwordTextField.text ?? "", forKey: "password")
     }
     
+    @IBAction func touchdown(_ sender: Any) {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
     @IBAction func clickRememberMebutton(_ sender: UIButton) {
         if rememberMeButton.isSelected {
             rememberMeButton.isSelected = false
@@ -119,7 +124,7 @@ class SignInPageViewController: UIViewController {
         }
         
         if message != "" {
-            showAlertInfo(message, y: self.view.bounds.midY * 0.65)
+            showAlertInfo(message, y: self.view.bounds.midY * 0.64)
         } else {
             Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { result, error in
                 if error == nil {
@@ -137,6 +142,8 @@ class SignInPageViewController: UIViewController {
     
     @IBAction func clinkOnSignUp(_ sender: UIButton) {
     }
+    
+   
 }
 
 // MARK: - 設置鍵盤監聽
@@ -148,14 +155,13 @@ extension SignInPageViewController {
     
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRect = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRect.height / 2
-            view.bounds.origin.y = keyboardHeight
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            view.frame.origin.y = -keyboardHeight * 0.36
         }
     }
     
     @objc func keyboardWillHide(notification: Notification) {
-        view.bounds.origin.y = 0
+        view.frame.origin.y = 0
     }
     
 }

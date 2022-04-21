@@ -1,10 +1,3 @@
-//
-//  ChatRoomViewController.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/4/11.
-//
-
 import UIKit
 import Foundation
 import FirebaseAuth
@@ -30,9 +23,11 @@ class ChatRoomViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 3, delay: 2) {
+        self.view.alpha = 0.7
+        animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 3, delay: 2, options: .allowUserInteraction, animations: {
             self.view.alpha = 0.4
-        }
+        }, completion: { UIViewAnimatingPosition in
+        })
     }
     
     override func viewDidLoad() {
@@ -46,10 +41,10 @@ class ChatRoomViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
+        chatTextField.text?.removeAll()
         webSocketReceive.removeAll()
         chatRoomTableView.reloadData()
         disconnect()
-        self.view.alpha = 1
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -126,8 +121,9 @@ class ChatRoomViewController: UIViewController {
         }
     }
     
-    func send(message: String) {
-        let message = URLSessionWebSocketTask.Message.string("{\"action\": \"N\", \"content\": \"\(message)\"}")
+    func send() {
+        guard let inputText = chatTextField.text else { return }
+        let message = URLSessionWebSocketTask.Message.string("{\"action\": \"N\", \"content\": \"\(inputText)\"}")
         webSocketTask?.send(message) { error in
             if let error = error {
                 print(error)
@@ -157,11 +153,15 @@ class ChatRoomViewController: UIViewController {
         )
     }
    
-    @IBAction func clickSendMessage(_ sender: Any) {
+    @IBAction func clickSendMessage(_ sender: UIButton) {
         if chatTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
+            self.showAlertInfo("請輸入內容", y: self.view.bounds.midY)
             print("Input is empty")
+        } else if chatTextField.text!.trimmingCharacters(in: .whitespaces).description.count > 160 {
+            self.showAlertInfo("字數過多", y: self.view.bounds.midY)
+            print("Too much input")
         } else {
-            send(message: self.chatTextField.text!)
+            send()
         }
         chatTextField.text?.removeAll() //送出後要重置輸入框
     }
@@ -196,12 +196,12 @@ extension ChatRoomViewController: UITableViewDelegate, UITableViewDataSource {
        
         if webSocketReceive[index].event.contains("sys_updateRoomStatus") {
             if webSocketReceive[index].body.entry_notice?.action == "enter" {
-                cell.chatTextView.text = "\(webSocketReceive[index].body.entry_notice!.username!)  進入聊天室"
+                cell.chatTextView.text = "【系統】\(webSocketReceive[index].body.entry_notice!.username!)  進入聊天室"
             } else {
-                cell.chatTextView.text = "\(webSocketReceive[index].body.entry_notice!.username!)  離開聊天室"
+                cell.chatTextView.text = "【系統】\(webSocketReceive[index].body.entry_notice!.username!)  離開聊天室"
             }
         } else if webSocketReceive[index].event.contains("default_message") {
-            cell.chatTextView.text = "\(webSocketReceive[index].body.nickname!): \(webSocketReceive[index].body.text!)"
+            cell.chatTextView.text = "\(webSocketReceive[index].body.nickname!)： \(webSocketReceive[index].body.text!)"
         } else if webSocketReceive[index].event.contains("admin_all_broadcast") {
             cell.chatTextView.text = "\(webSocketReceive[index].body.content!.tw!)"
         }
@@ -240,15 +240,12 @@ extension ChatRoomViewController {
     
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRect = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRect.height
-            view.frame.origin.y = -keyboardHeight
-        } else {
-            view.frame.origin.y = -view.frame.height / 3
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            self.view.frame.origin.y = -keyboardHeight + 20
         }
     }
     
     @objc func keyboardWillHide(notification: Notification) {
-        view.frame.origin.y = 0
+        self.view.frame.origin.y = 0
     }
 }

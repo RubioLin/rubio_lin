@@ -9,6 +9,8 @@ import FirebaseFirestoreSwift
 var handle: AuthStateDidChangeListenerHandle?
 let userDefaults = UserDefaults.standard
 
+// 有些畫面錯誤是英文 有些是中文 要統一
+
 class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarControllerDelegate {
     
     static let HomePage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomePage")
@@ -16,7 +18,7 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
     static var isSignIn: Bool?
     var result: JsonResult?
     let db = Firestore.firestore()
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         LiveRoomCollectionView.reloadData()
@@ -49,28 +51,28 @@ extension HomePageViewController: UICollectionViewDataSource {
     // 設置 Collection View 的 Header，判斷有無使用者決定 Header 的內容
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
-            if let currentUser = Auth.auth().currentUser {
-                header?.currentUserHeadPhotoImageView.isHidden = false
-                header?.currentUserNicknameLabel.isHidden = false
-                if let email = currentUser.email {
-                    self.db.collection("userInfo").document(email).getDocument { document, error in
-                        guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
-                        URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
-                            DispatchQueue.main.async {
-                                if let data = data {
-                                    header?.currentUserHeadPhotoImageView.image = UIImage(data: data)
-                                }
-                                header?.currentUserNicknameLabel.text = user.nickname
+        if let currentUser = Auth.auth().currentUser {
+            header?.currentUserHeadPhotoImageView.isHidden = false
+            header?.currentUserNicknameLabel.isHidden = false
+            if let email = currentUser.email {
+                self.db.collection("userInfo").document(email).getDocument { document, error in
+                    guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
+                    URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
+                        DispatchQueue.main.async {
+                            if let data = data {
+                                header?.currentUserHeadPhotoImageView.image = UIImage(data: data)
                             }
-                        }.resume()
-                    }
+                            header?.currentUserNicknameLabel.text = user.nickname
+                        }
+                    }.resume()
                 }
-            } else {
-                header?.currentUserHeadPhotoImageView.isHidden = true
-                header?.currentUserNicknameLabel.isHidden = true
-                header?.currentUserHeadPhotoImageView.image = nil
-                header?.currentUserNicknameLabel.text?.removeAll()
             }
+        } else {
+            header?.currentUserHeadPhotoImageView.isHidden = true
+            header?.currentUserNicknameLabel.isHidden = true
+            header?.currentUserHeadPhotoImageView.image = nil
+            header?.currentUserNicknameLabel.text?.removeAll()
+        }
         return header!
     }
     

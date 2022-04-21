@@ -9,11 +9,9 @@ class NavigationViewController: UINavigationController{
         if Auth.auth().currentUser != nil {
             let accountPage = self.storyboard?.instantiateViewController(withIdentifier:"AccountPage")
             self.viewControllers = [accountPage!]
-            print("有用戶")
         } else {
             let signInPage = self.storyboard?.instantiateViewController(withIdentifier:"SignInPage")
             self.viewControllers = [signInPage!]
-            print("無用戶")
         }
     }
 }

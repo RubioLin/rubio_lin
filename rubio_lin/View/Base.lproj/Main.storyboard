@@ -77,7 +77,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Xh0-QH-IJP">
-                                <rect key="frame" x="20" y="521" width="335" height="257"/>
+                                <rect key="frame" x="20" y="411" width="335" height="367"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="335" id="jbQ-tb-jrd"/>
@@ -184,7 +184,7 @@
                             <constraint firstItem="Xh0-QH-IJP" firstAttribute="leading" secondItem="Knl-qE-hkN" secondAttribute="leading" constant="20" id="Dqi-pW-1o3"/>
                             <constraint firstItem="lU1-gj-UrX" firstAttribute="centerY" secondItem="v0p-dV-ipV" secondAttribute="centerY" id="S6I-Vf-cLm"/>
                             <constraint firstItem="0Q3-1H-Irb" firstAttribute="centerX" secondItem="v0p-dV-ipV" secondAttribute="centerX" multiplier="1.8" id="UBy-rj-izy"/>
-                            <constraint firstItem="Xh0-QH-IJP" firstAttribute="height" secondItem="Knl-qE-hkN" secondAttribute="height" multiplier="0.35" id="hDN-1c-zHO"/>
+                            <constraint firstItem="Xh0-QH-IJP" firstAttribute="height" secondItem="Knl-qE-hkN" secondAttribute="height" multiplier="0.5" id="hDN-1c-zHO"/>
                             <constraint firstItem="lU1-gj-UrX" firstAttribute="centerX" secondItem="v0p-dV-ipV" secondAttribute="centerX" id="ml2-mw-sey"/>
                             <constraint firstItem="lU1-gj-UrX" firstAttribute="width" secondItem="v0p-dV-ipV" secondAttribute="width" multiplier="0.8" id="s2e-Bi-ig4"/>
                             <constraint firstItem="Knl-qE-hkN" firstAttribute="trailing" secondItem="Xh0-QH-IJP" secondAttribute="trailing" constant="20" id="v57-40-Rxk"/>
@@ -201,7 +201,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ej9-24-B29" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1204" y="-723"/>
+            <point key="canvasLocation" x="1204" y="-723.39901477832518"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lH7-q0-SEn">
@@ -383,7 +383,7 @@
         <scene sceneID="V5T-r3-azl">
             <objects>
                 <viewController storyboardIdentifier="SignInPage" id="Ozg-MB-Oft" userLabel="SignInPage" customClass="SignInPageViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ew3-qs-SFc">
+                    <view key="view" contentMode="scaleToFill" id="ew3-qs-SFc" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -426,7 +426,7 @@
                                                     <action selector="emailEditDidEnd:" destination="Ozg-MB-Oft" eventType="editingDidEnd" id="gqO-7x-znq"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入6-12位字母或數字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="djz-Sq-eGc">
+                                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入6-12位字母或數字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="djz-Sq-eGc">
                                                 <rect key="frame" x="0.0" y="64" width="320.33333333333331" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="S6Q-h5-1mx"/>
@@ -519,6 +519,9 @@
                             <constraint firstItem="88c-hQ-pnp" firstAttribute="centerX" secondItem="ew3-qs-SFc" secondAttribute="centerX" id="szF-Gu-qtn"/>
                             <constraint firstItem="Rq8-sS-jwy" firstAttribute="width" secondItem="epY-po-NdD" secondAttribute="width" id="xWe-pA-lbn"/>
                         </constraints>
+                        <connections>
+                            <action selector="touchdown:" destination="Ozg-MB-Oft" eventType="touchDown" id="XrS-Zp-x6q"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="T0E-Qu-y0P"/>
                     <connections>
@@ -675,27 +678,27 @@
             <objects>
                 <viewController id="Udu-1Q-LcZ" userLabel="Chat Room" customClass="ChatRoomViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FM-rO-DMW">
-                        <rect key="frame" x="0.0" y="0.0" width="335" height="257"/>
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="itB-3g-Wem">
-                                <rect key="frame" x="0.0" y="203" width="335" height="44"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Aff-V2-eoP">
+                                <rect key="frame" x="0.0" y="323" width="335" height="44"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="    一起聊個天吧..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wx5-bo-YQC">
-                                        <rect key="frame" x="0.0" y="0.0" width="283" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="281" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Igl-k8-Xms"/>
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="send"/>
                                         <connections>
-                                            <action selector="didEndOnExit:" destination="Udu-1Q-LcZ" eventType="editingDidEndOnExit" id="Ckc-S7-3Jv"/>
+                                            <action selector="didEndOnExit:" destination="Udu-1Q-LcZ" eventType="editingDidEndOnExit" id="zj3-51-snt"/>
                                             <action selector="editdidEnd:" destination="Udu-1Q-LcZ" eventType="editingDidEnd" id="uAd-lW-Ah0"/>
                                             <action selector="touchdown:" destination="Udu-1Q-LcZ" eventType="touchDown" id="1Gd-cf-14m"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeq-CG-Xfm">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeq-CG-Xfm">
                                         <rect key="frame" x="291" y="0.0" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="1KN-72-Pl6"/>
@@ -703,6 +706,7 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="send"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="send"/>
                                         <connections>
                                             <action selector="clickSendMessage:" destination="Udu-1Q-LcZ" eventType="touchUpInside" id="cEY-vJ-nC9"/>
                                         </connections>
@@ -710,7 +714,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" delaysContentTouches="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rjg-5s-ARJ">
-                                <rect key="frame" x="0.0" y="44" width="335" height="149"/>
+                                <rect key="frame" x="0.0" y="44" width="335" height="274"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Udu-1Q-LcZ" id="Qam-9A-yTt"/>
@@ -721,13 +725,13 @@
                         <viewLayoutGuide key="safeArea" id="1no-eV-1Un"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="trailing" secondItem="itB-3g-Wem" secondAttribute="trailing" id="CZ9-oR-DNf"/>
-                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="leading" secondItem="itB-3g-Wem" secondAttribute="leading" id="Iai-2w-Nlr"/>
+                            <constraint firstItem="1no-eV-1Un" firstAttribute="trailing" secondItem="Aff-V2-eoP" secondAttribute="trailing" id="3Bi-Ir-LzL"/>
+                            <constraint firstItem="Aff-V2-eoP" firstAttribute="leading" secondItem="1no-eV-1Un" secondAttribute="leading" id="7oG-yB-aD6"/>
+                            <constraint firstItem="Aff-V2-eoP" firstAttribute="top" secondItem="rjg-5s-ARJ" secondAttribute="bottom" constant="5" id="BX6-IZ-voz"/>
                             <constraint firstItem="rjg-5s-ARJ" firstAttribute="top" secondItem="1no-eV-1Un" secondAttribute="top" id="Ojj-I6-0AJ"/>
-                            <constraint firstItem="1no-eV-1Un" firstAttribute="trailing" secondItem="itB-3g-Wem" secondAttribute="trailing" id="k9v-zt-T1T"/>
-                            <constraint firstItem="itB-3g-Wem" firstAttribute="leading" secondItem="1no-eV-1Un" secondAttribute="leading" id="obN-c0-IiI"/>
-                            <constraint firstItem="1no-eV-1Un" firstAttribute="bottom" secondItem="itB-3g-Wem" secondAttribute="bottom" constant="10" id="qci-kg-6uE"/>
-                            <constraint firstItem="itB-3g-Wem" firstAttribute="top" secondItem="rjg-5s-ARJ" secondAttribute="bottom" constant="10" id="yN7-X2-loM"/>
+                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="trailing" secondItem="1no-eV-1Un" secondAttribute="trailing" id="YeX-zd-J0C"/>
+                            <constraint firstItem="1no-eV-1Un" firstAttribute="bottom" secondItem="Aff-V2-eoP" secondAttribute="bottom" id="iPL-mn-vvw"/>
+                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="leading" secondItem="1no-eV-1Un" secondAttribute="leading" id="pA4-GF-es5"/>
                         </constraints>
                     </view>
                     <connections>
