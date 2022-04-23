@@ -16,27 +16,7 @@ class AccountPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-            if Auth.auth().currentUser != nil {
-                if let email = Auth.auth().currentUser?.email {
-                    print("\(email) login")
-                    self.db.collection("userInfo").document(email).getDocument { document, error in
-                        guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
-                        self.showSpinner()
-                        URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
-                            DispatchQueue.main.async {
-                                if let data = data {
-                                    self.userHeadPhotoImageView.image = UIImage(data: data)
-                                }
-                                self.nickNameLabel.text = "暱稱：\(user.nickname)"
-                                self.emailLabel.text = "帳號：\(user.email)"
-                                self.removeSpinner()
-                            }
-                        }.resume()
-                    }
-                }
-            } else {
-                print("not login")
-            }
+        setUserInfo()
     }
     
     override func viewDidLoad() {
@@ -48,6 +28,30 @@ class AccountPageViewController: UIViewController {
     func setHeadPhotoImageView() {
         let accountHeadPhotoCornerRadius: CGFloat = UIScreen.main.bounds.width / 4
         userHeadPhotoImageView.layer.cornerRadius = accountHeadPhotoCornerRadius
+    }
+    
+    func setUserInfo() {
+        if Auth.auth().currentUser != nil {
+            if let email = Auth.auth().currentUser?.email {
+                print("\(email) login")
+                self.db.collection("userInfo").document(email).getDocument { document, error in
+                    guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
+                    self.showSpinner()
+                    URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
+                        DispatchQueue.main.async {
+                            if let data = data {
+                                self.userHeadPhotoImageView.image = UIImage(data: data)
+                            }
+                            self.nickNameLabel.text = "暱稱：\(user.nickname)"
+                            self.emailLabel.text = "帳號：\(user.email)"
+                            self.removeSpinner()
+                        }
+                    }.resume()
+                }
+            }
+        } else {
+            print("not login")
+        }
     }
     
     @IBAction func clickOnSignOut(_ sender: Any) {

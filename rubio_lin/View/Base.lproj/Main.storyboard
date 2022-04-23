@@ -691,7 +691,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                                        <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="didEndOnExit:" destination="Udu-1Q-LcZ" eventType="editingDidEndOnExit" id="zj3-51-snt"/>
                                             <action selector="editdidEnd:" destination="Udu-1Q-LcZ" eventType="editingDidEnd" id="uAd-lW-Ah0"/>
@@ -714,7 +714,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" delaysContentTouches="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rjg-5s-ARJ">
-                                <rect key="frame" x="0.0" y="44" width="335" height="274"/>
+                                <rect key="frame" x="0.0" y="164" width="335" height="154"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Udu-1Q-LcZ" id="Qam-9A-yTt"/>
@@ -728,7 +728,7 @@
                             <constraint firstItem="1no-eV-1Un" firstAttribute="trailing" secondItem="Aff-V2-eoP" secondAttribute="trailing" id="3Bi-Ir-LzL"/>
                             <constraint firstItem="Aff-V2-eoP" firstAttribute="leading" secondItem="1no-eV-1Un" secondAttribute="leading" id="7oG-yB-aD6"/>
                             <constraint firstItem="Aff-V2-eoP" firstAttribute="top" secondItem="rjg-5s-ARJ" secondAttribute="bottom" constant="5" id="BX6-IZ-voz"/>
-                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="top" secondItem="1no-eV-1Un" secondAttribute="top" id="Ojj-I6-0AJ"/>
+                            <constraint firstItem="rjg-5s-ARJ" firstAttribute="top" secondItem="1no-eV-1Un" secondAttribute="top" constant="120" id="Ojj-I6-0AJ"/>
                             <constraint firstItem="rjg-5s-ARJ" firstAttribute="trailing" secondItem="1no-eV-1Un" secondAttribute="trailing" id="YeX-zd-J0C"/>
                             <constraint firstItem="1no-eV-1Un" firstAttribute="bottom" secondItem="Aff-V2-eoP" secondAttribute="bottom" id="iPL-mn-vvw"/>
                             <constraint firstItem="rjg-5s-ARJ" firstAttribute="leading" secondItem="1no-eV-1Un" secondAttribute="leading" id="pA4-GF-es5"/>

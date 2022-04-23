@@ -100,8 +100,8 @@ class SignUpPageViewController: UIViewController {
     @IBAction func selectPhotoBtn(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Select Photo", message: nil, preferredStyle: .actionSheet)
         let sources:[(name:String, type:UIImagePickerController.SourceType)] = [
-            ("Album", .photoLibrary),
-            ("Camera", .camera)
+            ("選擇照片", .photoLibrary),
+            ("開啟相機", .camera)
         ]
         for source in sources {
             let action = UIAlertAction(title: source.name, style: .default) { (_) in
@@ -154,10 +154,12 @@ class SignUpPageViewController: UIViewController {
         if let email = emailTextField.text, let password = passwordTextField.text {
             Auth.auth().createUser(withEmail: email, password: password) { auth, error in
                 if error != nil {
-                    let alert = UIAlertController(title: "Sign up failure", message: error?.localizedDescription, preferredStyle: .alert)
+                    let alert = UIAlertController(title: "註冊失敗", message: error?.localizedDescription, preferredStyle: .alert)
                     let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alert.addAction(ok)
                     self.present(alert, animated: true, completion: nil)
+                    print("註冊失敗")
+                    print("Error：\(error?.localizedDescription)")
                 } else {
                     //upload userPhoto to Storage
                     self.uploadPhoto(image: self.userHeadPhotoImageView.image ?? UIImage()) { result in
@@ -167,12 +169,13 @@ class SignUpPageViewController: UIViewController {
                             self.uploadUserInfo(url: userPhotoUrl)
                             self.tabBarController?.selectedIndex = 0
                             self.navigationController?.viewDidLoad()
-                            self.removeSpinner()
                         case .failure(let error):
-                            print(error.localizedDescription)
+                            print("使用者頭像上傳失敗")
+                            print("Error：\(error.localizedDescription)")
                         }
                     }
                 }
+                self.removeSpinner()
             }
         }
     }
@@ -187,7 +190,8 @@ class SignUpPageViewController: UIViewController {
             do {
                 try db.collection("userInfo").document("\(email)").setData(from: user)
             } catch {
-                print(error.localizedDescription)
+                print("錯誤：使用者資訊上傳錯誤")
+                print("Error：\(error.localizedDescription)")
             }
         }
     }

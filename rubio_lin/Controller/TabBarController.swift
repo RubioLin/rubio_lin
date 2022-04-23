@@ -5,6 +5,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var firstTabbarItemImageView: UIImageView!
     var secondTabbarItemImageView: UIImageView!
     var thirdTabbarItemImageView: UIImageView!
+    
     // 設置 Tabbar 的點擊動畫
     override func viewDidLoad() {
         super.viewDidLoad()

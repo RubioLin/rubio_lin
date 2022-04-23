@@ -9,7 +9,6 @@ import FirebaseFirestoreSwift
 var handle: AuthStateDidChangeListenerHandle?
 let userDefaults = UserDefaults.standard
 
-// 有些畫面錯誤是英文 有些是中文 要統一
 
 class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarControllerDelegate {
     
@@ -52,6 +51,7 @@ extension HomePageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
         if let currentUser = Auth.auth().currentUser {
+            self.showSpinner()
             header?.currentUserHeadPhotoImageView.isHidden = false
             header?.currentUserNicknameLabel.isHidden = false
             if let email = currentUser.email {
@@ -67,6 +67,7 @@ extension HomePageViewController: UICollectionViewDataSource {
                     }.resume()
                 }
             }
+            self.removeSpinner()
         } else {
             header?.currentUserHeadPhotoImageView.isHidden = true
             header?.currentUserNicknameLabel.isHidden = true

@@ -126,17 +126,20 @@ class SignInPageViewController: UIViewController {
         if message != "" {
             showAlertInfo(message, y: self.view.bounds.midY * 0.64)
         } else {
+            self.showSpinner()
             Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { result, error in
                 if error == nil {
                     self.tabBarController?.selectedIndex = 0
                     self.navigationController?.viewDidLoad()
                 } else {
-                    let alert = UIAlertController(title: "Sign in failure", message: error?.localizedDescription, preferredStyle: .alert)
+                    let alert = UIAlertController(title: "登入失敗", message: error?.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel))
                     self.present(alert, animated: true)
-                    print(error?.localizedDescription)
+                    print("登入失敗")
+                    print("Error：\(error?.localizedDescription)")
                 }
             }
+            self.removeSpinner()
         }
     }
     
