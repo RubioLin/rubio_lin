@@ -1,5 +1,4 @@
 import UIKit
-import FirebaseAuth
 
 class SignInPageViewController: UIViewController {
     
@@ -127,30 +126,29 @@ class SignInPageViewController: UIViewController {
             showAlertInfo(message, y: self.view.bounds.midY * 0.64)
         } else {
             self.showSpinner()
-            Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { result, error in
+            FirebaseManager.shared.signInUser(emailTextField.text!, passwordTextField.text!) { error in
                 if error == nil {
+                    FirebaseManager.shared.getUserInfo() // 登入使用者要抓取其UserInfo
                     self.tabBarController?.selectedIndex = 0
                     self.navigationController?.viewDidLoad()
+                    self.removeSpinner()
+                    print("Sign In Success")
                 } else {
-                    let alert = UIAlertController(title: "登入失敗", message: error?.localizedDescription, preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Sign In Failure", message: error?.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                    self.removeSpinner()
                     self.present(alert, animated: true)
-                    print("登入失敗")
-                    print("Error：\(error?.localizedDescription)")
+                    print("Sign In Failure：\(String(describing: error))")
                 }
             }
-            self.removeSpinner()
         }
     }
     
-    @IBAction func clinkOnSignUp(_ sender: UIButton) {
-    }
-    
-   
 }
 
-// MARK: - 設置鍵盤監聽
+// MARK: - Setup KeyboardObserver
 extension SignInPageViewController {
+    
     func addKeyboardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)

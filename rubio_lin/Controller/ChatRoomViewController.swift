@@ -1,10 +1,5 @@
 import UIKit
 import Foundation
-import FirebaseAuth
-import FirebaseFirestore
-import FirebaseFirestoreSwift
-import FirebaseStorage
-import FirebaseStorageSwift
 
 class ChatRoomViewController: UIViewController {
     @IBOutlet weak var chatTextField: UITextField!
@@ -12,7 +7,6 @@ class ChatRoomViewController: UIViewController {
     @IBOutlet weak var chatRoomTableView: UITableView!
     var webSocketTask: URLSessionWebSocketTask?
     var webSocketReceive: [receiveInfo] = []
-    let db = Firestore.firestore()
     var animator = UIViewPropertyAnimator()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,27 +42,22 @@ class ChatRoomViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
-    
-    
+    // MARK: - WebSocket Manager
+    // Establish onnection y sign in status
     func establishConnection() {
         var nickname = ""
         let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
-        if let currentUser = Auth.auth().currentUser {
-            if let currentEmail = currentUser.email {
-                self.db.collection("userInfo").document(currentEmail).getDocument { document, error in
-                    guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
-                    nickname = user.nickname.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-                    let urlStr = "wss://client-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)"
-                    guard let url = URL(string: urlStr) else {
-                        print("connection error")
-                        return }
-                    let request = URLRequest(url: url)
-                    print(request)
-                    self.webSocketTask = urlSession.webSocketTask(with: request)
-                    self.webSocketTask?.resume()
-                    self.receive()
+        if FirebaseManager.shared.isSignIn == true {
+            if let userInfo = FirebaseManager.shared.userInfo {
+                nickname = userInfo.nickname.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                guard let url = URL(string: "wss://client-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)") else {
+                    print("connection error")
+                    return
                 }
+                let request = URLRequest(url: url)
+                self.webSocketTask = urlSession.webSocketTask(with: request)
+                self.webSocketTask?.resume()
+                self.receive()
             }
         } else {
             nickname = "訪客"

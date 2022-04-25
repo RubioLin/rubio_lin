@@ -1,9 +1,4 @@
 import UIKit
-import FirebaseAuth
-import FirebaseStorage
-import FirebaseStorageSwift
-import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 class AccountPageViewController: UIViewController {
     
@@ -12,11 +7,22 @@ class AccountPageViewController: UIViewController {
     @IBOutlet weak var nickNameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var signInOutButton: UIButton!
-    let db = Firestore.firestore()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setUserInfo()
+        if FirebaseManager.shared.isSignIn == true {
+            if FirebaseManager.shared.userInfo != nil {
+                if let url = FirebaseManager.shared.userInfo?.userPhotoUrl {
+                    URLSession.shared.dataTask(with: url) { data, response, error in
+                        DispatchQueue.main.async {
+                            self.userHeadPhotoImageView.image = UIImage(data: data ?? Data())
+                            self.nickNameLabel.text = "暱稱：\(FirebaseManager.shared.userInfo!.nickname)"
+                            self.emailLabel.text = "帳號：\(FirebaseManager.shared.userInfo!.email)"
+                        }
+                    }.resume()
+                }
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -30,39 +36,8 @@ class AccountPageViewController: UIViewController {
         userHeadPhotoImageView.layer.cornerRadius = accountHeadPhotoCornerRadius
     }
     
-    func setUserInfo() {
-        if Auth.auth().currentUser != nil {
-            if let email = Auth.auth().currentUser?.email {
-                print("\(email) login")
-                self.db.collection("userInfo").document(email).getDocument { document, error in
-                    guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
-                    self.showSpinner()
-                    URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
-                        DispatchQueue.main.async {
-                            if let data = data {
-                                self.userHeadPhotoImageView.image = UIImage(data: data)
-                            }
-                            self.nickNameLabel.text = "暱稱：\(user.nickname)"
-                            self.emailLabel.text = "帳號：\(user.email)"
-                            self.removeSpinner()
-                        }
-                    }.resume()
-                }
-            }
-        } else {
-            print("not login")
-        }
-    }
-    
     @IBAction func clickOnSignOut(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-            userHeadPhotoImageView.image = UIImage(named: "picPersonal")
-            nickNameLabel.text = nil
-            emailLabel.text = nil
-        } catch {
-            print(error)
-        }
+        FirebaseManager.shared.signOutUser()
         self.navigationController?.viewDidLoad()
     }
 }

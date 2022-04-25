@@ -1,19 +1,14 @@
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
-import FirebaseFirestoreSwift
-import FirebaseStorage
-import FirebaseStorageSwift
+
 
 class SignUpPageViewController: UIViewController {
-        
+    
     static let SignUpPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpPage") as! SignUpPageViewController
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var userHeadPhotoImageView: UIImageView!
     @IBOutlet weak var signUpBtn: UIButton!
-    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,22 +146,15 @@ class SignUpPageViewController: UIViewController {
         }
         self.showSpinner()
         //create a new user and upload to FirebaseAuth
-        if let email = emailTextField.text, let password = passwordTextField.text {
-            Auth.auth().createUser(withEmail: email, password: password) { auth, error in
-                if error != nil {
-                    let alert = UIAlertController(title: "註冊失敗", message: error?.localizedDescription, preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(ok)
-                    self.present(alert, animated: true, completion: nil)
-                    print("註冊失敗")
-                    print("Error：\(error?.localizedDescription)")
-                } else {
-                    //upload userPhoto to Storage
-                    self.uploadPhoto(image: self.userHeadPhotoImageView.image ?? UIImage()) { result in
+        if let email = emailTextField.text, let password = passwordTextField.text, let nickname = nicknameTextField.text {
+            FirebaseManager.shared.signUpUser(email, password) { error in
+                if error == nil {
+                    FirebaseManager.shared.uploadUserAvatar(self.userHeadPhotoImageView.image!, email) { result in
                         switch result {
-                        case .success(let userPhotoUrl):
-                            //upload UserInfo to Firestore
-                            self.uploadUserInfo(url: userPhotoUrl)
+                        case .success(let avatarUrl):
+                            FirebaseManager.shared.uploadUserInfo(nickname, email, password, avatarUrl)
+                            FirebaseManager.shared.getUserInfo() // 註冊新的使用者要抓取其UserInfo
+                            self.removeSpinner()
                             self.tabBarController?.selectedIndex = 0
                             self.navigationController?.viewDidLoad()
                         case .failure(let error):
@@ -174,56 +162,19 @@ class SignUpPageViewController: UIViewController {
                             print("Error：\(error.localizedDescription)")
                         }
                     }
-                }
-                self.removeSpinner()
-            }
-        }
-    }
-    
-    func uploadUserInfo(url: URL) {
-        if let nickname = nicknameTextField.text, let email = emailTextField.text, let password = passwordTextField.text {
-            guard email != "" else {
-                print("email can't be nil")
-                return
-            }
-            let user = UserInfo(nickname: nickname, email: email, password: password, userPhotoUrl: url)
-            do {
-                try db.collection("userInfo").document("\(email)").setData(from: user)
-            } catch {
-                print("錯誤：使用者資訊上傳錯誤")
-                print("Error：\(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func uploadPhoto(image: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
-        if let email = emailTextField.text {
-            guard email != "" else {
-                print("email can't be nil")
-                return
-            }
-            let fileReference = Storage.storage().reference().child("\(email).jpg")
-            if let data = image.jpegData(compressionQuality: 0.6) {
-                fileReference.putData(data, metadata: nil) { result in
-                    switch result {
-                    case .success(_):
-                        fileReference.downloadURL { result in
-                            switch result {
-                            case .success(let url):
-                                completion(.success(url))
-                            case .failure(let error):
-                                completion(.failure(error))
-                            }
-                        }
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
+                } else {
+                    let alert = UIAlertController(title: "Sign Up Failure", message: error?.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                    self.removeSpinner()
+                    self.present(alert, animated: true)
+                    print("Sign Up Failure：\(String(describing: error))")
                 }
             }
         }
     }
 }
 
+// MARK: - Setup UIImagePicker
 extension SignUpPageViewController: UIImagePickerControllerDelegate,  UINavigationControllerDelegate {
     
     func selectPhoto(sourceType: UIImagePickerController.SourceType) {

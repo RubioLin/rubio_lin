@@ -1,5 +1,6 @@
 import Foundation
 
+// MARK: - Websocket Modal
 struct receiveInfo: Codable {
     let event: String
     let room_id: String
@@ -25,4 +26,20 @@ struct body_content: Codable {
     let cn: String?
     let en: String?
     let tw: String?
+}
+
+// MARK: - WebSocket Manager
+class WebSocketManager {
+    
+    static let shared = WebSocketManager()
+    
+    private var webSockeTask: URLSessionWebSocketTask?
+    
+    func establishConnection() {
+        var nickname = ""
+         let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
+
+    }
+
+
 }

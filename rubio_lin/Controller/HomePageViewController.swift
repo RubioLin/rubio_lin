@@ -1,22 +1,15 @@
 import UIKit
 import Foundation
-import FirebaseAuth
-import FirebaseStorage
-import FirebaseStorageSwift
-import FirebaseFirestore
-import FirebaseFirestoreSwift
 
-var handle: AuthStateDidChangeListenerHandle?
 let userDefaults = UserDefaults.standard
 
+// Header 不會一開就更新
 
 class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarControllerDelegate {
     
     static let HomePage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomePage")
     @IBOutlet weak var LiveRoomCollectionView: UICollectionView!
-    static var isSignIn: Bool?
     var result: JsonResult?
-    let db = Firestore.firestore()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -40,39 +33,25 @@ extension HomePageViewController: UICollectionViewDataSource {
     
     // 設置 Collection View 的 Header在有登入時存在，未登入則高度為零
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if Auth.auth().currentUser == nil {
-            return CGSize(width: 0.0, height: 0.0)
-        } else {
+        if FirebaseManager.shared.isSignIn == true {
             return CGSize(width: self.view.bounds.width, height: 40)
+        } else {
+            return CGSize(width: 0.0, height: 0.0)
         }
     }
     
     // 設置 Collection View 的 Header，判斷有無使用者決定 Header 的內容
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
-        if let currentUser = Auth.auth().currentUser {
-            self.showSpinner()
-            header?.currentUserHeadPhotoImageView.isHidden = false
-            header?.currentUserNicknameLabel.isHidden = false
-            if let email = currentUser.email {
-                self.db.collection("userInfo").document(email).getDocument { document, error in
-                    guard let documents = document, documents.exists, let user = try? documents.data(as: UserInfo.self) else { return }
-                    URLSession.shared.dataTask(with: user.userPhotoUrl) { data, response, error in
-                        DispatchQueue.main.async {
-                            if let data = data {
-                                header?.currentUserHeadPhotoImageView.image = UIImage(data: data)
-                            }
-                            header?.currentUserNicknameLabel.text = user.nickname
-                        }
-                    }.resume()
-                }
+        if FirebaseManager.shared.isSignIn == true {
+            if let url = FirebaseManager.shared.userInfo?.userPhotoUrl {
+                URLSession.shared.dataTask(with: url) { data, response, error in
+                    DispatchQueue.main.async {
+                        header?.currentUserHeadPhotoImageView.image = UIImage(data: data ?? Data())
+                        header?.currentUserNicknameLabel.text = FirebaseManager.shared.userInfo?.nickname
+                    }
+                }.resume()
             }
-            self.removeSpinner()
-        } else {
-            header?.currentUserHeadPhotoImageView.isHidden = true
-            header?.currentUserNicknameLabel.isHidden = true
-            header?.currentUserHeadPhotoImageView.image = nil
-            header?.currentUserNicknameLabel.text?.removeAll()
         }
         return header!
     }

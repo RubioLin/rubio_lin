@@ -67,7 +67,7 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
             self.player.seek(to: CMTime.zero)
             self.player.play()
         }
-        let playerObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { notification in
+        _ = NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { notification in
             resetPlayer()
         }
     }

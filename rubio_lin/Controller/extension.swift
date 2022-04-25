@@ -1,10 +1,10 @@
 import Foundation
 import UIKit
-import SwiftUI
 
 fileprivate var backgroundView: UIView?
 
 extension UIViewController {
+    
     func showAlertInfo(_ message: String?, y: CGFloat) {
         backgroundView = UIView(frame: CGRect(x: 0, y: y, width: self.view.bounds.width * 0.855, height: 44))
         backgroundView?.center.x = self.view.center.x

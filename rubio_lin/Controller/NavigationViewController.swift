@@ -1,17 +1,14 @@
 import UIKit
-import FirebaseAuth
 
 class NavigationViewController: UINavigationController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // 判斷有無使用者決定要去哪個頁面
-        if Auth.auth().currentUser != nil {
-            let accountPage = self.storyboard?.instantiateViewController(withIdentifier:"AccountPage")
-            self.viewControllers = [accountPage!]
+        if FirebaseManager.shared.isSignIn == true {
+            self.viewControllers = [AccountPageViewController.AccountPage]
         } else {
-            let signInPage = self.storyboard?.instantiateViewController(withIdentifier:"SignInPage")
-            self.viewControllers = [signInPage!]
+            self.viewControllers = [SignInPageViewController.SignInPage]
         }
     }
 }
