@@ -16,8 +16,8 @@ class AccountPageViewController: UIViewController {
                     URLSession.shared.dataTask(with: url) { data, response, error in
                         DispatchQueue.main.async {
                             self.userHeadPhotoImageView.image = UIImage(data: data ?? Data())
-                            self.nickNameLabel.text = "暱稱：\(FirebaseManager.shared.userInfo!.nickname)"
-                            self.emailLabel.text = "帳號：\(FirebaseManager.shared.userInfo!.email)"
+                            self.nickNameLabel.text = "\(NSLocalizedString("accountPageNickname", comment: ""))\(FirebaseManager.shared.userInfo!.nickname)"
+                            self.emailLabel.text = "\(NSLocalizedString("accountPageAccount", comment: ""))\(FirebaseManager.shared.userInfo!.email)"
                         }
                     }.resume()
                 }
@@ -28,7 +28,7 @@ class AccountPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeadPhotoImageView()
-        self.navigationItem.title = "會員資訊"
+        self.navigationItem.title = NSLocalizedString("accountPageNavigationTitle", comment: "")
     }
     
     func setHeadPhotoImageView() {

@@ -1,0 +1,32 @@
+/* Traditional Chinese */
+// Search Page
+"search" = "搜索結果";
+"recommend" = "熱門推薦";
+// Account Page
+"accountPageNickname" = "暱稱：";
+"accountPageAccount" = "帳號：";
+"accountPageNavigationTitle" = "會員資訊";
+// Sign In Page
+"account" = "  帳號 ";
+"password" = "  密碼 ";
+"emailIsEmpty" = "請輸入帳號 ";
+"emailIncorrectWordCount" = "帳號字數不正確 ";
+"passwordIsEmpty" = "請輸入密碼 ";
+"passwordIncorrectWordCount" = "密碼字數不正確 ";
+"passwordIsBadlyFormatted" = "密碼含有特殊符號 ";
+"SignInFailure" = "登入失敗";
+// Sign Up Page
+"signUpPageNavigationTitle" = "註冊會員";
+"nickname" = "  暱稱 ";
+"selectedPhoto" = "選擇照片";
+"openCamera" = "開啟相機";
+"cancel" = "取消";
+"nicknameIsEmpty" = "請輸入暱稱 ";
+"SignUpFailure" = "註冊失敗";
+// Chat Room
+"guest" = "訪客";
+"chatPlaceholder" = " 一起聊個天吧...";
+"system" = "【系統】";
+"systemEnter" = "  進入聊天室";
+"systemLeave" = "  離開聊天室";
+"admin_all_broadcast" = "【公告】這是一張平凡無奇的公告，你可以理我也可以不理我，但記得要把我接起來";

@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 // MARK: - Websocket Modal
 struct receiveInfo: Codable {
@@ -29,17 +30,102 @@ struct body_content: Codable {
 }
 
 // MARK: - WebSocket Manager
-class WebSocketManager {
+final class WebSocketManager: NSObject, URLSessionWebSocketDelegate, UITableViewDelegate {
     
     static let shared = WebSocketManager()
     
-    private var webSockeTask: URLSessionWebSocketTask?
+    private var webSocketTask: URLSessionWebSocketTask?
+    private var request: URLRequest?
+    var webSocketReceive: [receiveInfo] = []
     
     func establishConnection() {
         var nickname = ""
-         let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
-
+        let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
+        if FirebaseManager.shared.isSignIn == true {
+            if let userInfo = FirebaseManager.shared.userInfo {
+                nickname = userInfo.nickname.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                guard let url = URL(string: "wss://client-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else {
+                    print("connection error")
+                    return }
+                request = URLRequest(url: url)
+                self.webSocketTask = urlSession.webSocketTask(with: request!)
+                self.webSocketTask?.resume()
+            }
+        } else {
+            nickname = "訪客"
+            guard let url = URL(string: "wss://client-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else {
+                print("connection error")
+                return }
+            request = URLRequest(url: url)
+            self.webSocketTask = urlSession.webSocketTask(with: request!)
+            self.webSocketTask?.resume()
+        }
+        self.receive()
     }
-
-
+    
+    private func receive() {
+        webSocketTask?.receive { [weak self] result in
+            switch result {
+            case .success(let message):
+                switch message {
+                case .string(let text):
+                    do {
+                        let decoder = JSONDecoder()
+                        let receiveInfo = try decoder.decode(receiveInfo.self, from: Data(text.utf8))
+                        self!.webSocketReceive.append(receiveInfo)
+//                        if receiveInfo.event.contains("sys_updateRoomStatus") {
+//                            self!.webSocketReceive.append(receiveInfo)
+//                        } else if receiveInfo.event.contains("admin_all_broadcast") {
+//                            self!.webSocketReceive.append(receiveInfo)
+//                        } else if receiveInfo.event.contains("default_message") {
+//                            self!.webSocketReceive.append(receiveInfo)
+//                        } else if receiveInfo.event.contains("sys_member_notice") {
+//                        }
+                    } catch {
+                        print("Error: \(error)")
+                    }
+                    print("Received string: \(text)")
+                    print(self?.webSocketReceive)
+                case .data(let data):
+                    print("Received data: \(data)")
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+            self?.receive()
+        }
+    }
+    
+    func disconnection() {
+        webSocketTask?.cancel(with: .goingAway, reason: nil)
+        webSocketReceive.removeAll()
+    }
+    
+    func send(_ inputText: String) {
+        let message = URLSessionWebSocketTask.Message.string("{\"action\": \"N\", \"content\": \"\(inputText)\"}")
+        webSocketTask?.send(message) { error in
+            if let error = error {
+                print("Error：\(error)")
+            }
+        }
+    }
+    
+    public func urlSession(_ session: URLSession,
+                           webSocketTask: URLSessionWebSocketTask,
+                           didOpenWithProtocol protocol: String?) {
+        print("URLSessionWebSocketTask is connected")
+    }
+    public func urlSession(_ session: URLSession,
+                           webSocketTask: URLSessionWebSocketTask,
+                           didCloseWith closeCode: URLSessionWebSocketTask.CloseCode,
+                           reason: Data?) {
+        let reasonString: String
+        if let reason = reason, let string = String(data: reason, encoding: .utf8) {
+            reasonString = string
+        } else {
+            reasonString = ""
+        }
+        print("URLSessionWebSocketTask is closed: code=\(closeCode), reason=\(reasonString)")
+    }
+    
 }

@@ -43,12 +43,12 @@ extension SearchPageViewController: UICollectionViewDataSource {
         let header = recommendCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SearchPageHeaderReusableView", for: indexPath) as? SearchPageHeaderReusableView
         if isSearch == true {
             if indexPath.section == 0 {
-                header?.recommendAndSearchLabel.text = "搜索結果"
+                header?.recommendAndSearchLabel.text = NSLocalizedString("search", comment: "")
             } else {
-                header?.recommendAndSearchLabel.text = "熱門推薦"
+                header?.recommendAndSearchLabel.text = NSLocalizedString("recommend", comment: "")
             }
         } else {
-            header?.recommendAndSearchLabel.text = "熱門推薦"
+            header?.recommendAndSearchLabel.text = NSLocalizedString("recommend", comment: "")
         }
         return header!
     }

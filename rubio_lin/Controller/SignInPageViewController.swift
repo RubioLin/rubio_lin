@@ -39,14 +39,14 @@ class SignInPageViewController: UIViewController {
     func setEmailTextField() {
         emailTextField.keyboardType = .asciiCapable
         let overlay = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        emailTextField.setLeftView(overlay, emailTextField, "  帳號 ", .always)
+        emailTextField.setLeftView(overlay, emailTextField, NSLocalizedString("account", comment: ""), .always)
         emailTextField.setUITextField(emailTextField, 22, .white, 1.0, 1.0, UIColor.black.cgColor)
     }
-    
+
     func setPasswordTextField() {
         passwordTextField.keyboardType = .asciiCapable
         let psLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        passwordTextField.setLeftView(psLeftView, passwordTextField, "  密碼 ", .always)
+        passwordTextField.setLeftView(psLeftView, passwordTextField, NSLocalizedString("password", comment: ""), .always)
         passwordTextField.setUITextField(passwordTextField, 22, .white, 1.0, 1.0, UIColor.black.cgColor)
         let psRightView = UIButton(frame: CGRect(x: 6, y: 11, width: 30, height: 22))
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
@@ -94,29 +94,29 @@ class SignInPageViewController: UIViewController {
             rememberMeButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         }
     }
-    
+
     @IBAction func clickOnSignIn(_ sender: UIButton) {
         let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+="
         var message = ""
         if emailTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
-            message += "請輸入帳號 "
+            message += NSLocalizedString("emailIsEmpty", comment: "")
             print("Email is empty")
         } else if emailTextField.text!.split(separator: "@")[0].count > 20 || emailTextField.text!.split(separator: "@")[0].count < 4 {
-            message += "帳號字數不正確 "
+            message += NSLocalizedString("emailIncorrectWordCount", comment: "")
             print("Email incorrect word count")
         }
         
         if passwordTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
-            message += "請輸入密碼 "
+            message += NSLocalizedString("passwordIsEmpty", comment: "")
             print("Password is empty")
         } else if passwordTextField.text!.count > 12 || passwordTextField.text!.count < 6 {
-            message += "密碼字數不正確 "
+            message += NSLocalizedString("passwordIncorrectWordCount", comment: "")
             print("Password incorrect word count")
         }
         
         for i in punctuation {
             if passwordTextField.text?.contains(i) == true {
-                message += "密碼含有特殊符號 "
+                message += NSLocalizedString("passwordIsBadlyFormatted", comment: "")
                 print("Password is badly formatted")
                 break
             }
@@ -134,7 +134,7 @@ class SignInPageViewController: UIViewController {
                     self.removeSpinner()
                     print("Sign In Success")
                 } else {
-                    let alert = UIAlertController(title: "Sign In Failure", message: error?.localizedDescription, preferredStyle: .alert)
+                    let alert = UIAlertController(title: NSLocalizedString("SignInFailure", comment: ""), message: error?.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel))
                     self.removeSpinner()
                     self.present(alert, animated: true)

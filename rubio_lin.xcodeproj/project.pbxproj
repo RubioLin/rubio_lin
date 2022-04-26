@@ -44,6 +44,7 @@
 		4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FF827F571FD002816EA /* SignInPageViewController.swift */; };
 		4BFC12A7280E98BB00E77D7C /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 4BFC12A6280E98BB00E77D7C /* YouTubeiOSPlayerHelper */; };
 		C20B96E62812A4B60000F4F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C20B96E52812A4B60000F4F7 /* GoogleService-Info.plist */; };
+		C29AA19628177F1E00F14302 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C29AA19828177F1E00F14302 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,9 +67,9 @@
 /* Begin PBXFileReference section */
 		4B1748152809C5CD0067AD71 /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		4B43556F2808FFFA007B688A /* HomePageHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomePageHeaderReusableView.swift; path = rubio_lin/Controller/HomePageHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
-		4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomePageHeaderReusableView.xib; path = rubio_lin/HomePageHeaderReusableView.xib; sourceTree = SOURCE_ROOT; };
+		4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomePageHeaderReusableView.xib; path = rubio_lin/View/HomePageHeaderReusableView.xib; sourceTree = SOURCE_ROOT; };
 		4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchPageHeaderReusableView.swift; path = rubio_lin/Controller/SearchPageHeaderReusableView.swift; sourceTree = SOURCE_ROOT; };
-		4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchPageHeaderReusableView.xib; path = rubio_linUITests/SearchPageHeaderReusableView.xib; sourceTree = SOURCE_ROOT; };
+		4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchPageHeaderReusableView.xib; path = rubio_lin/View/SearchPageHeaderReusableView.xib; sourceTree = SOURCE_ROOT; };
 		4B4A72A3280D1B9A00149C89 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4B4A72A5280DAA2400149C89 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		4B602EEF280324B200D621E6 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
@@ -101,6 +102,10 @@
 		4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveRoomCollectionViewCell.xib; sourceTree = "<group>"; };
 		4BF23FF827F571FD002816EA /* SignInPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPageViewController.swift; sourceTree = "<group>"; };
 		C20B96E52812A4B60000F4F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C29AA1902816DDBB00F14302 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		C29AA1932816E00C00F14302 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hant"; path = "zh-Hant.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		C29AA19728177F1E00F14302 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C29AA19928177F2000F14302 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +202,7 @@
 		4BF201A127F2B0C8007311AA /* rubio_lin */ = {
 			isa = PBXGroup;
 			children = (
+				C29AA19828177F1E00F14302 /* Localizable.strings */,
 				C20B96E52812A4B60000F4F7 /* GoogleService-Info.plist */,
 				4BF201A227F2B0C8007311AA /* AppDelegate.swift */,
 				4BF201A427F2B0C8007311AA /* SceneDelegate.swift */,
@@ -332,6 +338,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 4BF2019627F2B0C7007311AA;
 			packageReferences = (
@@ -356,6 +364,7 @@
 			files = (
 				4B43557A28091952007B688A /* SearchPageHeaderReusableView.xib in Resources */,
 				4BE1D4A327F842D5006145B0 /* Result.json in Resources */,
+				C29AA19628177F1E00F14302 /* Localizable.strings in Resources */,
 				4BF201AF27F2B0C9007311AA /* LaunchScreen.storyboard in Resources */,
 				4BA3FB1028051B7E00ABE771 /* ChatRoomTableViewCell.xib in Resources */,
 				4BA3FB0C2805158100ABE771 /* hime3.mp4 in Resources */,
@@ -448,6 +457,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				4BF201A927F2B0C8007311AA /* Base */,
+				C29AA1902816DDBB00F14302 /* zh-Hans */,
+				C29AA1932816E00C00F14302 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -458,6 +469,15 @@
 				4BF201AE27F2B0C9007311AA /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C29AA19828177F1E00F14302 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C29AA19728177F1E00F14302 /* zh-Hans */,
+				C29AA19928177F2000F14302 /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -27,7 +27,7 @@ class SignUpPageViewController: UIViewController {
     func setNavigationBar() {
         let navigationBarLeftButton = UIBarButtonItem(image: UIImage(named: "titlebarBack"), style: .plain, target: self, action: #selector(backPreviousPage))
         navigationBarLeftButton.tintColor = UIColor.black
-        self.navigationItem.title = "註冊會員"
+        self.navigationItem.title = NSLocalizedString("signUpPageNavigationTitle", comment: "")
         self.navigationItem.setLeftBarButton(navigationBarLeftButton, animated: true)
     }
     
@@ -41,21 +41,21 @@ class SignUpPageViewController: UIViewController {
     
     func setNicknameTextField() {
         let overlay = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        nicknameTextField.setLeftView(overlay, nicknameTextField, "  暱稱 ", .always)
+        nicknameTextField.setLeftView(overlay, nicknameTextField, NSLocalizedString("nickname", comment: ""), .always)
         nicknameTextField.setUITextField(nicknameTextField, 22, UIColor.white, 1, 1, UIColor.black.cgColor)
     }
     
     func setEmailTextField() {
         emailTextField.keyboardType = .asciiCapable
         let overlay = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        emailTextField.setLeftView(overlay, emailTextField, "  帳號 ", .always)
+        emailTextField.setLeftView(overlay, emailTextField, NSLocalizedString("account", comment: ""), .always)
         emailTextField.setUITextField(emailTextField, 22, UIColor.white, 1, 1, UIColor.black.cgColor)
     }
     
     func setPasswordTextField() {
         passwordTextField.keyboardType = .asciiCapable
         let psLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        passwordTextField.setLeftView(psLeftView, passwordTextField, "  密碼 ", .always)
+        passwordTextField.setLeftView(psLeftView, passwordTextField, NSLocalizedString("password", comment: ""), .always)
         passwordTextField.setUITextField(passwordTextField, 22, UIColor.white, 1, 1, UIColor.black.cgColor)
         let psRightView = UIButton(frame: CGRect(x: 6, y: 11, width: 30, height: 22))
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
@@ -95,8 +95,8 @@ class SignUpPageViewController: UIViewController {
     @IBAction func selectPhotoBtn(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Select Photo", message: nil, preferredStyle: .actionSheet)
         let sources:[(name:String, type:UIImagePickerController.SourceType)] = [
-            ("選擇照片", .photoLibrary),
-            ("開啟相機", .camera)
+            (NSLocalizedString("selectedPhoto", comment: ""), .photoLibrary),
+            (NSLocalizedString("openCamera", comment: ""), .camera)
         ]
         for source in sources {
             let action = UIAlertAction(title: source.name, style: .default) { (_) in
@@ -104,37 +104,37 @@ class SignUpPageViewController: UIViewController {
             }
             alertController.addAction(action)
         }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func clickOnSignUp(_ sender: Any) {
         var message = ""
         let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+="
-        
         if nicknameTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
-            message += "請輸入暱稱 "
+            message += NSLocalizedString("nicknameIsEmpty", comment: "")
+            print("Nickname is empty")
         }
         
         if emailTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
-            message += "請輸入帳號 "
+            message += NSLocalizedString("emailIsEmpty", comment: "")
             print("Email is empty")
         } else if emailTextField.text!.split(separator: "@")[0].count > 20 || emailTextField.text!.split(separator: "@")[0].count < 4 {
-            message += "帳號字數不正確 "
+            message += NSLocalizedString("emailIncorrectWordCount", comment: "")
             print("Email incorrect word count")
         }
         
         if passwordTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
-            message += "請輸入密碼"
+            message += NSLocalizedString("passwordIsEmpty", comment: "")
             print("Password is empty")
         } else if passwordTextField.text!.count > 12 || passwordTextField.text!.count < 6 {
-            message += "密碼字數不正確"
+            message += NSLocalizedString("passwordIncorrectWordCount", comment: "")
             print("Password incorrect word count")
         }
         
         for i in punctuation {
             if passwordTextField.text?.contains(i) == true {
-                message += "密碼含有特殊符號"
+                message += NSLocalizedString("passwordIsBadlyFormatted", comment: "")
                 print("Password is badly formatted")
                 break
             }
@@ -163,7 +163,7 @@ class SignUpPageViewController: UIViewController {
                         }
                     }
                 } else {
-                    let alert = UIAlertController(title: "Sign Up Failure", message: error?.localizedDescription, preferredStyle: .alert)
+                    let alert = UIAlertController(title: NSLocalizedString("SignUpFailure", comment: ""), message: error?.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel))
                     self.removeSpinner()
                     self.present(alert, animated: true)

@@ -3,8 +3,6 @@ import Foundation
 
 let userDefaults = UserDefaults.standard
 
-// Header 不會一開就更新
-
 class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarControllerDelegate {
     
     static let HomePage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomePage")
@@ -13,7 +11,8 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        LiveRoomCollectionView.reloadData()
+        FirebaseManager.shared.getUserInfo()
+        self.LiveRoomCollectionView.reloadData()
     }
     
     // 要register Colletion View 的 Cell 和 Header
@@ -43,14 +42,16 @@ extension HomePageViewController: UICollectionViewDataSource {
     // 設置 Collection View 的 Header，判斷有無使用者決定 Header 的內容
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
-        if FirebaseManager.shared.isSignIn == true {
-            if let url = FirebaseManager.shared.userInfo?.userPhotoUrl {
-                URLSession.shared.dataTask(with: url) { data, response, error in
-                    DispatchQueue.main.async {
-                        header?.currentUserHeadPhotoImageView.image = UIImage(data: data ?? Data())
-                        header?.currentUserNicknameLabel.text = FirebaseManager.shared.userInfo?.nickname
-                    }
-                }.resume()
+        Timer.scheduledTimer(withTimeInterval: 0.5 , repeats: false) { Timer in
+            if FirebaseManager.shared.isSignIn == true {
+                if let url = FirebaseManager.shared.userInfo?.userPhotoUrl {
+                    URLSession.shared.dataTask(with: url) { data, response, error in
+                        DispatchQueue.main.async {
+                            header?.currentUserHeadPhotoImageView.image = UIImage(data: data ?? Data())
+                            header?.currentUserNicknameLabel.text = FirebaseManager.shared.userInfo?.nickname
+                        }
+                    }.resume()
+                }
             }
         }
         return header!

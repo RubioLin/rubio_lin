@@ -1,0 +1,32 @@
+/* Simplified Chinese */
+// Search Page
+"search" = "搜索结果";
+"recommend" = "热门推荐";
+// Account Page
+"accountPageNickname" = "昵称：";
+"accountPageAccount" = "帐号：";
+"accountPageNavigationTitle" = "会员资讯";
+// Sign In Page
+"account" = "  帐号 ";
+"password" = "  密码 ";
+"emailIsEmpty" = "请输入帐号 ";
+"emailIncorrectWordCount" = "帐号字数不正确 ";
+"passwordIsEmpty" = "请输入密码 ";
+"passwordIncorrectWordCount" = "密码字数不正确 ";
+"passwordIsBadlyFormatted" = "密码含有特殊符号 ";
+"SignInFailure" = "登入失败";
+// Sign Up Page
+"signUpPageNavigationTitle" = "注册会员";
+"nickname" = "  昵称 ";
+"selectedPhoto" = "选择照片";
+"openCamera" = "开启相机";
+"cancel" = "取消";
+"nicknameIsEmpty" = "请输入昵称 ";
+"SignUpFailure" = "注册失败";
+// Chat Room
+"guest" = "访客";
+"chatPlaceholder" = " 一起聊个天吧...";
+"system" = "【系统】";
+"systemEnter" = "  进入聊天室";
+"systemLeave" = "  离开聊天室";
+"admin_all_broadcast" = "【公告】这是一张平凡无奇的公告，你可以理我也可以不理我，但记得要把我接起来";

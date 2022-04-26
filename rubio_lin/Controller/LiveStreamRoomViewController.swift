@@ -93,6 +93,7 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
         playerLayer.removeFromSuperlayer()
         YTPlayer.removeWebView()
         alertUIView.isHidden = true
+        WebSocketManager.shared.disconnection()
         self.dismiss(animated: true)
     }
     @IBAction func clickStayLiveStreamRoom(_ sender: Any) {

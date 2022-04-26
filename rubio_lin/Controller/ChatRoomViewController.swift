@@ -60,7 +60,7 @@ class ChatRoomViewController: UIViewController {
                 self.receive()
             }
         } else {
-            nickname = "訪客"
+            nickname = NSLocalizedString("guest", comment: "")
             let urlStr = "wss://client-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             guard let url = URL(string: urlStr!) else {
                 print("connection error")
@@ -137,7 +137,7 @@ class ChatRoomViewController: UIViewController {
         chatTextField.leftViewMode = .always
         chatTextField.setUITextField(chatTextField, 22, .black, 0.7, 0, UIColor.white.cgColor)
         chatTextField.attributedPlaceholder = NSAttributedString(
-            string: " 一起聊個天吧...",
+            string: NSLocalizedString("chatPlaceholder", comment: ""),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
         )
     }
@@ -182,14 +182,14 @@ extension ChatRoomViewController: UITableViewDelegate, UITableViewDataSource {
        
         if webSocketReceive[index].event.contains("sys_updateRoomStatus") {
             if webSocketReceive[index].body.entry_notice?.action == "enter" {
-                cell.chatTextView.text = "【系統】\(webSocketReceive[index].body.entry_notice!.username!)  進入聊天室"
+                cell.chatTextView.text = "\(NSLocalizedString("system", comment: ""))\(webSocketReceive[index].body.entry_notice!.username!)\(NSLocalizedString("systemEnter", comment: ""))"
             } else {
-                cell.chatTextView.text = "【系統】\(webSocketReceive[index].body.entry_notice!.username!)  離開聊天室"
+                cell.chatTextView.text = "\(NSLocalizedString("system", comment: ""))\(webSocketReceive[index].body.entry_notice!.username!)\(NSLocalizedString("systemLeave", comment: ""))"
             }
         } else if webSocketReceive[index].event.contains("default_message") {
             cell.chatTextView.text = "\(webSocketReceive[index].body.nickname!)： \(webSocketReceive[index].body.text!)"
         } else if webSocketReceive[index].event.contains("admin_all_broadcast") {
-            cell.chatTextView.text = "\(webSocketReceive[index].body.content!.tw!)"
+            cell.chatTextView.text = "\(NSLocalizedString("admin_all_broadcast", comment: ""))"
         }
         return cell
     }
