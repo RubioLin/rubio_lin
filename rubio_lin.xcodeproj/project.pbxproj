@@ -43,6 +43,7 @@
 		4BF23FEF27F54AAE002816EA /* LiveRoomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */; };
 		4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FF827F571FD002816EA /* SignInPageViewController.swift */; };
 		4BFC12A7280E98BB00E77D7C /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 4BFC12A6280E98BB00E77D7C /* YouTubeiOSPlayerHelper */; };
+		C203B147281844A600C13C4B /* StreamInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C203B146281844A600C13C4B /* StreamInfoViewController.swift */; };
 		C20B96E62812A4B60000F4F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C20B96E52812A4B60000F4F7 /* GoogleService-Info.plist */; };
 		C29AA19628177F1E00F14302 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C29AA19828177F1E00F14302 /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -101,9 +102,10 @@
 		4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRoomCollectionViewCell.swift; sourceTree = "<group>"; };
 		4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveRoomCollectionViewCell.xib; sourceTree = "<group>"; };
 		4BF23FF827F571FD002816EA /* SignInPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPageViewController.swift; sourceTree = "<group>"; };
+		C203B1222817E45A00C13C4B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		C203B1232817E46000C13C4B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		C203B146281844A600C13C4B /* StreamInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamInfoViewController.swift; sourceTree = "<group>"; };
 		C20B96E52812A4B60000F4F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C29AA1902816DDBB00F14302 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
-		C29AA1932816E00C00F14302 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hant"; path = "zh-Hant.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		C29AA19728177F1E00F14302 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C29AA19928177F2000F14302 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +175,7 @@
 				4BE1D4AF27FD223A006145B0 /* SignUpPageViewController.swift */,
 				4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */,
 				4B602EF32803401800D621E6 /* ChatRoomViewController.swift */,
+				C203B146281844A600C13C4B /* StreamInfoViewController.swift */,
 				4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */,
 				4B1748152809C5CD0067AD71 /* extension.swift */,
 			);
@@ -400,6 +403,7 @@
 				4B4355712808FFFA007B688A /* HomePageHeaderReusableView.swift in Sources */,
 				4BA3FB0F28051B7E00ABE771 /* ChatRoomTableViewCell.swift in Sources */,
 				4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */,
+				C203B147281844A600C13C4B /* StreamInfoViewController.swift in Sources */,
 				4B1748162809C5CD0067AD71 /* extension.swift in Sources */,
 				4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */,
 				4BF23FE927F53D0F002816EA /* SearchPageViewController.swift in Sources */,
@@ -457,8 +461,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				4BF201A927F2B0C8007311AA /* Base */,
-				C29AA1902816DDBB00F14302 /* zh-Hans */,
-				C29AA1932816E00C00F14302 /* zh-Hant */,
+				C203B1222817E45A00C13C4B /* zh-Hans */,
+				C203B1232817E46000C13C4B /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

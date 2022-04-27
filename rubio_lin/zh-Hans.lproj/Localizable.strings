@@ -23,6 +23,11 @@
 "cancel" = "取消";
 "nicknameIsEmpty" = "请输入昵称 ";
 "SignUpFailure" = "注册失败";
+// Live Stream Room
+"alertExit" = "立马走";
+"alertStay" = "先不要";
+"followBtn" = "追踪";
+"followBtnisSelected" = "追踪中";
 // Chat Room
 "guest" = "访客";
 "chatPlaceholder" = " 一起聊个天吧...";

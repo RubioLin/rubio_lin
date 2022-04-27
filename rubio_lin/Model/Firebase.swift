@@ -19,6 +19,8 @@ class FirebaseManager {
     
     static let shared = FirebaseManager()
     
+    weak var delegate: FirebaseManagerDelegate?
+    
     private var db = Firestore.firestore()
     var userInfo: UserInfo?
     var isSignIn: Bool {
@@ -41,6 +43,7 @@ class FirebaseManager {
                         return
                     }
                     self.userInfo = try? user?.data(as: UserInfo.self)
+                    self.delegate?.getUserInfoFinishReload()
                 }
             }
         }
@@ -113,4 +116,8 @@ class FirebaseManager {
 
 }
 
+protocol FirebaseManagerDelegate: NSObject {
+    
+    func getUserInfoFinishReload()
+}
 

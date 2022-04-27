@@ -1,0 +1,78 @@
+
+/* Class = "UITextField"; placeholder = "请输入4-20位字母或数字的电子邮件"; ObjectID = "3vK-05-T8z"; */
+"3vK-05-T8z.placeholder" = "请输入4-20位字母或数字的电子邮件";
+
+/* Class = "UIButton"; configuration.title = "注册"; ObjectID = "88c-hQ-pnp"; */
+"88c-hQ-pnp.configuration.title" = "注册";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "88c-hQ-pnp"; */
+"88c-hQ-pnp.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "确定离开此聊天室？"; ObjectID = "8bf-Yl-cZD"; */
+"8bf-Yl-cZD.text" = "确定离开此聊天室？";
+
+/* Class = "UITextField"; placeholder = "请输入昵称"; ObjectID = "AKS-Fc-RWc"; */
+"AKS-Fc-RWc.placeholder" = "请输入昵称";
+
+/* Class = "UIButton"; configuration.title = "立马走"; ObjectID = "DBG-Ny-U65"; */
+"DBG-Ny-U65.configuration.title" = "立马走";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "DBG-Ny-U65"; */
+"DBG-Ny-U65.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "DNt-mh-P82"; */
+"DNt-mh-P82.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "记住我"; ObjectID = "F1X-bc-s2p"; */
+"F1X-bc-s2p.text" = "记住我";
+
+/* Class = "UITabBarItem"; title = "个人"; ObjectID = "HJa-3g-n76"; */
+"HJa-3g-n76.title" = "个人";
+
+/* Class = "UITabBarItem"; title = "搜寻"; ObjectID = "LYS-J9-iO6"; */
+"LYS-J9-iO6.title" = "搜寻";
+
+/* Class = "UIButton"; configuration.title = "先不要"; ObjectID = "Phg-wV-6yz"; */
+"Phg-wV-6yz.configuration.title" = "先不要";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Phg-wV-6yz"; */
+"Phg-wV-6yz.normalTitle" = "Button";
+
+/* Class = "UISearchBar"; placeholder = "搜寻"; ObjectID = "R41-vP-eru"; */
+"R41-vP-eru.placeholder" = "搜寻";
+
+/* Class = "UIButton"; configuration.title = "登入"; ObjectID = "Rq8-sS-jwy"; */
+"Rq8-sS-jwy.configuration.title" = "登入";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Rq8-sS-jwy"; */
+"Rq8-sS-jwy.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "登出"; ObjectID = "Xqn-Qj-NOy"; */
+"Xqn-Qj-NOy.configuration.title" = "登出";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Xqn-Qj-NOy"; */
+"Xqn-Qj-NOy.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "请输入6-12位字母或数字"; ObjectID = "djz-Sq-eGc"; */
+"djz-Sq-eGc.placeholder" = "请输入6-12位字母或数字";
+
+/* Class = "UIButton"; configuration.title = "注册"; ObjectID = "kMC-Ge-g0l"; */
+"kMC-Ge-g0l.configuration.title" = "注册";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "kMC-Ge-g0l"; */
+"kMC-Ge-g0l.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "请输入6-12位字母或数字"; ObjectID = "ngQ-AT-ooK"; */
+"ngQ-AT-ooK.placeholder" = "请输入6-12位字母或数字";
+
+/* Class = "UITabBarItem"; title = "首页"; ObjectID = "v4a-hW-abB"; */
+"v4a-hW-abB.title" = "首页";
+
+/* Class = "UITextField"; placeholder = "请输入4-20位字母或数字的电子邮件"; ObjectID = "vaI-MK-vCN"; */
+"vaI-MK-vCN.placeholder" = "请输入4-20位字母或数字的电子邮件";
+
+/* Class = "UITextField"; placeholder = "    一起聊个天吧..."; ObjectID = "wx5-bo-YQC"; */
+"wx5-bo-YQC.placeholder" = "    一起聊个天吧...";
+
+/* Class = "UIButton"; configuration.title" = "追踪"; ObjectID = "Uly-R6-e2H"; */
+"Uly-R6-e2H.configuration.title" = "追踪";

@@ -2,8 +2,7 @@ import UIKit
 import AVFoundation
 import YouTubeiOSPlayerHelper
 
-class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
-    
+class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLSessionDelegate {
     
     static let LiveStreamRoom = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
     @IBOutlet weak var logoutButton: UIButton!
@@ -11,15 +10,24 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
     @IBOutlet weak var alertUIView: UIView!
     @IBOutlet weak var alertExitBtn: UIButton!
     @IBOutlet weak var alertStayBtn: UIButton!
+    @IBOutlet weak var followBtn: UIButton!
+    @IBOutlet weak var streamInfoAndFollowBtnBackgroundView: UIView!
+    @IBOutlet weak var streamInfoBtn: UIButton!
+    @IBOutlet weak var online_numBackgroundView: UIView!
+    @IBOutlet weak var online_numLabel: UILabel!
     var player = AVPlayer()
     var playerLayer = AVPlayerLayer()
     let YTPlayer = YTPlayerView()
     var playlist = ["I3440shDJYw", "xSbeUixi22o", "3OHT350Acj4", "_zvMspsjNgA", "tH4SMx_-5As"]
     var isStream: Bool?
+    var streamTitle: String?
+    var online_num: Int?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         chatRoomUIView.isHidden = false
+        setStreamInfoBtn()
+        setonline_numLabel()
         if isStream == true {
             playerViewDidBecomeReady(YTPlayer) // 進入畫面 loading 完會自動播放
             playerView(YTPlayer, didChangeTo: .ended) // 播完會自動重播
@@ -33,6 +41,10 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
         super.viewDidLoad()
         setupLogoutButton()
         setupAlertView()
+        setFollowBtn()
+        setStreamInfoAndFollowBtnBackgroundView()
+        setonline_numBackgroundView()
+        setAlert()
         YTPlayer.delegate = self
     }
     
@@ -72,6 +84,11 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
         }
     }
     
+    func setAlert() {
+        alertExitBtn.setTitle(NSLocalizedString("alertExit", comment: ""), for: .normal)
+        alertStayBtn.setTitle(NSLocalizedString("alertStay", comment: ""), for: .normal)
+    }
+    
     func setupLogoutButton() {
         logoutButton.layer.cornerRadius = 22
         logoutButton.backgroundColor = .black
@@ -80,6 +97,41 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate {
     
     func setupAlertView() {
         alertUIView.layer.cornerRadius = alertUIView.bounds.width / 8
+    }
+    
+    func setFollowBtn() {
+        followBtn.layer.cornerRadius = followBtn.bounds.height / 4
+        followBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
+    }
+    
+    func setStreamInfoAndFollowBtnBackgroundView() {
+        streamInfoAndFollowBtnBackgroundView.layer.cornerRadius = streamInfoAndFollowBtnBackgroundView.bounds.height / 4
+    }
+    
+    func setStreamInfoBtn() {
+        streamInfoBtn.setTitle(streamTitle, for: .normal)
+    }
+    
+    func setonline_numLabel() {
+        let formater = NumberFormatter()
+        formater.numberStyle = .decimal
+        online_numLabel.text = (formater.string(from: online_num as! NSNumber))
+    }
+    
+    func setonline_numBackgroundView() {
+        online_numBackgroundView.layer.cornerRadius = online_numBackgroundView.bounds.height / 4
+    }
+    
+    @IBAction func clickFollowButton(_ sender: Any) {
+        WebSocketManager.shared.sendFollow()
+        switch followBtn.isSelected {
+        case true:
+            followBtn.isSelected = false
+            followBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
+        default :
+            followBtn.isSelected = true
+            followBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
+        }
     }
     
     @IBAction func clickLogoutButton(_ sender: Any) {

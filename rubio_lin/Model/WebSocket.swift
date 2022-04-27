@@ -30,9 +30,11 @@ struct body_content: Codable {
 }
 
 // MARK: - WebSocket Manager
-final class WebSocketManager: NSObject, URLSessionWebSocketDelegate, UITableViewDelegate {
+final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
     
     static let shared = WebSocketManager()
+    
+    weak var delegate: WebSocketManagerDelegate?
     
     private var webSocketTask: URLSessionWebSocketTask?
     private var request: URLRequest?
@@ -50,6 +52,7 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate, UITableView
                 request = URLRequest(url: url)
                 self.webSocketTask = urlSession.webSocketTask(with: request!)
                 self.webSocketTask?.resume()
+                self.receive()
             }
         } else {
             nickname = "訪客"
@@ -59,8 +62,8 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate, UITableView
             request = URLRequest(url: url)
             self.webSocketTask = urlSession.webSocketTask(with: request!)
             self.webSocketTask?.resume()
+            self.receive()
         }
-        self.receive()
     }
     
     private func receive() {
@@ -73,25 +76,17 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate, UITableView
                         let decoder = JSONDecoder()
                         let receiveInfo = try decoder.decode(receiveInfo.self, from: Data(text.utf8))
                         self!.webSocketReceive.append(receiveInfo)
-//                        if receiveInfo.event.contains("sys_updateRoomStatus") {
-//                            self!.webSocketReceive.append(receiveInfo)
-//                        } else if receiveInfo.event.contains("admin_all_broadcast") {
-//                            self!.webSocketReceive.append(receiveInfo)
-//                        } else if receiveInfo.event.contains("default_message") {
-//                            self!.webSocketReceive.append(receiveInfo)
-//                        } else if receiveInfo.event.contains("sys_member_notice") {
-//                        }
                     } catch {
                         print("Error: \(error)")
                     }
                     print("Received string: \(text)")
-                    print(self?.webSocketReceive)
                 case .data(let data):
                     print("Received data: \(data)")
                 }
             case .failure(let error):
                 print("Error: \(error)")
             }
+            self?.delegate?.receiveFinishReload()
             self?.receive()
         }
     }
@@ -110,6 +105,18 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate, UITableView
         }
     }
     
+    func sendFollow() {
+        switch LiveStreamRoomViewController.LiveStreamRoom.followBtn.isSelected {
+        case true:
+            break
+        default:
+            webSocketTask?.send(URLSessionWebSocketTask.Message.string("{\"action\": \"N\", \"content\": \"追蹤了主播❤️❤️\"}"), completionHandler: { error in
+                if let error = error {
+                    print(error)
+                }
+            })
+        }
+    }
     public func urlSession(_ session: URLSession,
                            webSocketTask: URLSessionWebSocketTask,
                            didOpenWithProtocol protocol: String?) {
@@ -127,5 +134,11 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate, UITableView
         }
         print("URLSessionWebSocketTask is closed: code=\(closeCode), reason=\(reasonString)")
     }
+    
+}
+
+protocol WebSocketManagerDelegate: NSObject {
+    
+    func receiveFinishReload()
     
 }

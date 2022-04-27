@@ -22,6 +22,7 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
         self.LiveRoomCollectionView.register(nib, forCellWithReuseIdentifier: "LiveRoomCollectionViewCell")
         self.LiveRoomCollectionView.register(UINib(nibName: "HomePageHeaderReusableView", bundle: nil), forSupplementaryViewOfKind:  UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomePageHeaderReusableView")
         result = FetchJsonModal.shared.load("Result.json") // 解析本地 json 資料
+        FirebaseManager.shared.delegate = self
         tabBarController?.delegate = self
         tabBarController?.tabBar.tintColor = .black
     }
@@ -42,7 +43,7 @@ extension HomePageViewController: UICollectionViewDataSource {
     // 設置 Collection View 的 Header，判斷有無使用者決定 Header 的內容
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
-        Timer.scheduledTimer(withTimeInterval: 0.5 , repeats: false) { Timer in
+//        Timer.scheduledTimer(withTimeInterval: 0.5 , repeats: false) { Timer in
             if FirebaseManager.shared.isSignIn == true {
                 if let url = FirebaseManager.shared.userInfo?.userPhotoUrl {
                     URLSession.shared.dataTask(with: url) { data, response, error in
@@ -51,7 +52,7 @@ extension HomePageViewController: UICollectionViewDataSource {
                             header?.currentUserNicknameLabel.text = FirebaseManager.shared.userInfo?.nickname
                         }
                     }.resume()
-                }
+//                }
             }
         }
         return header!
@@ -133,8 +134,20 @@ extension HomePageViewController: UICollectionViewDelegate {
         } else {
             LiveStreamRoomViewController.LiveStreamRoom.isStream = false
         }
+        
         LiveStreamRoomViewController.LiveStreamRoom.modalPresentationStyle = .fullScreen
+        LiveStreamRoomViewController.LiveStreamRoom.streamTitle = result?.stream_list[indexPath.row]?.stream_title
+        if let onlinerNum = result?.stream_list[indexPath.row]?.online_num {
+            LiveStreamRoomViewController.LiveStreamRoom.online_num = onlinerNum
+        }
         self.present(LiveStreamRoomViewController.LiveStreamRoom, animated: true)
+    }    
+}
+
+extension HomePageViewController: FirebaseManagerDelegate {
+    
+    func getUserInfoFinishReload() {
+        self.LiveRoomCollectionView.reloadData()
     }
     
 }
