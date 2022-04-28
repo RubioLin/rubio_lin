@@ -92,6 +92,19 @@ class SignUpPageViewController: UIViewController {
         passwordTextField.resignFirstResponder()
     }
     
+    @IBAction func didEndOnExit(_ sender: UITextField) {
+        switch sender {
+        case nicknameTextField:
+            emailTextField.becomeFirstResponder()
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField:
+            self.clickOnSignUp(signUpBtn)
+        default:
+            break
+        }
+    }
+    
     @IBAction func selectPhotoBtn(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Select Photo", message: nil, preferredStyle: .actionSheet)
         let sources:[(name:String, type:UIImagePickerController.SourceType)] = [

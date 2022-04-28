@@ -28,10 +28,9 @@
 "alertStay" = "先不要";
 "followBtn" = "追踪";
 "followBtnisSelected" = "追踪中";
-// Chat Room
 "guest" = "访客";
 "chatPlaceholder" = " 一起聊个天吧...";
 "system" = "【系统】";
 "systemEnter" = "  进入聊天室";
 "systemLeave" = "  离开聊天室";
-"admin_all_broadcast" = "【公告】这是一张平凡无奇的公告，你可以理我也可以不理我，但记得要把我接起来";
+"followText" = "追踪了主播❤️❤️";

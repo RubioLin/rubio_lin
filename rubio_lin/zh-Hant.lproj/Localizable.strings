@@ -28,10 +28,10 @@
 "alertStay" = "先不要";
 "followBtn" = "追蹤";
 "followBtnisSelected" = "追蹤中";
-// Chat Room
 "guest" = "訪客";
 "chatPlaceholder" = " 一起聊個天吧...";
 "system" = "【系統】";
 "systemEnter" = "  進入聊天室";
 "systemLeave" = "  離開聊天室";
-"admin_all_broadcast" = "【公告】這是一張平凡無奇的公告，你可以理我也可以不理我，但記得要把我接起來";
+"followText" = "追蹤了主播❤️❤️";
+

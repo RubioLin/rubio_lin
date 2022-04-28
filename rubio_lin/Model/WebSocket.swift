@@ -55,7 +55,7 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
                 self.receive()
             }
         } else {
-            nickname = "訪客"
+            nickname = NSLocalizedString("guest", comment: "")
             guard let url = URL(string: "wss://client-dev.lottcube.asia/ws/chat/chat:app_test?nickname=\(nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else {
                 print("connection error")
                 return }
@@ -110,7 +110,8 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
         case true:
             break
         default:
-            webSocketTask?.send(URLSessionWebSocketTask.Message.string("{\"action\": \"N\", \"content\": \"追蹤了主播❤️❤️\"}"), completionHandler: { error in
+            let followText = NSLocalizedString("followText", comment: "")
+            webSocketTask?.send(URLSessionWebSocketTask.Message.string("{\"action\": \"N\", \"content\": \"\(followText)\"}"), completionHandler: { error in
                 if let error = error {
                     print(error)
                 }

@@ -1,0 +1,75 @@
+
+/* Class = "UITextField"; placeholder = "請輸入4-20位字母或數字的電子郵件"; ObjectID = "3vK-05-T8z"; */
+"3vK-05-T8z.placeholder" = "Please input a 4-20 alphanumeric email";
+
+/* Class = "UIButton"; configuration.title = "註冊"; ObjectID = "88c-hQ-pnp"; */
+"88c-hQ-pnp.configuration.title" = "Sing Up";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "88c-hQ-pnp"; */
+"88c-hQ-pnp.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "確定離開此聊天室？"; ObjectID = "8bf-Yl-cZD"; */
+"8bf-Yl-cZD.text" = "Are you sure you want to leave this chat room?";
+
+/* Class = "UITextField"; placeholder = "請輸入暱稱"; ObjectID = "AKS-Fc-RWc"; */
+"AKS-Fc-RWc.placeholder" = "Please input nickname";
+
+/* Class = "UIButton"; configuration.title = "立馬走"; ObjectID = "DBG-Ny-U65"; */
+"DBG-Ny-U65.configuration.title" = "Exit";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "DBG-Ny-U65"; */
+"DBG-Ny-U65.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "DNt-mh-P82"; */
+"DNt-mh-P82.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "記住我"; ObjectID = "F1X-bc-s2p"; */
+"F1X-bc-s2p.text" = "Remember me";
+
+/* Class = "UITabBarItem"; title = "個人"; ObjectID = "HJa-3g-n76"; */
+"HJa-3g-n76.title" = "Account";
+
+/* Class = "UITabBarItem"; title = "搜尋"; ObjectID = "LYS-J9-iO6"; */
+"LYS-J9-iO6.title" = "Search";
+
+/* Class = "UIButton"; configuration.title = "先不要"; ObjectID = "Phg-wV-6yz"; */
+"Phg-wV-6yz.configuration.title" = "Stay";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Phg-wV-6yz"; */
+"Phg-wV-6yz.normalTitle" = "Button";
+
+/* Class = "UISearchBar"; placeholder = "搜尋"; ObjectID = "R41-vP-eru"; */
+"R41-vP-eru.placeholder" = "search";
+
+/* Class = "UIButton"; configuration.title = "登入"; ObjectID = "Rq8-sS-jwy"; */
+"Rq8-sS-jwy.configuration.title" = "Sign In";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Rq8-sS-jwy"; */
+"Rq8-sS-jwy.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "登出"; ObjectID = "Xqn-Qj-NOy"; */
+"Xqn-Qj-NOy.configuration.title" = "Sign Out";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Xqn-Qj-NOy"; */
+"Xqn-Qj-NOy.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "請輸入6-12位字母或數字"; ObjectID = "djz-Sq-eGc"; */
+"djz-Sq-eGc.placeholder" = "Please input 6-12 alphanumeric";
+
+/* Class = "UIButton"; configuration.title = "註冊"; ObjectID = "kMC-Ge-g0l"; */
+"kMC-Ge-g0l.configuration.title" = "Sing Up";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "kMC-Ge-g0l"; */
+"kMC-Ge-g0l.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "請輸入6-12位字母或數字"; ObjectID = "ngQ-AT-ooK"; */
+"ngQ-AT-ooK.placeholder" = "Please input 6-12 alphanumeric";
+
+/* Class = "UITabBarItem"; title = "首頁"; ObjectID = "v4a-hW-abB"; */
+"v4a-hW-abB.title" = "Home";
+
+/* Class = "UITextField"; placeholder = "請輸入4-20位字母或數字的電子郵件"; ObjectID = "vaI-MK-vCN"; */
+"vaI-MK-vCN.placeholder" = "Please input a 4-20 alphanumeric email";
+
+/* Class = "UITextField"; placeholder = "    一起聊個天吧..."; ObjectID = "wx5-bo-YQC"; */
+"wx5-bo-YQC.placeholder" = "    Let's chat...";

@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 class SignInPageViewController: UIViewController {
     
@@ -6,7 +7,7 @@ class SignInPageViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rememberMeButton: UIButton!
-    var rememberMe: Bool = true
+    @IBOutlet weak var signInBtn: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -72,12 +73,10 @@ class SignInPageViewController: UIViewController {
     }
     
     @IBAction func emailEditDidEnd(_ sender: Any) {
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(emailTextField.text ?? "", forKey: "email")
-    }
-    @IBAction func passwordEditDidEnd(_ sender: Any) {
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(passwordTextField.text ?? "", forKey: "password")
+        if rememberMeButton.isSelected == true {
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(emailTextField.text ?? "", forKey: "email")
+        }
     }
     
     @IBAction func touchdown(_ sender: Any) {
@@ -144,6 +143,16 @@ class SignInPageViewController: UIViewController {
         }
     }
     
+    @IBAction func didEndOnExit(_ sender: UITextField) {
+        switch sender {
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField:
+            self.clickOnSignIn(signInBtn)
+        default:
+            break
+        }
+    }
 }
 
 // MARK: - Setup KeyboardObserver

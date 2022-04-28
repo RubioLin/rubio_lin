@@ -1,7 +1,37 @@
-/* 
-  Localizable.strings
-  rubio_lin
+/* English */
+// Search Page
+"search" = "Search Result";
+"recommend" = "Recommend";
+// Account Page
+"accountPageNickname" = "Nickname：";
+"accountPageAccount" = "Account：";
+"accountPageNavigationTitle" = "Member Information";
+// Sign In Page
+"account" = "  Account ";
+"password" = "  Password ";
+"emailIsEmpty" = "Please input email ";
+"emailIncorrectWordCount" = "Email incorrect word count ";
+"passwordIsEmpty" = "Please input password ";
+"passwordIncorrectWordCount" = "Password incorrect word count ";
+"passwordIsBadlyFormatted" = "Password is badly formatted ";
+"SignInFailure" = "Sign in Failure";
+// Sign Up Page
+"signUpPageNavigationTitle" = "Sign Up Member";
+"nickname" = "  nickname ";
+"selectedPhoto" = "Seleted Photo";
+"openCamera" = "Open Camera";
+"cancel" = "Cancel";
+"nicknameIsEmpty" = "Please input nickname ";
+"SignUpFailure" = "Sign up Failure";
+// Live Stream Room
+"alertExit" = "Exit";
+"alertStay" = "Stay";
+"followBtn" = "Follow";
+"followBtnisSelected" = "Following";
+"guest" = "guest";
+"chatPlaceholder" = " Let's chat...";
+"system" = "【System】";
+"systemEnter" = "  enter the room";
+"systemLeave" = "  leave the room";
+"followText" = "Followed the streamer❤️❤️";
 
-  Created by Class on 2022/4/13.
-  
-*/
