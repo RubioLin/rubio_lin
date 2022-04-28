@@ -1,9 +1,8 @@
 import UIKit
-import SwiftUI
 
 class SignInPageViewController: UIViewController {
     
-    static let SignInPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInPage") as! SignInPageViewController
+    static let shared = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInPage") as! SignInPageViewController
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rememberMeButton: UIButton!

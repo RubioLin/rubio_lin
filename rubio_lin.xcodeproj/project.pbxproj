@@ -16,7 +16,6 @@
 		4B4A72A6280DAA2400149C89 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4A72A5280DAA2400149C89 /* NavigationViewController.swift */; };
 		4B602EF0280324B200D621E6 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EEF280324B200D621E6 /* Firebase.swift */; };
 		4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */; };
-		4B602EF42803401800D621E6 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B602EF32803401800D621E6 /* ChatRoomViewController.swift */; };
 		4BA3FB0C2805158100ABE771 /* hime3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0B2805158100ABE771 /* hime3.mp4 */; };
 		4BA3FB0F28051B7E00ABE771 /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */; };
 		4BA3FB1028051B7E00ABE771 /* ChatRoomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */; };
@@ -39,7 +38,6 @@
 		4BF23FEE27F54AAE002816EA /* LiveRoomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */; };
 		4BF23FEF27F54AAE002816EA /* LiveRoomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */; };
 		4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF23FF827F571FD002816EA /* SignInPageViewController.swift */; };
-		C203B147281844A600C13C4B /* StreamInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C203B146281844A600C13C4B /* StreamInfoViewController.swift */; };
 		C20B96E62812A4B60000F4F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C20B96E52812A4B60000F4F7 /* GoogleService-Info.plist */; };
 		C229A4F3281A4B1500A43C1D /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4F2281A4B1500A43C1D /* YouTubeiOSPlayerHelper */; };
 		C229A4F5281A4B2200A43C1D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4F4281A4B2200A43C1D /* FirebaseAuth */; };
@@ -47,6 +45,7 @@
 		C229A4F9281A4B3400A43C1D /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4F8281A4B3400A43C1D /* FirebaseFirestoreSwift-Beta */; };
 		C229A4FB281A4B3C00A43C1D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4FA281A4B3C00A43C1D /* FirebaseStorage */; };
 		C229A4FD281A4B4300A43C1D /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4FC281A4B4300A43C1D /* FirebaseStorageSwift-Beta */; };
+		C25D343C281A73EE00FF9274 /* StreamerInfomationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25D343B281A73EE00FF9274 /* StreamerInfomationVC.swift */; };
 		C29AA19628177F1E00F14302 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C29AA19828177F1E00F14302 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -77,7 +76,6 @@
 		4B4A72A5280DAA2400149C89 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		4B602EEF280324B200D621E6 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamRoomViewController.swift; sourceTree = "<group>"; };
-		4B602EF32803401800D621E6 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatRoomViewController.swift; path = rubio_lin/Controller/ChatRoomViewController.swift; sourceTree = SOURCE_ROOT; };
 		4BA3FB0B2805158100ABE771 /* hime3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = hime3.mp4; sourceTree = "<group>"; };
 		4BA3FB0D28051B7E00ABE771 /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
 		4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatRoomTableViewCell.xib; sourceTree = "<group>"; };
@@ -106,10 +104,10 @@
 		4BF23FF827F571FD002816EA /* SignInPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPageViewController.swift; sourceTree = "<group>"; };
 		C203B1222817E45A00C13C4B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		C203B1232817E46000C13C4B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
-		C203B146281844A600C13C4B /* StreamInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamInfoViewController.swift; sourceTree = "<group>"; };
 		C20B96E52812A4B60000F4F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C25D3438281A4FA100FF9274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C25D343A281A61F900FF9274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		C25D343B281A73EE00FF9274 /* StreamerInfomationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamerInfomationVC.swift; sourceTree = "<group>"; };
 		C29AA19728177F1E00F14302 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C29AA19928177F2000F14302 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,8 +178,7 @@
 				4BF23FF827F571FD002816EA /* SignInPageViewController.swift */,
 				4BE1D4AF27FD223A006145B0 /* SignUpPageViewController.swift */,
 				4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */,
-				4B602EF32803401800D621E6 /* ChatRoomViewController.swift */,
-				C203B146281844A600C13C4B /* StreamInfoViewController.swift */,
+				C25D343B281A73EE00FF9274 /* StreamerInfomationVC.swift */,
 				4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */,
 				4B1748152809C5CD0067AD71 /* extension.swift */,
 			);
@@ -419,7 +416,6 @@
 				4B4355712808FFFA007B688A /* HomePageHeaderReusableView.swift in Sources */,
 				4BA3FB0F28051B7E00ABE771 /* ChatRoomTableViewCell.swift in Sources */,
 				4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */,
-				C203B147281844A600C13C4B /* StreamInfoViewController.swift in Sources */,
 				4B1748162809C5CD0067AD71 /* extension.swift in Sources */,
 				4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */,
 				4BF23FE927F53D0F002816EA /* SearchPageViewController.swift in Sources */,
@@ -427,7 +423,6 @@
 				4BF23FEB27F53D32002816EA /* AccountPageViewController.swift in Sources */,
 				4B4A72A6280DAA2400149C89 /* NavigationViewController.swift in Sources */,
 				4BF201A727F2B0C8007311AA /* HomePageViewController.swift in Sources */,
-				4B602EF42803401800D621E6 /* ChatRoomViewController.swift in Sources */,
 				4BE1D4B027FD223A006145B0 /* SignUpPageViewController.swift in Sources */,
 				4BE1D4A227F842D5006145B0 /* JsonResult.swift in Sources */,
 				4B43557928091952007B688A /* SearchPageHeaderReusableView.swift in Sources */,
@@ -437,6 +432,7 @@
 				4BF23FEE27F54AAE002816EA /* LiveRoomCollectionViewCell.swift in Sources */,
 				4BF201A527F2B0C8007311AA /* SceneDelegate.swift in Sources */,
 				4B602EF0280324B200D621E6 /* Firebase.swift in Sources */,
+				C25D343C281A73EE00FF9274 /* StreamerInfomationVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

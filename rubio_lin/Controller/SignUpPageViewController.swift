@@ -3,7 +3,7 @@ import UIKit
 
 class SignUpPageViewController: UIViewController {
     
-    static let SignUpPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpPage") as! SignUpPageViewController
+    static let shared = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpPage") as! SignUpPageViewController
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!

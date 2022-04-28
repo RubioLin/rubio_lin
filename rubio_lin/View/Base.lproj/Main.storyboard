@@ -190,6 +190,9 @@
                                         <state key="normal" title="Stream">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickStreamerInfoBtn:" destination="hdd-z4-MWk" eventType="touchUpInside" id="UfT-ak-rT6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -324,6 +327,113 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ej9-24-B29" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1202.8985507246377" y="-723.88392857142856"/>
+        </scene>
+        <!--Streamer InfomationVC-->
+        <scene sceneID="SSM-pv-MTN">
+            <objects>
+                <viewController storyboardIdentifier="StreamerInfomation" id="qIl-W6-lSP" customClass="StreamerInfomationVC" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="apW-PJ-Onc" customClass="UIControl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBD-kq-dHj">
+                                <rect key="frame" x="83" y="284.5" width="248" height="327"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StreamerInfoCover" translatesAutoresizingMaskIntoConstraints="NO" id="Hct-Gn-OYJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="248" height="163.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="StreamerName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mff-8V-ngI">
+                                        <rect key="frame" x="8" y="171.5" width="154" height="23.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Hashtag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHw-nf-TjI">
+                                        <rect key="frame" x="8" y="203" width="232" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="我在等風，也在等你\n\n外表高冷、實質聒噪" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lcn-3N-zSn">
+                                        <rect key="frame" x="8" y="225.5" width="232" height="93.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtk-Ep-fow">
+                                        <rect key="frame" x="170" y="171.5" width="70" height="23.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="uNe-C9-Dkp"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="F">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="F">
+                                                    <attributes>
+                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <font key="NSFont" metaFont="system" size="12"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="plain" title="F" buttonSize="small">
+                                            <fontDescription key="titleFontDescription" name="ArialMT" family="Arial" pointSize="12"/>
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="clickStreamFollowBtn:" destination="qIl-W6-lSP" eventType="touchUpInside" id="6cA-E3-abg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="mff-8V-ngI" firstAttribute="top" secondItem="Hct-Gn-OYJ" secondAttribute="bottom" constant="8" id="0ID-ZG-oaw"/>
+                                    <constraint firstItem="rtk-Ep-fow" firstAttribute="height" secondItem="mff-8V-ngI" secondAttribute="height" id="1i5-bO-vcR"/>
+                                    <constraint firstItem="Lcn-3N-zSn" firstAttribute="leading" secondItem="qBD-kq-dHj" secondAttribute="leading" constant="8" id="4kY-UV-dFL"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lcn-3N-zSn" secondAttribute="bottom" constant="8" id="6wB-7c-rji"/>
+                                    <constraint firstItem="rtk-Ep-fow" firstAttribute="top" secondItem="mff-8V-ngI" secondAttribute="top" id="9wm-1u-2Y5"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lcn-3N-zSn" secondAttribute="trailing" constant="8" id="BeX-CU-Sb5"/>
+                                    <constraint firstItem="Lcn-3N-zSn" firstAttribute="top" secondItem="kHw-nf-TjI" secondAttribute="bottom" constant="8" id="ISk-64-760"/>
+                                    <constraint firstAttribute="trailing" secondItem="kHw-nf-TjI" secondAttribute="trailing" constant="8" id="Jmf-YR-vH9"/>
+                                    <constraint firstItem="kHw-nf-TjI" firstAttribute="leading" secondItem="qBD-kq-dHj" secondAttribute="leading" constant="8" id="Jtb-kz-zQR"/>
+                                    <constraint firstItem="rtk-Ep-fow" firstAttribute="leading" secondItem="mff-8V-ngI" secondAttribute="trailing" constant="8" id="QAa-Ju-0eK"/>
+                                    <constraint firstItem="Hct-Gn-OYJ" firstAttribute="height" secondItem="qBD-kq-dHj" secondAttribute="height" multiplier="0.5" id="S1c-s8-vhQ"/>
+                                    <constraint firstItem="Hct-Gn-OYJ" firstAttribute="leading" secondItem="qBD-kq-dHj" secondAttribute="leading" id="VS9-zH-BP3"/>
+                                    <constraint firstItem="Hct-Gn-OYJ" firstAttribute="top" secondItem="qBD-kq-dHj" secondAttribute="top" id="aP2-X1-Lgs"/>
+                                    <constraint firstItem="kHw-nf-TjI" firstAttribute="top" secondItem="mff-8V-ngI" secondAttribute="bottom" constant="8" id="dAQ-BI-rNk"/>
+                                    <constraint firstAttribute="trailing" secondItem="rtk-Ep-fow" secondAttribute="trailing" constant="8" id="hrb-cU-gJU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hct-Gn-OYJ" secondAttribute="trailing" id="msX-l4-42m"/>
+                                    <constraint firstItem="mff-8V-ngI" firstAttribute="leading" secondItem="qBD-kq-dHj" secondAttribute="leading" constant="8" id="xBY-M0-9uF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="F17-RX-z41"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qBD-kq-dHj" firstAttribute="width" secondItem="F17-RX-z41" secondAttribute="width" multiplier="0.6" id="4SV-fa-ixz"/>
+                            <constraint firstItem="qBD-kq-dHj" firstAttribute="height" secondItem="F17-RX-z41" secondAttribute="height" multiplier="0.4" id="edr-Vo-YTv"/>
+                            <constraint firstItem="qBD-kq-dHj" firstAttribute="centerX" secondItem="apW-PJ-Onc" secondAttribute="centerX" id="lTS-zh-vNO"/>
+                            <constraint firstItem="qBD-kq-dHj" firstAttribute="centerY" secondItem="apW-PJ-Onc" secondAttribute="centerY" id="uDa-Uh-Kes"/>
+                        </constraints>
+                        <connections>
+                            <action selector="touchDown:" destination="qIl-W6-lSP" eventType="touchDown" id="NyB-gR-LZz"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="streamerCoverIV" destination="Hct-Gn-OYJ" id="VSq-GV-hsH"/>
+                        <outlet property="streamerFollowBtn" destination="rtk-Ep-fow" id="Yx8-0U-Riy"/>
+                        <outlet property="streamerHashtagL" destination="kHw-nf-TjI" id="iv3-Wa-00q"/>
+                        <outlet property="streamerIntroL" destination="Lcn-3N-zSn" id="qXg-rh-ghh"/>
+                        <outlet property="streamerNameL" destination="mff-8V-ngI" id="InG-VR-WsD"/>
+                        <outlet property="streamerView" destination="qBD-kq-dHj" id="nlo-PW-Yz4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wqT-H9-Y8x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1927.5362318840582" y="-723.21428571428567"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lH7-q0-SEn">
@@ -779,6 +889,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="StreamerInfoCover" width="270" height="270"/>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
         <image name="brokenHeart" width="62" height="58"/>
         <image name="btnEdit" width="41" height="41"/>

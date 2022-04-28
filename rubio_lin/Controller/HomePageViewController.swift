@@ -5,7 +5,7 @@ let userDefaults = UserDefaults.standard
 
 class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarControllerDelegate {
     
-    static let HomePage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomePage")
+    static let shared = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomePage")
     @IBOutlet weak var LiveRoomCollectionView: UICollectionView!
     var result: JsonResult?
     
@@ -23,6 +23,7 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
         self.LiveRoomCollectionView.register(UINib(nibName: "HomePageHeaderReusableView", bundle: nil), forSupplementaryViewOfKind:  UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomePageHeaderReusableView")
         result = FetchJsonModal.shared.load("Result.json") // 解析本地 json 資料
         FirebaseManager.shared.delegate = self
+//        StreamerInfomationVC.shared.delegate = self
         tabBarController?.delegate = self
         tabBarController?.tabBar.tintColor = .black
     }
@@ -130,17 +131,20 @@ extension HomePageViewController: UICollectionViewDelegate {
     // 點選 Cell 進入直播間，點 index 偶數間進入 Youtube 串流影片，基數間進入本地影片
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row % 2 == 0 {
-            LiveStreamRoomViewController.LiveStreamRoom.isStream = true
+            LiveStreamRoomViewController.shared.isStream = true
         } else {
-            LiveStreamRoomViewController.LiveStreamRoom.isStream = false
+            LiveStreamRoomViewController.shared.isStream = false
         }
         
-        LiveStreamRoomViewController.LiveStreamRoom.modalPresentationStyle = .fullScreen
-        LiveStreamRoomViewController.LiveStreamRoom.streamTitle = result?.stream_list[indexPath.row]?.stream_title
+        LiveStreamRoomViewController.shared.modalPresentationStyle = .fullScreen
+        LiveStreamRoomViewController.shared.streamTitle = result?.stream_list[indexPath.row]?.stream_title
+        LiveStreamRoomViewController.shared.streamerName = result?.stream_list[indexPath.row]?.nickname
+        LiveStreamRoomViewController.shared.streamertags = result?.stream_list[indexPath.row]?.tags
+        LiveStreamRoomViewController.shared.streamerCover = result?.stream_list[indexPath.row]?.head_photo
         if let onlinerNum = result?.stream_list[indexPath.row]?.online_num {
-            LiveStreamRoomViewController.LiveStreamRoom.online_num = onlinerNum
+            LiveStreamRoomViewController.shared.online_num = onlinerNum
         }
-        self.present(LiveStreamRoomViewController.LiveStreamRoom, animated: true)
+        self.present(LiveStreamRoomViewController.shared, animated: true)
     }    
 }
 

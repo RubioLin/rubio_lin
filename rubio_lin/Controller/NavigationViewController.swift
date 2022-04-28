@@ -6,9 +6,9 @@ class NavigationViewController: UINavigationController{
         super.viewDidLoad()
         // 判斷有無使用者決定要去哪個頁面
         if FirebaseManager.shared.isSignIn == true {
-            self.viewControllers = [AccountPageViewController.AccountPage]
+            self.viewControllers = [AccountPageViewController.shared]
         } else {
-            self.viewControllers = [SignInPageViewController.SignInPage]
+            self.viewControllers = [SignInPageViewController.shared]
         }
     }
 }

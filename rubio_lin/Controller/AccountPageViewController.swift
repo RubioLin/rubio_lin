@@ -2,7 +2,7 @@ import UIKit
 
 class AccountPageViewController: UIViewController {
     
-    static let AccountPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountPage") as! AccountPageViewController
+    static let shared = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountPage") as! AccountPageViewController
     @IBOutlet weak var userHeadPhotoImageView: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!

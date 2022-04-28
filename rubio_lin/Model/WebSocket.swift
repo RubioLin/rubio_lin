@@ -106,7 +106,7 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
     }
     
     func sendFollow() {
-        switch LiveStreamRoomViewController.LiveStreamRoom.followBtn.isSelected {
+        switch LiveStreamRoomViewController.shared.followBtn.isSelected {
         case true:
             break
         default:
@@ -118,6 +118,7 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
             })
         }
     }
+    
     public func urlSession(_ session: URLSession,
                            webSocketTask: URLSessionWebSocketTask,
                            didOpenWithProtocol protocol: String?) {

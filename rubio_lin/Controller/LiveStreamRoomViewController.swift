@@ -4,7 +4,7 @@ import YouTubeiOSPlayerHelper
 
 class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLSessionDelegate {
     
-    static let LiveStreamRoom = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
+    static let shared = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var alertUIView: UIView!
     @IBOutlet weak var alertExitBtn: UIButton!
@@ -25,6 +25,9 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     var isStream: Bool?
     var streamTitle: String?
     var online_num: Int?
+    var streamertags: String?
+    var streamerName: String?
+    var streamerCover: String?
     var animator = UIViewPropertyAnimator()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -245,6 +248,10 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
 //            let lineURL = URL(string: "https://line.me/R/")
 //            application.open(lineURL!, options: [:], completionHandler: nil)
 //        }
+    }
+    @IBAction func clickStreamerInfoBtn(_ sender: Any) {
+        StreamerInfomationVC.shared.modalPresentationStyle = .overFullScreen
+        self.present(StreamerInfomationVC.shared, animated: true)
     }
     
 }
