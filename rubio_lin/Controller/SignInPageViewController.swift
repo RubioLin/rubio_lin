@@ -141,7 +141,7 @@ class SignInPageViewController: UIViewController {
             }
         }
     }
-    
+    // 按下鍵盤next可以跳下一個TextField，最後一個TextField鍵盤上為Send按下後為登錄
     @IBAction func didEndOnExit(_ sender: UITextField) {
         switch sender {
         case emailTextField:

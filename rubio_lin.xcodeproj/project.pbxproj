@@ -46,7 +46,11 @@
 		C229A4FB281A4B3C00A43C1D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4FA281A4B3C00A43C1D /* FirebaseStorage */; };
 		C229A4FD281A4B4300A43C1D /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4FC281A4B4300A43C1D /* FirebaseStorageSwift-Beta */; };
 		C25D343C281A73EE00FF9274 /* StreamerInfomationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25D343B281A73EE00FF9274 /* StreamerInfomationVC.swift */; };
+		C25D3460281B72A900FF9274 /* DialogBoxTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25D345F281B72A900FF9274 /* DialogBoxTF.swift */; };
 		C29AA19628177F1E00F14302 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C29AA19828177F1E00F14302 /* Localizable.strings */; };
+		C2FCC6E9281B9A67002481B5 /* GiftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FCC6E8281B9A67002481B5 /* GiftVC.swift */; };
+		C2FCC6EE281B9D98002481B5 /* GiftCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FCC6EC281B9D98002481B5 /* GiftCVCell.swift */; };
+		C2FCC6EF281B9D98002481B5 /* GiftCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2FCC6ED281B9D98002481B5 /* GiftCVCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,8 +112,12 @@
 		C25D3438281A4FA100FF9274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C25D343A281A61F900FF9274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		C25D343B281A73EE00FF9274 /* StreamerInfomationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamerInfomationVC.swift; sourceTree = "<group>"; };
+		C25D345F281B72A900FF9274 /* DialogBoxTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxTF.swift; sourceTree = "<group>"; };
 		C29AA19728177F1E00F14302 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C29AA19928177F2000F14302 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C2FCC6E8281B9A67002481B5 /* GiftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftVC.swift; sourceTree = "<group>"; };
+		C2FCC6EC281B9D98002481B5 /* GiftCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCVCell.swift; sourceTree = "<group>"; };
+		C2FCC6ED281B9D98002481B5 /* GiftCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiftCVCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +171,7 @@
 				4B43557828091952007B688A /* SearchPageHeaderReusableView.xib */,
 				4BF23FED27F54AAE002816EA /* LiveRoomCollectionViewCell.xib */,
 				4BA3FB0E28051B7E00ABE771 /* ChatRoomTableViewCell.xib */,
+				C2FCC6ED281B9D98002481B5 /* GiftCVCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -179,7 +188,9 @@
 				4BE1D4AF27FD223A006145B0 /* SignUpPageViewController.swift */,
 				4B602EF128032FC600D621E6 /* LiveStreamRoomViewController.swift */,
 				C25D343B281A73EE00FF9274 /* StreamerInfomationVC.swift */,
+				C2FCC6E8281B9A67002481B5 /* GiftVC.swift */,
 				4BE1D49E27F83ED2006145B0 /* FetchJsonModal.swift */,
+				C25D345F281B72A900FF9274 /* DialogBoxTF.swift */,
 				4B1748152809C5CD0067AD71 /* extension.swift */,
 			);
 			path = Controller;
@@ -209,10 +220,10 @@
 		4BF201A127F2B0C8007311AA /* rubio_lin */ = {
 			isa = PBXGroup;
 			children = (
-				C29AA19828177F1E00F14302 /* Localizable.strings */,
 				C20B96E52812A4B60000F4F7 /* GoogleService-Info.plist */,
 				4BF201A227F2B0C8007311AA /* AppDelegate.swift */,
 				4BF201A427F2B0C8007311AA /* SceneDelegate.swift */,
+				C29AA19828177F1E00F14302 /* Localizable.strings */,
 				4BA2207627F60A9700CDFC59 /* Controller */,
 				4BF354A7280E92B000F0EE0A /* Cell Controller */,
 				4BA2207527F60A9000CDFC59 /* View */,
@@ -244,6 +255,7 @@
 		4BF354A7280E92B000F0EE0A /* Cell Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C2FCC6EC281B9D98002481B5 /* GiftCVCell.swift */,
 				4B43556F2808FFFA007B688A /* HomePageHeaderReusableView.swift */,
 				4B43557728091952007B688A /* SearchPageHeaderReusableView.swift */,
 				4BF23FEC27F54AAE002816EA /* LiveRoomCollectionViewCell.swift */,
@@ -380,6 +392,7 @@
 			files = (
 				4B43557A28091952007B688A /* SearchPageHeaderReusableView.xib in Resources */,
 				4BE1D4A327F842D5006145B0 /* Result.json in Resources */,
+				C2FCC6EF281B9D98002481B5 /* GiftCVCell.xib in Resources */,
 				C29AA19628177F1E00F14302 /* Localizable.strings in Resources */,
 				4BF201AF27F2B0C9007311AA /* LaunchScreen.storyboard in Resources */,
 				4BA3FB1028051B7E00ABE771 /* ChatRoomTableViewCell.xib in Resources */,
@@ -413,8 +426,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2FCC6E9281B9A67002481B5 /* GiftVC.swift in Sources */,
 				4B4355712808FFFA007B688A /* HomePageHeaderReusableView.swift in Sources */,
 				4BA3FB0F28051B7E00ABE771 /* ChatRoomTableViewCell.swift in Sources */,
+				C25D3460281B72A900FF9274 /* DialogBoxTF.swift in Sources */,
 				4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */,
 				4B1748162809C5CD0067AD71 /* extension.swift in Sources */,
 				4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */,
@@ -433,6 +448,7 @@
 				4BF201A527F2B0C8007311AA /* SceneDelegate.swift in Sources */,
 				4B602EF0280324B200D621E6 /* Firebase.swift in Sources */,
 				C25D343C281A73EE00FF9274 /* StreamerInfomationVC.swift in Sources */,
+				C2FCC6EE281B9D98002481B5 /* GiftCVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

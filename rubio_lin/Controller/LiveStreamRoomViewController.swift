@@ -17,6 +17,7 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     @IBOutlet weak var dialogBoxTextField: UITextField!
     @IBOutlet weak var chatRoomTableView: UITableView!
     @IBOutlet weak var shareBtn: UIButton!
+    @IBOutlet weak var giftBtn: UIButton!
     var player = AVPlayer()
     var playerLayer = AVPlayerLayer()
     let YTPlayer = YTPlayerView()
@@ -33,7 +34,7 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         WebSocketManager.shared.establishConnection()
-//        addKeyboardObserver() //事後再加上 先計算好上彈多少
+        addKeyboardObserver() //事後再加上 先計算好上彈多少
         setStreamInfoBtn()
         setonline_numLabel()
         if isStream == true {
@@ -59,11 +60,13 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         setStreamInfoAndFollowBtnBackgroundView()
         setonline_numBackgroundView()
         setAlert()
-        setDialogBox()
         setshareBtn()
+        setGiftBtn()
         YTPlayer.delegate = self
         WebSocketManager.shared.delegate = self
         dialogBoxTextField.delegate = self
+        print(dialogBoxTextField.frame.origin.y)
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -107,23 +110,6 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         _ = NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { notification in
             resetPlayer()
         }
-    }
-    
-    // 讓rightView 向左移動
-    func setDialogBox() {
-        let leftView = UILabel(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
-        leftView.text = "   "
-        dialogBoxTextField.leftViewMode = .always
-        dialogBoxTextField.leftView = leftView
-        let rightView = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        rightView.setImage(UIImage(named: "send"), for: .normal)
-        rightView.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
-        dialogBoxTextField.rightViewMode = .always
-        dialogBoxTextField.rightView = rightView
-        dialogBoxTextField.setUITextField(dialogBoxTextField, 18, .black, 0.7, 0, UIColor.white.cgColor)
-        dialogBoxTextField.attributedPlaceholder = NSAttributedString(
-            string: NSLocalizedString("chatPlaceholder", comment: ""),
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
     }
     
     @objc func sendMessage(_ button: UIButton) {
@@ -180,6 +166,10 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         shareBtn.alpha = 0.7
     }
     
+    func setGiftBtn() {
+        giftBtn.layer.cornerRadius = 18
+    }
+    
     @IBAction func clickFollowButton(_ sender: Any) {
         WebSocketManager.shared.sendFollow()
         switch followBtn.isSelected {
@@ -225,7 +215,7 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         self.dialogBoxTextField.alpha = 0.7
     }
     
-    @IBAction func showActivity(_ sender: Any) {
+    @IBAction func clickShareBtn(_ sender: Any) {
         //原生 分享
         var shareURL = URL(string: "")
         if isStream == true {
@@ -254,6 +244,11 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         self.present(StreamerInfomationVC.shared, animated: true)
     }
     
+    @IBAction func clickGiftBtn(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "GiftVC") as! GiftVC
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true)
+    }
 }
 
 // MARK: - TableView DataSource & Delegate
@@ -264,6 +259,7 @@ extension LiveStreamRoomViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRoomTableViewCell", for: indexPath) as! ChatRoomTableViewCell
+        cell.selectionStyle = .none
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
         let index = WebSocketManager.shared.webSocketReceive.count - 1 - indexPath.row
@@ -312,8 +308,8 @@ extension LiveStreamRoomViewController {
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
-            self.chatRoomTableView.frame.origin.y -= view.frame.height / 2.8
-            self.dialogBoxTextField.frame.origin.y -= view.frame.height / 2.8
+            self.chatRoomTableView.frame.origin.y -= (keyboardHeight-60)
+            self.dialogBoxTextField.frame.origin.y -= (keyboardHeight-60)
         }
     }
     
