@@ -1,6 +1,6 @@
 import UIKit
 
-class DialogBoxTF: UITextField {
+class DialogBoxTF: UITextField, UITextFieldDelegate {
         
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -27,7 +27,7 @@ class DialogBoxTF: UITextField {
     @objc func sendMessage(_ button: UIButton) {
         if self.text!.trimmingCharacters(in: .whitespaces) == "" {
             // 未輸入內容或輸入為空字串，會跳Alert提醒
-            LiveStreamRoomViewController.shared.showAlertInfo("請輸入內容", y: LiveStreamRoomViewController.shared.chatRoomTableView.frame.origin.y)
+//            LiveStreamRoomViewController().showAlertInfo("請輸入內容", y: LiveStreamRoomViewController().chatRoomTableView.frame.origin.y)
             self.text?.removeAll() //送出後要重置輸入框
             print("Input is empty")
         } else {
@@ -35,5 +35,6 @@ class DialogBoxTF: UITextField {
             self.text?.removeAll() //送出後要重置輸入框
         }
     }
-    
 }
+
+

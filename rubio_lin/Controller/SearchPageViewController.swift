@@ -40,7 +40,7 @@ extension SearchPageViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = recommendCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SearchPageHeaderReusableView", for: indexPath) as? SearchPageHeaderReusableView
+        weak var header = recommendCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SearchPageHeaderReusableView", for: indexPath) as? SearchPageHeaderReusableView
         if isSearch == true {
             if indexPath.section == 0 {
                 header?.recommendAndSearchLabel.text = NSLocalizedString("search", comment: "")
@@ -66,7 +66,7 @@ extension SearchPageViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveRoomCollectionViewCell", for: indexPath) as? LiveRoomCollectionViewCell
+        weak var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveRoomCollectionViewCell", for: indexPath) as? LiveRoomCollectionViewCell
         
         if isSearch == true {
             if indexPath.section == 0 {
@@ -186,13 +186,19 @@ extension SearchPageViewController: UICollectionViewDelegate {
     
     // 點選Cell進入直播間
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
+        vc.modalPresentationStyle = .fullScreen
         if indexPath.row % 2 == 0 {
-            LiveStreamRoomViewController.shared.isStream = true
+            vc.isStream = true
         } else {
-            LiveStreamRoomViewController.shared.isStream = false
+            vc.isStream = false
         }
-        LiveStreamRoomViewController.shared.modalPresentationStyle = .fullScreen
-        self.present(LiveStreamRoomViewController.shared, animated: true)
+        vc.streamTitle = self.result?.lightyear_list[indexPath.row]?.stream_title
+        vc.streamerTags = self.result?.lightyear_list[indexPath.row]?.tags
+        vc.streamerName = self.result?.lightyear_list[indexPath.row]?.nickname
+        vc.streamerAvatar = self.result?.lightyear_list[indexPath.row]?.head_photo
+        vc.online_num = self.result?.lightyear_list[indexPath.row]?.online_num
+        present(vc, animated: true)
     }
 }
 

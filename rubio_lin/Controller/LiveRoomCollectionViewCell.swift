@@ -1,10 +1,3 @@
-//
-//  LiveRoomCollectionViewCell.swift
-//  rubio_lin
-//
-//  Created by Class on 2022/3/31.
-//
-
 import UIKit
 
 class LiveRoomCollectionViewCell: UICollectionViewCell {

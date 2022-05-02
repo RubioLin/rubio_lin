@@ -86,7 +86,7 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
             case .failure(let error):
                 print("Error: \(error)")
             }
-            self?.delegate?.receiveFinishReload()
+            self?.delegate?.receiveFinishReload!()
             self?.receive()
         }
     }
@@ -105,17 +105,19 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
         }
     }
     
-    func sendFollow() {
-        switch LiveStreamRoomViewController.shared.followBtn.isSelected {
+    func sendFollow(_ isSelected: Bool) {
+        switch isSelected {
         case true:
-            break
-        default:
+            print("Follow")
             let followText = NSLocalizedString("followText", comment: "")
             webSocketTask?.send(URLSessionWebSocketTask.Message.string("{\"action\": \"N\", \"content\": \"\(followText)\"}"), completionHandler: { error in
                 if let error = error {
                     print(error)
                 }
             })
+        default:
+            print("Unfollow")
+            break
         }
     }
     
@@ -139,8 +141,9 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
     
 }
 
-protocol WebSocketManagerDelegate: NSObject {
+@objc protocol WebSocketManagerDelegate: NSObjectProtocol {
     
-    func receiveFinishReload()
+    @objc optional func receiveFinishReload()
     
 }
+

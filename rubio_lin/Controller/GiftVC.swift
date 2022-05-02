@@ -7,11 +7,13 @@ class GiftVC: UIViewController {
     var giftNameArray = ["幽浮", "跑車", "遊艇", "火箭", "鑽石", "水晶", "泡泡"]
     var giftPriceArray = [5000, 500, 1000, 2500, 250, 100, 10]
     var giftPicArray = [UIImage(named: "ufo-gradient"), UIImage(named: "sportcar-gradient"), UIImage(named: "yacht-gradient"), UIImage(named: "rocket-gradient"), UIImage(named: "diamond-gradient"), UIImage(named: "crystal-gradient"), UIImage(named: "bubbles-gradient")]
+    var streamerName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         giftCV.register(UINib(nibName: "GiftCVCell", bundle: nil), forCellWithReuseIdentifier: "GiftCVCell")
         giftCV.delegate = self
+        giftCV.dataSource = self
         giftCV.reloadData()
     }
     
@@ -52,7 +54,7 @@ extension GiftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let alert = UIAlertController(title: "確定要送給\(LiveStreamRoomViewController.shared.streamerName!)\(giftNameArray[indexPath.row])", message: "\(LiveStreamRoomViewController.shared.streamerName!)會很開心的", preferredStyle: .alert)
+        let alert = UIAlertController(title: "確定要送給\(streamerName!)\(giftNameArray[indexPath.row])", message: "\(streamerName!)會很開心的", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         alert.addAction(UIAlertAction(title: "先不要", style: .cancel))
         present(alert, animated: true)

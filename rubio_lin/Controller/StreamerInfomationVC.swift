@@ -4,7 +4,6 @@ class StreamerInfomationVC: UIViewController {
     
     static let shared = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StreamerInfomation") as! StreamerInfomationVC
     
-//    weak var delegate: StreamerInfomationDelegate?
     
     @IBOutlet weak var streamerView: UIView!
     @IBOutlet weak var streamerCoverIV: UIImageView!
@@ -12,6 +11,10 @@ class StreamerInfomationVC: UIViewController {
     @IBOutlet weak var streamerFollowBtn: UIButton!
     @IBOutlet weak var streamerHashtagL: UILabel!
     @IBOutlet weak var streamerIntroL: UILabel!
+    
+    var streamerAvatar: String?
+    var streamerName: String?
+    var streamerTags: String?
         
     override func viewWillAppear(_ animated: Bool) {
         setUIAppearance()
@@ -25,7 +28,7 @@ class StreamerInfomationVC: UIViewController {
         streamerView.layer.masksToBounds = true
         streamerView.layer.cornerRadius = streamerView.bounds.width / 16
         
-        if let url = URL(string: LiveStreamRoomViewController.shared.streamerCover ?? "") {
+        if let url = URL(string: streamerAvatar ?? "") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 DispatchQueue.main.async {
                     self.streamerCoverIV.image = UIImage(data: data ?? Data())
@@ -33,9 +36,9 @@ class StreamerInfomationVC: UIViewController {
             }.resume()
         }
 
-        streamerNameL.text = LiveStreamRoomViewController.shared.streamerName
+        streamerNameL.text = streamerName
         
-        streamerHashtagL.text = "#\((LiveStreamRoomViewController.shared.streamertags)!)"
+        streamerHashtagL.text = "#\(streamerTags!))"
         
         streamerFollowBtn.layer.cornerRadius = streamerFollowBtn.bounds.height / 4
         streamerFollowBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
@@ -46,7 +49,6 @@ class StreamerInfomationVC: UIViewController {
     }
     
     @IBAction func clickStreamFollowBtn(_ sender: Any) {
-        WebSocketManager.shared.sendFollow()
         switch streamerFollowBtn.isSelected {
         case true:
             streamerFollowBtn.isSelected = false
@@ -55,6 +57,7 @@ class StreamerInfomationVC: UIViewController {
             streamerFollowBtn.isSelected = true
             streamerFollowBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
         }
+        WebSocketManager.shared.sendFollow(streamerFollowBtn.isSelected)
     }
     
     @IBAction func touchDown(_ sender: Any) {

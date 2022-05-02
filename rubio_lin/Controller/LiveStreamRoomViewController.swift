@@ -4,7 +4,8 @@ import YouTubeiOSPlayerHelper
 
 class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLSessionDelegate {
     
-    static let shared = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
+//    static let shared = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
+    
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var alertUIView: UIView!
     @IBOutlet weak var alertExitBtn: UIButton!
@@ -26,9 +27,9 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     var isStream: Bool?
     var streamTitle: String?
     var online_num: Int?
-    var streamertags: String?
+    var streamerTags: String?
     var streamerName: String?
-    var streamerCover: String?
+    var streamerAvatar: String?
     var animator = UIViewPropertyAnimator()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,12 +66,11 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         YTPlayer.delegate = self
         WebSocketManager.shared.delegate = self
         dialogBoxTextField.delegate = self
-        print(dialogBoxTextField.frame.origin.y)
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        self.dismiss(animated: true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -171,7 +171,6 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     }
     
     @IBAction func clickFollowButton(_ sender: Any) {
-        WebSocketManager.shared.sendFollow()
         switch followBtn.isSelected {
         case true:
             followBtn.isSelected = false
@@ -180,6 +179,7 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
             followBtn.isSelected = true
             followBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
         }
+        WebSocketManager.shared.sendFollow(followBtn.isSelected)
     }
     
     @IBAction func clickLogoutButton(_ sender: Any) {
@@ -240,13 +240,18 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
 //        }
     }
     @IBAction func clickStreamerInfoBtn(_ sender: Any) {
-        StreamerInfomationVC.shared.modalPresentationStyle = .overFullScreen
-        self.present(StreamerInfomationVC.shared, animated: true)
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StreamerInfomation") as! StreamerInfomationVC
+        vc.modalPresentationStyle = .overFullScreen
+        vc.streamerAvatar = streamerAvatar
+        vc.streamerName = streamerName
+        vc.streamerTags = streamerTags
+        present(vc, animated: true)
     }
     
     @IBAction func clickGiftBtn(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "GiftVC") as! GiftVC
         vc.modalPresentationStyle = .overFullScreen
+        vc.streamerName = streamerName
         present(vc, animated: true)
     }
 }

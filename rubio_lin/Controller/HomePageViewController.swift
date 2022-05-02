@@ -23,7 +23,6 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
         self.LiveRoomCollectionView.register(UINib(nibName: "HomePageHeaderReusableView", bundle: nil), forSupplementaryViewOfKind:  UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomePageHeaderReusableView")
         result = FetchJsonModal.shared.load("Result.json") // 解析本地 json 資料
         FirebaseManager.shared.delegate = self
-//        StreamerInfomationVC.shared.delegate = self
         tabBarController?.delegate = self
         tabBarController?.tabBar.tintColor = .black
     }
@@ -44,7 +43,6 @@ extension HomePageViewController: UICollectionViewDataSource {
     // 設置 Collection View 的 Header，判斷有無使用者決定 Header 的內容
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = LiveRoomCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomePageHeaderReusableView", for: indexPath) as? HomePageHeaderReusableView
-//        Timer.scheduledTimer(withTimeInterval: 0.5 , repeats: false) { Timer in
             if FirebaseManager.shared.isSignIn == true {
                 if let url = FirebaseManager.shared.userInfo?.userPhotoUrl {
                     URLSession.shared.dataTask(with: url) { data, response, error in
@@ -53,7 +51,6 @@ extension HomePageViewController: UICollectionViewDataSource {
                             header?.currentUserNicknameLabel.text = FirebaseManager.shared.userInfo?.nickname
                         }
                     }.resume()
-//                }
             }
         }
         return header!
@@ -130,22 +127,30 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
 extension HomePageViewController: UICollectionViewDelegate {
     // 點選 Cell 進入直播間，點 index 偶數間進入 Youtube 串流影片，基數間進入本地影片
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
+        vc.modalPresentationStyle = .fullScreen
         if indexPath.row % 2 == 0 {
-            LiveStreamRoomViewController.shared.isStream = true
+            vc.isStream = true
         } else {
-            LiveStreamRoomViewController.shared.isStream = false
+            vc.isStream = false
         }
+        vc.streamTitle = self.result?.stream_list[indexPath.row]?.stream_title
+        vc.streamerTags = self.result?.stream_list[indexPath.row]?.tags
+        vc.streamerName = self.result?.stream_list[indexPath.row]?.nickname
+        vc.streamerAvatar = self.result?.stream_list[indexPath.row]?.head_photo
+        vc.online_num = self.result?.stream_list[indexPath.row]?.online_num
+        present(vc, animated: true)
+    }
+    
+
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        LiveStreamRoomViewController.shared.modalPresentationStyle = .fullScreen
-        LiveStreamRoomViewController.shared.streamTitle = result?.stream_list[indexPath.row]?.stream_title
-        LiveStreamRoomViewController.shared.streamerName = result?.stream_list[indexPath.row]?.nickname
-        LiveStreamRoomViewController.shared.streamertags = result?.stream_list[indexPath.row]?.tags
-        LiveStreamRoomViewController.shared.streamerCover = result?.stream_list[indexPath.row]?.head_photo
-        if let onlinerNum = result?.stream_list[indexPath.row]?.online_num {
-            LiveStreamRoomViewController.shared.online_num = onlinerNum
-        }
-        self.present(LiveStreamRoomViewController.shared, animated: true)
-    }    
+    
+    }
+
+    
 }
 
 extension HomePageViewController: FirebaseManagerDelegate {
