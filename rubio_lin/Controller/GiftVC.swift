@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 class GiftVC: UIViewController {
     
@@ -6,7 +7,7 @@ class GiftVC: UIViewController {
     
     var giftNameArray = ["幽浮", "跑車", "遊艇", "火箭", "鑽石", "水晶", "泡泡"]
     var giftPriceArray = [5000, 500, 1000, 2500, 250, 100, 10]
-    var giftPicArray = [UIImage(named: "ufo-gradient"), UIImage(named: "sportcar-gradient"), UIImage(named: "yacht-gradient"), UIImage(named: "rocket-gradient"), UIImage(named: "diamond-gradient"), UIImage(named: "crystal-gradient"), UIImage(named: "bubbles-gradient")]
+    var giftPicArray = ["ufo-gradient", "sportcar-gradient", "yacht-gradient", "rocket-gradient", "diamond-gradient",  "crystal-gradient", "bubbles-gradient"]
     var streamerName: String?
     
     override func viewDidLoad() {
@@ -32,7 +33,7 @@ extension GiftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GiftCVCell", for: indexPath) as! GiftCVCell
         cell.giftNameL.text = giftNameArray[indexPath.row]
         cell.giftPriceL.text = "\(giftPriceArray[indexPath.row])"
-        cell.giftPicIV.image = giftPicArray[indexPath.row]
+        cell.giftPicIV.image = UIImage(named: giftPicArray[indexPath.row])
         return cell
     }
     
@@ -55,10 +56,19 @@ extension GiftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let alert = UIAlertController(title: "確定要送給\(streamerName!)\(giftNameArray[indexPath.row])", message: "\(streamerName!)會很開心的", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "OK", style: .default,handler: { UIAlertAction in
+            let vc = UIHostingController(rootView: GiftView(imageName: self.giftPicArray[indexPath.row]))
+            vc.modalPresentationStyle = .overFullScreen
+            vc.view.backgroundColor = .clear
+            self.present(vc, animated: false) {
+                Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { Timer in
+                    self.dismiss(animated: false)
+                }
+            }
+        }))
         alert.addAction(UIAlertAction(title: "先不要", style: .cancel))
         present(alert, animated: true)
     }
-    
-    
+
 }
+

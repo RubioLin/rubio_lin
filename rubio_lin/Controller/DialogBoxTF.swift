@@ -25,15 +25,7 @@ class DialogBoxTF: UITextField, UITextFieldDelegate {
     }
     
     @objc func sendMessage(_ button: UIButton) {
-        if self.text!.trimmingCharacters(in: .whitespaces) == "" {
-            // 未輸入內容或輸入為空字串，會跳Alert提醒
-//            LiveStreamRoomViewController().showAlertInfo("請輸入內容", y: LiveStreamRoomViewController().chatRoomTableView.frame.origin.y)
-            self.text?.removeAll() //送出後要重置輸入框
-            print("Input is empty")
-        } else {
-            WebSocketManager.shared.send(self.text!)
-            self.text?.removeAll() //送出後要重置輸入框
-        }
+        delegate?.textFieldShouldReturn?(self)
     }
 }
 

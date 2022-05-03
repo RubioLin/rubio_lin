@@ -19,6 +19,8 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     @IBOutlet weak var chatRoomTableView: UITableView!
     @IBOutlet weak var shareBtn: UIButton!
     @IBOutlet weak var giftBtn: UIButton!
+    @IBOutlet weak var chatRoomBackgroundView: UIView!
+    @IBOutlet weak var chatRoomBackgroundViewConstraint: NSLayoutConstraint!
     var player = AVPlayer()
     var playerLayer = AVPlayerLayer()
     let YTPlayer = YTPlayerView()
@@ -35,7 +37,7 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         WebSocketManager.shared.establishConnection()
-        addKeyboardObserver() //事後再加上 先計算好上彈多少
+        addKeyboardObserver()
         setStreamInfoBtn()
         setonline_numLabel()
         if isStream == true {
@@ -110,16 +112,6 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         _ = NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { notification in
             resetPlayer()
         }
-    }
-    
-    @objc func sendMessage(_ button: UIButton) {
-        if dialogBoxTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
-            self.showAlertInfo("請輸入內容", y: self.chatRoomTableView.frame.origin.y)
-            print("Input is empty")
-        } else {
-            WebSocketManager.shared.send(dialogBoxTextField.text!)
-        }
-        dialogBoxTextField.text?.removeAll() //送出後要重置輸入框
     }
     
     func setAlert() {
@@ -311,27 +303,36 @@ extension LiveStreamRoomViewController {
     }
     
     @objc func keyboardWillShow(notification: Notification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardFrame.cgRectValue.height
-            self.chatRoomTableView.frame.origin.y -= (keyboardHeight-60)
-            self.dialogBoxTextField.frame.origin.y -= (keyboardHeight-60)
+            if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardHeight = keyboardFrame.cgRectValue.height
+                self.chatRoomBackgroundViewConstraint.constant = keyboardHeight - 30
         }
     }
     
     @objc func keyboardWillHide(notification: Notification) {
-        self.chatRoomTableView.frame.origin.y += view.frame.height / 2.8
-        self.dialogBoxTextField.frame.origin.y += view.frame.height / 2.8
-        
+        chatRoomBackgroundViewConstraint.constant = 29
     }
 }
 
+//MARK: - UITextFieldDelegate
 extension LiveStreamRoomViewController: UITextFieldDelegate {
     
+    // 按下return的事件處理
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        dialogBoxTextField.resignFirstResponder()
-        if dialogBoxTextField.returnKeyType == .send {
-            sendMessage(UIButton())
+        if dialogBoxTextField.text!.trimmingCharacters(in: .whitespaces) == "" {
+            // 未輸入內容或輸入為空字串，會跳Alert提醒
+            self.showAlertInfo("請輸入內容", y: self.chatRoomBackgroundView.frame.origin.y)
+            dialogBoxTextField.text?.removeAll() //送出後要重置輸入框
+            dialogBoxTextField.resignFirstResponder()
+            print("Input is empty")
+        } else {
+            if dialogBoxTextField.returnKeyType == .send {
+                WebSocketManager.shared.send(dialogBoxTextField.text!)
+                dialogBoxTextField.text?.removeAll() //送出後要重置輸入框
+                dialogBoxTextField.resignFirstResponder()
+                return true
+            }
         }
-        return true
+        return false
     }
 }

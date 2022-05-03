@@ -47,6 +47,7 @@
 		C229A4FD281A4B4300A43C1D /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4FC281A4B4300A43C1D /* FirebaseStorageSwift-Beta */; };
 		C25D343C281A73EE00FF9274 /* StreamerInfomationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25D343B281A73EE00FF9274 /* StreamerInfomationVC.swift */; };
 		C25D3460281B72A900FF9274 /* DialogBoxTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25D345F281B72A900FF9274 /* DialogBoxTF.swift */; };
+		C27ACB012821052D0013CCB7 /* GiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27ACB002821052D0013CCB7 /* GiftView.swift */; };
 		C29AA19628177F1E00F14302 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C29AA19828177F1E00F14302 /* Localizable.strings */; };
 		C2FCC6E9281B9A67002481B5 /* GiftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FCC6E8281B9A67002481B5 /* GiftVC.swift */; };
 		C2FCC6EE281B9D98002481B5 /* GiftCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FCC6EC281B9D98002481B5 /* GiftCVCell.swift */; };
@@ -113,6 +114,7 @@
 		C25D343A281A61F900FF9274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		C25D343B281A73EE00FF9274 /* StreamerInfomationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamerInfomationVC.swift; sourceTree = "<group>"; };
 		C25D345F281B72A900FF9274 /* DialogBoxTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxTF.swift; sourceTree = "<group>"; };
+		C27ACB002821052D0013CCB7 /* GiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftView.swift; sourceTree = SOURCE_ROOT; };
 		C29AA19728177F1E00F14302 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C29AA19928177F2000F14302 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C2FCC6E8281B9A67002481B5 /* GiftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftVC.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		4BA2207527F60A9000CDFC59 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C27ACB002821052D0013CCB7 /* GiftView.swift */,
 				4BF201AD27F2B0C9007311AA /* LaunchScreen.storyboard */,
 				4BF201A827F2B0C8007311AA /* Main.storyboard */,
 				4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */,
@@ -432,6 +435,7 @@
 				C25D3460281B72A900FF9274 /* DialogBoxTF.swift in Sources */,
 				4BF23FF927F571FD002816EA /* SignInPageViewController.swift in Sources */,
 				4B1748162809C5CD0067AD71 /* extension.swift in Sources */,
+				C27ACB012821052D0013CCB7 /* GiftView.swift in Sources */,
 				4B602EF228032FC600D621E6 /* LiveStreamRoomViewController.swift in Sources */,
 				4BF23FE927F53D0F002816EA /* SearchPageViewController.swift in Sources */,
 				4BA3FB142805695B00ABE771 /* WebSocket.swift in Sources */,
