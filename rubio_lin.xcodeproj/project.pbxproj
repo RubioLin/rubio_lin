@@ -45,6 +45,7 @@
 		C229A4F9281A4B3400A43C1D /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4F8281A4B3400A43C1D /* FirebaseFirestoreSwift-Beta */; };
 		C229A4FB281A4B3C00A43C1D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4FA281A4B3C00A43C1D /* FirebaseStorage */; };
 		C229A4FD281A4B4300A43C1D /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C229A4FC281A4B4300A43C1D /* FirebaseStorageSwift-Beta */; };
+		C2379CE128220DBA00D125BA /* FireworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2379CE028220DBA00D125BA /* FireworkView.swift */; };
 		C25D343C281A73EE00FF9274 /* StreamerInfomationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25D343B281A73EE00FF9274 /* StreamerInfomationVC.swift */; };
 		C25D3460281B72A900FF9274 /* DialogBoxTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25D345F281B72A900FF9274 /* DialogBoxTF.swift */; };
 		C27ACB012821052D0013CCB7 /* GiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27ACB002821052D0013CCB7 /* GiftView.swift */; };
@@ -110,6 +111,7 @@
 		C203B1222817E45A00C13C4B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		C203B1232817E46000C13C4B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		C20B96E52812A4B60000F4F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C2379CE028220DBA00D125BA /* FireworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireworkView.swift; sourceTree = "<group>"; };
 		C25D3438281A4FA100FF9274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C25D343A281A61F900FF9274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		C25D343B281A73EE00FF9274 /* StreamerInfomationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamerInfomationVC.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				C27ACB002821052D0013CCB7 /* GiftView.swift */,
+				C2379CE028220DBA00D125BA /* FireworkView.swift */,
 				4BF201AD27F2B0C9007311AA /* LaunchScreen.storyboard */,
 				4BF201A827F2B0C8007311AA /* Main.storyboard */,
 				4B4355702808FFFA007B688A /* HomePageHeaderReusableView.xib */,
@@ -451,6 +454,7 @@
 				4BF23FEE27F54AAE002816EA /* LiveRoomCollectionViewCell.swift in Sources */,
 				4BF201A527F2B0C8007311AA /* SceneDelegate.swift in Sources */,
 				4B602EF0280324B200D621E6 /* Firebase.swift in Sources */,
+				C2379CE128220DBA00D125BA /* FireworkView.swift in Sources */,
 				C25D343C281A73EE00FF9274 /* StreamerInfomationVC.swift in Sources */,
 				C2FCC6EE281B9D98002481B5 /* GiftCVCell.swift in Sources */,
 			);

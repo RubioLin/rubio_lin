@@ -11,6 +11,7 @@ struct LightyearList: Codable {
     let nickname: String?
     let tags: String?
     let online_num: Int?
+    let streamer_id: Int?
 }
 
 struct StreamList: Codable {
@@ -19,6 +20,7 @@ struct StreamList: Codable {
     let nickname: String?
     let tags: String?
     let online_num: Int?
+    let streamer_id: Int?
 }
 
 class FetchJsonModal {

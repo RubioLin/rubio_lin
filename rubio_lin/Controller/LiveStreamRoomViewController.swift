@@ -33,6 +33,7 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     var streamerName: String?
     var streamerAvatar: String?
     var animator = UIViewPropertyAnimator()
+    var streamer_id: Int?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -163,15 +164,23 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     }
     
     @IBAction func clickFollowButton(_ sender: Any) {
+        if FirebaseManager.shared.isSignIn == true {
         switch followBtn.isSelected {
         case true:
             followBtn.isSelected = false
             followBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
+//            FirebaseManager.shared.deleteFollowInfo(22233, "ddd", isFollow: false)
         default :
             followBtn.isSelected = true
             followBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
+            FirebaseManager.shared.uploadFollowInfo(streamer_id!, streamerName!, isFollow: true)
         }
         WebSocketManager.shared.sendFollow(followBtn.isSelected)
+        } else {
+            let alert = UIAlertController(title: NSLocalizedString("noSignIn", comment: ""), message: NSLocalizedString("noSignInDescription", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true)
+        }
     }
     
     @IBAction func clickLogoutButton(_ sender: Any) {
@@ -241,10 +250,16 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     }
     
     @IBAction func clickGiftBtn(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "GiftVC") as! GiftVC
-        vc.modalPresentationStyle = .overFullScreen
-        vc.streamerName = streamerName
-        present(vc, animated: true)
+        if FirebaseManager.shared.isSignIn == true {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "GiftVC") as! GiftVC
+            vc.modalPresentationStyle = .overFullScreen
+            vc.streamerName = streamerName
+            present(vc, animated: true)
+        } else {
+            let alert = UIAlertController(title: NSLocalizedString("noSignIn", comment: ""), message: NSLocalizedString("noSignInDescription", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true)
+        }
     }
 }
 

@@ -34,3 +34,5 @@
 "systemEnter" = "  进入聊天室";
 "systemLeave" = "  离开聊天室";
 "followText" = "追踪了主播❤️❤️";
+"noSignIn" = "未登入";
+"noSignInDescription" = "您还没有登入喔";

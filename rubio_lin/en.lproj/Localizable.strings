@@ -34,4 +34,5 @@
 "systemEnter" = "  enter the room";
 "systemLeave" = "  leave the room";
 "followText" = "Followed the streamer❤️❤️";
-
+"noSignIn" = "No sign in";
+"noSignInDescription" = "You are not sign in";

@@ -955,7 +955,7 @@
         <!--個人-->
         <scene sceneID="uLg-ZK-GHM">
             <objects>
-                <navigationController storyboardIdentifier="Navigation" automaticallyAdjustsScrollViewInsets="NO" id="h3B-9d-gWt" customClass="NavigationViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AccountNavigation" automaticallyAdjustsScrollViewInsets="NO" id="h3B-9d-gWt" customClass="NavigationViewController" customModule="rubio_lin" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="個人" image="tabPersonal" id="HJa-3g-n76"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bWC-OC-sX5">

@@ -14,6 +14,16 @@ struct UserInfo: Codable {
     let userPhotoUrl: URL
 }
 
+struct FollowInfo: Codable {
+    let FollowList: [FollowList]
+}
+
+struct FollowList: Codable {
+    let streamerId: Int
+    let streamerName: String
+    let isFollow: Bool
+}
+
 // MARK: - Firebase Manager
 class FirebaseManager {
     
@@ -113,7 +123,24 @@ class FirebaseManager {
             }
         }
     }
+    // 上傳追蹤資訊
+    func uploadFollowInfo(_ streamerId: Int,_ streamerName: String, isFollow: Bool) {
+        let newFollower = FollowInfo(FollowList: [FollowList(streamerId: streamerId, streamerName: streamerName, isFollow: isFollow), FollowList(streamerId: 11, streamerName: "ddd", isFollow: false)])
+        
+        do {
+            try db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").setData(from: newFollower, merge: true)
+            print("Follow success")
+        } catch {
+            print("錯誤：新追蹤上傳錯誤")
+            print("Error：\(error.localizedDescription)")
+        }
+    }
+    // 刪除追蹤資訊
+    func deleteFollowInfo(_ streamerId: Int,_ streamerName: String, isFollow: Bool) {
+        
+    }
 
+    
 }
 
 protocol FirebaseManagerDelegate: NSObject {

@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import SwiftUI
 
 let userDefaults = UserDefaults.standard
 
@@ -127,20 +128,31 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
 extension HomePageViewController: UICollectionViewDelegate {
     // 點選 Cell 進入直播間，點 index 偶數間進入 Youtube 串流影片，基數間進入本地影片
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
-        vc.modalPresentationStyle = .fullScreen
-        if indexPath.row % 2 == 0 {
-            vc.isStream = true
-        } else {
-            vc.isStream = false
+        
+        let transitionView = UIHostingController(rootView: FireworkView())
+        transitionView.modalPresentationStyle = .overFullScreen
+        transitionView.view.backgroundColor = .clear
+        present(transitionView, animated: false) {
+            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { Timer in
+                self.dismiss(animated: false)
+            }
         }
-        vc.streamTitle = self.result?.stream_list[indexPath.row]?.stream_title
-        vc.streamerTags = self.result?.stream_list[indexPath.row]?.tags
-        vc.streamerName = self.result?.stream_list[indexPath.row]?.nickname
-        vc.streamerAvatar = self.result?.stream_list[indexPath.row]?.head_photo
-        vc.online_num = self.result?.stream_list[indexPath.row]?.online_num
-        present(vc, animated: true)
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { Timer in
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
+            vc.modalPresentationStyle = .fullScreen
+            if indexPath.row % 2 == 0 {
+                vc.isStream = true
+            } else {
+                vc.isStream = false
+            }
+            vc.streamTitle = self.result?.stream_list[indexPath.row]?.stream_title
+            vc.streamerTags = self.result?.stream_list[indexPath.row]?.tags
+            vc.streamerName = self.result?.stream_list[indexPath.row]?.nickname
+            vc.streamerAvatar = self.result?.stream_list[indexPath.row]?.head_photo
+            vc.online_num = self.result?.stream_list[indexPath.row]?.online_num
+            vc.streamer_id = self.result?.stream_list[indexPath.row]?.streamer_id
+            self.present(vc, animated: true)
+        }
     }
     
 

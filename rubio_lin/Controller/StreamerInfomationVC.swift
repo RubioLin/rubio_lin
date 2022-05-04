@@ -38,7 +38,7 @@ class StreamerInfomationVC: UIViewController {
 
         streamerNameL.text = streamerName
         
-        streamerHashtagL.text = "#\(streamerTags!))"
+        streamerHashtagL.text = "#\(streamerTags!)"
         
         streamerFollowBtn.layer.cornerRadius = streamerFollowBtn.bounds.height / 4
         streamerFollowBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)

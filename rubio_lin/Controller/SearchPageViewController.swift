@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 class SearchPageViewController: UIViewController {
     @IBOutlet weak var recommendCollectionView: UICollectionView!
@@ -186,19 +187,30 @@ extension SearchPageViewController: UICollectionViewDelegate {
     
     // 點選Cell進入直播間
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
-        vc.modalPresentationStyle = .fullScreen
-        if indexPath.row % 2 == 0 {
-            vc.isStream = true
-        } else {
-            vc.isStream = false
+        
+        let transitionView = UIHostingController(rootView: FireworkView())
+        transitionView.modalPresentationStyle = .overFullScreen
+        transitionView.view.backgroundColor = .clear
+        present(transitionView, animated: false) {
+            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { Timer in
+                self.dismiss(animated: false)
+            }
         }
-        vc.streamTitle = self.result?.lightyear_list[indexPath.row]?.stream_title
-        vc.streamerTags = self.result?.lightyear_list[indexPath.row]?.tags
-        vc.streamerName = self.result?.lightyear_list[indexPath.row]?.nickname
-        vc.streamerAvatar = self.result?.lightyear_list[indexPath.row]?.head_photo
-        vc.online_num = self.result?.lightyear_list[indexPath.row]?.online_num
-        present(vc, animated: true)
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { Timer in
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
+            vc.modalPresentationStyle = .fullScreen
+            if indexPath.row % 2 == 0 {
+                vc.isStream = true
+            } else {
+                vc.isStream = false
+            }
+            vc.streamTitle = self.result?.lightyear_list[indexPath.row]?.stream_title
+            vc.streamerTags = self.result?.lightyear_list[indexPath.row]?.tags
+            vc.streamerName = self.result?.lightyear_list[indexPath.row]?.nickname
+            vc.streamerAvatar = self.result?.lightyear_list[indexPath.row]?.head_photo
+            vc.online_num = self.result?.lightyear_list[indexPath.row]?.online_num
+            self.present(vc, animated: true)
+        }
     }
 }
 
