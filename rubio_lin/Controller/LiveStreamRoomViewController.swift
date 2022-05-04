@@ -37,17 +37,17 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        WebSocketManager.shared.establishConnection()
+//        WebSocketManager.shared.establishConnection()
         addKeyboardObserver()
         setStreamInfoBtn()
         setonline_numLabel()
-        if isStream == true {
-            playerViewDidBecomeReady(YTPlayer) // 進入畫面 loading 完會自動播放
-            playerView(YTPlayer, didChangeTo: .ended) // 播完會自動重播
-            playStreamVedio()
-        } else {
-            playVedio()
-        }
+//        if isStream == true {
+//            playerViewDidBecomeReady(YTPlayer) // 進入畫面 loading 完會自動播放
+//            playerView(YTPlayer, didChangeTo: .ended) // 播完會自動重播
+//            playStreamVedio()
+//        } else {
+//            playVedio()
+//        }
         animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 3, delay: 2, options: .allowUserInteraction, animations: {
             self.chatRoomTableView.alpha = 0.4
             self.dialogBoxTextField.alpha = 0.4
@@ -169,11 +169,11 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         case true:
             followBtn.isSelected = false
             followBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
-//            FirebaseManager.shared.deleteFollowInfo(22233, "ddd", isFollow: false)
+            FirebaseManager.shared.deleteUserFollowList(streamer_id!, streamerName!)
         default :
             followBtn.isSelected = true
             followBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
-            FirebaseManager.shared.uploadFollowInfo(streamer_id!, streamerName!, isFollow: true)
+            FirebaseManager.shared.uploadUserFollowList(streamer_id!, streamerName!)
         }
         WebSocketManager.shared.sendFollow(followBtn.isSelected)
         } else {

@@ -15,13 +15,12 @@ struct UserInfo: Codable {
 }
 
 struct FollowInfo: Codable {
-    let FollowList: [FollowList]
+    var FollowList: [FollowList]
 }
 
 struct FollowList: Codable {
     let streamerId: Int
     let streamerName: String
-    let isFollow: Bool
 }
 
 // MARK: - Firebase Manager
@@ -33,6 +32,7 @@ class FirebaseManager {
     
     private var db = Firestore.firestore()
     var userInfo: UserInfo?
+    var followList: FollowInfo?
     var isSignIn: Bool {
         get {
             if Auth.auth().currentUser != nil {
@@ -124,22 +124,28 @@ class FirebaseManager {
         }
     }
     // 上傳追蹤資訊
-    func uploadFollowInfo(_ streamerId: Int,_ streamerName: String, isFollow: Bool) {
-        let newFollower = FollowInfo(FollowList: [FollowList(streamerId: streamerId, streamerName: streamerName, isFollow: isFollow), FollowList(streamerId: 11, streamerName: "ddd", isFollow: false)])
-        
-        do {
-            try db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").setData(from: newFollower, merge: true)
-            print("Follow success")
-        } catch {
-            print("錯誤：新追蹤上傳錯誤")
-            print("Error：\(error.localizedDescription)")
+    func uploadUserFollowList(_ streamerId: Int,_ streamerName: String) {
+        let newFollower = [["streamerId": streamerId,"streamerName": streamerName]] as [Any]
+        //沒有此 colleciton 和 document 會新增
+        db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").setData(["FollowList" : FieldValue.arrayUnion(newFollower)],merge: true)
+        // 效果大致相同，唯一不同在沒有collection和document的情況下這個會沒用
+//        db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").updateData(["FollowList" : FieldValue.arrayUnion(newFollower)])
+    }
+    // 取得追蹤資訊
+    func getUserFollowList() {
+        db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").getDocument { follower, error in
+            if error == nil {
+                self.followList = try? follower?.data(as: FollowInfo.self)
+            } else {
+                print("解析失敗")
+            }
         }
     }
     // 刪除追蹤資訊
-    func deleteFollowInfo(_ streamerId: Int,_ streamerName: String, isFollow: Bool) {
-        
-    }
-
+    func deleteUserFollowList(_ streamerId: Int,_ streamerName: String) {
+        let removeFollower = [["streamerId": streamerId,"streamerName": streamerName]] as [Any]
+        db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").updateData(["FollowList" : FieldValue.arrayRemove(removeFollower)])
+        }
     
 }
 

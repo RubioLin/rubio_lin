@@ -13,6 +13,7 @@ class HomePageViewController: UIViewController, UITabBarDelegate, UITabBarContro
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         FirebaseManager.shared.getUserInfo()
+        FirebaseManager.shared.getUserFollowList()
         self.LiveRoomCollectionView.reloadData()
     }
     
