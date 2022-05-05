@@ -177,11 +177,11 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         case true:
             followBtn.isSelected = false
             followBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
-            FirebaseManager.shared.deleteUserFollowList(streamer_id!, streamerName!)
+            FirebaseManager.shared.deleteUserFollowList(streamer_id!, streamerName!, streamerAvatar ?? "")
         default :
             followBtn.isSelected = true
             followBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
-            FirebaseManager.shared.uploadUserFollowList(streamer_id!, streamerName!)
+            FirebaseManager.shared.uploadUserFollowList(streamer_id!, streamerName!, streamerAvatar ?? "")
             WebSocketManager.shared.sendFollow()
         }
         } else {
@@ -289,7 +289,7 @@ extension LiveStreamRoomViewController: UITableViewDelegate, UITableViewDataSour
         if WebSocketManager.shared.webSocketReceive[index].event.contains("sys_updateRoomStatus") {
             if WebSocketManager.shared.webSocketReceive[index].body.entry_notice?.action == "enter" {
                 cell.chatTextView.text = "\(NSLocalizedString("system", comment: ""))\(WebSocketManager.shared.webSocketReceive[index].body.entry_notice!.username!)\(NSLocalizedString("systemEnter", comment: ""))"
-            } else {
+            } else if WebSocketManager.shared.webSocketReceive[index].body.entry_notice?.action == "leave" {
                 cell.chatTextView.text = "\(NSLocalizedString("system", comment: ""))\(WebSocketManager.shared.webSocketReceive[index].body.entry_notice!.username!)\(NSLocalizedString("systemLeave", comment: ""))"
             }
         } else if WebSocketManager.shared.webSocketReceive[index].event.contains("default_message") {
@@ -372,5 +372,4 @@ extension LiveStreamRoomViewController: StreamerInfomationDelegate {
             followBtn.isSelected = true
         }
     }
-    
 }

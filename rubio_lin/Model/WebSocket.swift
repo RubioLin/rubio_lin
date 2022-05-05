@@ -86,7 +86,7 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
             case .failure(let error):
                 print("Error: \(error)")
             }
-            self?.delegate?.receiveFinishReload!()
+            self?.delegate?.receiveFinishReload?()
             self?.receive()
         }
     }

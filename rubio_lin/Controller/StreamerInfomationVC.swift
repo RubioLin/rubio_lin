@@ -65,12 +65,12 @@ class StreamerInfomationVC: UIViewController {
         case true:
             followBtn.isSelected = false
             followBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
-            FirebaseManager.shared.deleteUserFollowList(streamer_id!, streamerName!)
+            FirebaseManager.shared.deleteUserFollowList(streamer_id!, streamerName!, streamerAvatar ?? "")
             self.delegate?.followBtnUpdate(text: NSLocalizedString("followBtn", comment: ""))
         default :
             followBtn.isSelected = true
             followBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
-            FirebaseManager.shared.uploadUserFollowList(streamer_id!, streamerName!)
+            FirebaseManager.shared.uploadUserFollowList(streamer_id!, streamerName!, streamerAvatar ?? "")
             WebSocketManager.shared.sendFollow()
             self.delegate?.followBtnUpdate(text: NSLocalizedString("followBtnisSelected", comment: ""))
         }
