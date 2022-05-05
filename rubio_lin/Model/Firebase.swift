@@ -127,9 +127,17 @@ class FirebaseManager {
     func uploadUserFollowList(_ streamerId: Int,_ streamerName: String) {
         let newFollower = [["streamerId": streamerId,"streamerName": streamerName]] as [Any]
         //沒有此 colleciton 和 document 會新增
-        db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").setData(["FollowList" : FieldValue.arrayUnion(newFollower)],merge: true)
+        db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").setData(["FollowList" : FieldValue.arrayUnion(newFollower)],merge: true) { error in
+            self.db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").getDocument { follower, error in
+                if error == nil {
+                    self.followList = try? follower?.data(as: FollowInfo.self)
+                } else {
+                    print("解析失敗")
+                }
+            }
+        }
         // 效果大致相同，唯一不同在沒有collection和document的情況下這個會沒用
-//        db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").updateData(["FollowList" : FieldValue.arrayUnion(newFollower)])
+        //        db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").updateData(["FollowList" : FieldValue.arrayUnion(newFollower)])
     }
     // 取得追蹤資訊
     func getUserFollowList() {
@@ -144,9 +152,16 @@ class FirebaseManager {
     // 刪除追蹤資訊
     func deleteUserFollowList(_ streamerId: Int,_ streamerName: String) {
         let removeFollower = [["streamerId": streamerId,"streamerName": streamerName]] as [Any]
-        db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").updateData(["FollowList" : FieldValue.arrayRemove(removeFollower)])
+        db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").updateData(["FollowList" : FieldValue.arrayRemove(removeFollower)]) { error in
+            self.db.collection("followInfo").document("\(Auth.auth().currentUser!.email!)").getDocument { follower, error in
+                if error == nil {
+                    self.followList = try? follower?.data(as: FollowInfo.self)
+                } else {
+                    print("解析失敗")
+                }
+            }
         }
-    
+    }
 }
 
 protocol FirebaseManagerDelegate: NSObject {

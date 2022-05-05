@@ -37,17 +37,18 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-//        WebSocketManager.shared.establishConnection()
+        WebSocketManager.shared.establishConnection()
         addKeyboardObserver()
         setStreamInfoBtn()
         setonline_numLabel()
-//        if isStream == true {
-//            playerViewDidBecomeReady(YTPlayer) // 進入畫面 loading 完會自動播放
-//            playerView(YTPlayer, didChangeTo: .ended) // 播完會自動重播
-//            playStreamVedio()
-//        } else {
-//            playVedio()
-//        }
+        setFollowBtn()
+        if isStream == true {
+            playerViewDidBecomeReady(YTPlayer) // 進入畫面 loading 完會自動播放
+            playerView(YTPlayer, didChangeTo: .ended) // 播完會自動重播
+            playStreamVedio()
+        } else {
+            playVedio()
+        }
         animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 3, delay: 2, options: .allowUserInteraction, animations: {
             self.chatRoomTableView.alpha = 0.4
             self.dialogBoxTextField.alpha = 0.4
@@ -60,7 +61,6 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         self.chatRoomTableView.register(UINib(nibName: "ChatRoomTableViewCell", bundle: nil), forCellReuseIdentifier: "ChatRoomTableViewCell")
         setupLogoutButton()
         setupAlertView()
-        setFollowBtn()
         setStreamInfoAndFollowBtnBackgroundView()
         setonline_numBackgroundView()
         setAlert()
@@ -132,7 +132,15 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     
     func setFollowBtn() {
         followBtn.layer.cornerRadius = followBtn.bounds.height / 4
-        followBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
+        FirebaseManager.shared.followList?.FollowList.forEach {
+            if $0.streamerId == streamer_id {
+                followBtn.isSelected = true
+                followBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
+            } else {
+                followBtn.isSelected = false
+                followBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
+            }
+        }
     }
     
     func setStreamInfoAndFollowBtnBackgroundView() {
@@ -174,8 +182,8 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
             followBtn.isSelected = true
             followBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
             FirebaseManager.shared.uploadUserFollowList(streamer_id!, streamerName!)
+            WebSocketManager.shared.sendFollow()
         }
-        WebSocketManager.shared.sendFollow(followBtn.isSelected)
         } else {
             let alert = UIAlertController(title: NSLocalizedString("noSignIn", comment: ""), message: NSLocalizedString("noSignInDescription", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -246,6 +254,8 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
         vc.streamerAvatar = streamerAvatar
         vc.streamerName = streamerName
         vc.streamerTags = streamerTags
+        vc.streamer_id = streamer_id
+        vc.delegate = self
         present(vc, animated: true)
     }
     
@@ -350,4 +360,17 @@ extension LiveStreamRoomViewController: UITextFieldDelegate {
         }
         return false
     }
+}
+
+extension LiveStreamRoomViewController: StreamerInfomationDelegate {
+    
+    func followBtnUpdate(text: String) {
+        followBtn.setTitle(text, for: .normal)
+        if followBtn.isSelected == true {
+            followBtn.isSelected = false
+        } else {
+            followBtn.isSelected = true
+        }
+    }
+    
 }

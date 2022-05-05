@@ -105,20 +105,14 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
         }
     }
     
-    func sendFollow(_ isSelected: Bool) {
-        switch isSelected {
-        case true:
-            print("Follow")
-            let followText = NSLocalizedString("followText", comment: "")
-            webSocketTask?.send(URLSessionWebSocketTask.Message.string("{\"action\": \"N\", \"content\": \"\(followText)\"}"), completionHandler: { error in
-                if let error = error {
-                    print(error)
-                }
-            })
-        default:
-            print("Unfollow")
-            break
-        }
+    func sendFollow() {
+        let followText = NSLocalizedString("followText", comment: "")
+        webSocketTask?.send(URLSessionWebSocketTask.Message.string("{\"action\": \"N\", \"content\": \"\(followText)\"}"), completionHandler: { error in
+            if let error = error {
+                print(error)
+            }
+        })
+        
     }
     
     public func urlSession(_ session: URLSession,
