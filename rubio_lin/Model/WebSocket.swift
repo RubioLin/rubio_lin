@@ -75,7 +75,15 @@ final class WebSocketManager: NSObject, URLSessionWebSocketDelegate {
                     do {
                         let decoder = JSONDecoder()
                         let receiveInfo = try decoder.decode(receiveInfo.self, from: Data(text.utf8))
-                        self!.webSocketReceive.append(receiveInfo)
+                        if receiveInfo.event == "sys_updateRoomStatus" && receiveInfo.event != "sys_updateRoomStatus_new" {
+                            self!.webSocketReceive.append(receiveInfo)
+                        } else if receiveInfo.event == "default_message" {
+                            self!.webSocketReceive.append(receiveInfo)
+                        } else if receiveInfo.event == "admin_all_broadcast" {
+                            self!.webSocketReceive.append(receiveInfo)
+                        } else {
+                            break
+                        }
                     } catch {
                         print("Error: \(error)")
                     }

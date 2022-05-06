@@ -1,10 +1,11 @@
 import UIKit
+import Foundation
 import AVFoundation
 import YouTubeiOSPlayerHelper
 
 class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLSessionDelegate {
     
-//    static let shared = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
+    //    static let shared = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveStreamRoom") as! LiveStreamRoomViewController
     
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var alertUIView: UIView!
@@ -173,17 +174,17 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
     
     @IBAction func clickFollowButton(_ sender: Any) {
         if FirebaseManager.shared.isSignIn == true {
-        switch followBtn.isSelected {
-        case true:
-            followBtn.isSelected = false
-            followBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
-            FirebaseManager.shared.deleteUserFollowList(streamer_id!, streamerName!, streamerAvatar ?? "")
-        default :
-            followBtn.isSelected = true
-            followBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
-            FirebaseManager.shared.uploadUserFollowList(streamer_id!, streamerName!, streamerAvatar ?? "")
-            WebSocketManager.shared.sendFollow()
-        }
+            switch followBtn.isSelected {
+            case true:
+                followBtn.isSelected = false
+                followBtn.setTitle(NSLocalizedString("followBtn", comment: ""), for: .normal)
+                FirebaseManager.shared.deleteUserFollowList(streamer_id!, streamerName!, streamerAvatar ?? "")
+            default :
+                followBtn.isSelected = true
+                followBtn.setTitle(NSLocalizedString("followBtnisSelected", comment: ""), for: .normal)
+                FirebaseManager.shared.uploadUserFollowList(streamer_id!, streamerName!, streamerAvatar ?? "")
+                WebSocketManager.shared.sendFollow()
+            }
         } else {
             let alert = UIAlertController(title: NSLocalizedString("noSignIn", comment: ""), message: NSLocalizedString("noSignInDescription", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -234,19 +235,19 @@ class LiveStreamRoomViewController: UIViewController, YTPlayerViewDelegate, URLS
             shareURL = URL(string: "https://weakself.dev/episodes/46")!
         }
         let items: [Any] = ["#泡泡直播",shareURL]
-
+        
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(ac, animated: true)
-
+        
         // Line 分享
-//        let application = UIApplication.shared
-//        let url = URL(string: "https://line.me/R/msg/text/?https://www.youtube.com/watch?v=\(currentPlay)")
-//        if application.canOpenURL(url!) {
-//            application.open(url!,options: [:],completionHandler: nil)
-//        } else {
-//            let lineURL = URL(string: "https://line.me/R/")
-//            application.open(lineURL!, options: [:], completionHandler: nil)
-//        }
+        //        let application = UIApplication.shared
+        //        let url = URL(string: "https://line.me/R/msg/text/?https://www.youtube.com/watch?v=\(currentPlay)")
+        //        if application.canOpenURL(url!) {
+        //            application.open(url!,options: [:],completionHandler: nil)
+        //        } else {
+        //            let lineURL = URL(string: "https://line.me/R/")
+        //            application.open(lineURL!, options: [:], completionHandler: nil)
+        //        }
     }
     @IBAction func clickStreamerInfoBtn(_ sender: Any) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StreamerInfomation") as! StreamerInfomationVC
@@ -285,26 +286,28 @@ extension LiveStreamRoomViewController: UITableViewDelegate, UITableViewDataSour
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
         let index = WebSocketManager.shared.webSocketReceive.count - 1 - indexPath.row
-       
-        if WebSocketManager.shared.webSocketReceive[index].event.contains("sys_updateRoomStatus") {
-            if WebSocketManager.shared.webSocketReceive[index].body.entry_notice?.action == "enter" {
-                cell.chatTextView.text = "\(NSLocalizedString("system", comment: ""))\(WebSocketManager.shared.webSocketReceive[index].body.entry_notice!.username!)\(NSLocalizedString("systemEnter", comment: ""))"
-            } else if WebSocketManager.shared.webSocketReceive[index].body.entry_notice?.action == "leave" {
-                cell.chatTextView.text = "\(NSLocalizedString("system", comment: ""))\(WebSocketManager.shared.webSocketReceive[index].body.entry_notice!.username!)\(NSLocalizedString("systemLeave", comment: ""))"
+        var chatArray = WebSocketManager.shared.webSocketReceive
+        
+        if chatArray[index].event == "sys_updateRoomStatus" {
+            if chatArray[index].body.entry_notice?.action == "enter" {
+                cell.chatTextView.text = "\(NSLocalizedString("system", comment: ""))\(chatArray[index].body.entry_notice!.username!)\(NSLocalizedString("systemEnter", comment: ""))"
+            } else if chatArray[index].body.entry_notice?.action == "leave" {
+                cell.chatTextView.text = "\(NSLocalizedString("system", comment: ""))\(chatArray[index].body.entry_notice!.username!)\(NSLocalizedString("systemLeave", comment: ""))"
             }
-        } else if WebSocketManager.shared.webSocketReceive[index].event.contains("default_message") {
-            cell.chatTextView.text = "\(WebSocketManager.shared.webSocketReceive[index].body.nickname!)： \(WebSocketManager.shared.webSocketReceive[index].body.text!)"
-        } else if WebSocketManager.shared.webSocketReceive[index].event.contains("admin_all_broadcast") {
+        } else if chatArray[index].event == "default_message" {
+            cell.chatTextView.text = "\(chatArray[index].body.nickname!)： \(chatArray[index].body.text!)"
+        } else if chatArray[index].event == "admin_all_broadcast" {
             if UserDefaults.standard.stringArray(forKey: "AppleLanguages")![0].contains("zh-Hans") {
-                cell.chatTextView.text = WebSocketManager.shared.webSocketReceive[index].body.content?.cn
+                cell.chatTextView.text = chatArray[index].body.content?.cn
             } else if UserDefaults.standard.stringArray(forKey: "AppleLanguages")![0].contains("zh-Hant") {
-                cell.chatTextView.text = WebSocketManager.shared.webSocketReceive[index].body.content?.tw
+                cell.chatTextView.text = chatArray[index].body.content?.tw
             } else {
-                cell.chatTextView.text = WebSocketManager.shared.webSocketReceive[index].body.content?.en
+                cell.chatTextView.text = chatArray[index].body.content?.en
             }
         }
         return cell
     }
+    
 }
 
 // MARK: - WebSocket Delegate
@@ -328,9 +331,9 @@ extension LiveStreamRoomViewController {
     }
     
     @objc func keyboardWillShow(notification: Notification) {
-            if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                let keyboardHeight = keyboardFrame.cgRectValue.height
-                self.chatRoomBackgroundViewConstraint.constant = keyboardHeight - 30
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            self.chatRoomBackgroundViewConstraint.constant = keyboardHeight - 30
         }
     }
     
